@@ -1,12 +1,12 @@
 import React from "react";
 import Router from "./routes";
-import { HelmetComponent } from "./helmet/HelmetComponent";
+import { Helmets } from "./Helmets";
 
 function App() {
   return (
     <>
       <Router />
-      <HelmetComponent />
+      <Helmets />
     </>
   );
 }
