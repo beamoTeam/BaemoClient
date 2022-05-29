@@ -1,10 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import HeaderLeft from "./HeaderLeft";
+import HeaderRight from "./HeaderRight";
 
 function Header() {
   return (
     <StHeader>
-      헤더입니다.
+      <HeaderLeft />
+      <StMidWrap></StMidWrap>
+      <HeaderRight />
     </StHeader>
   );
 }
@@ -13,13 +17,18 @@ const StHeader = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+
   align-items: center;
   width: 100%;
   height: 3.75rem;
 
   background-color: white;
+`;
 
+const StMidWrap = styled.div`
+  text-align: center;
 `;
 
 export default Header;
