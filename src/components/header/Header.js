@@ -18,14 +18,17 @@ const StHeader = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
 
-  align-items: center;
   width: 100%;
   height: 3.75rem;
 
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  align-items: center;
+
   background-color: white;
+
+  z-index: 10;
 `;
 
 
