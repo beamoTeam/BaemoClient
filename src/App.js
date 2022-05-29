@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
+import Router from "./routes";
+import { HelmetComponent } from "./helmet/HelmetComponent";
 
 function App() {
   return (
-    <div>
-    </div>
+    <>
+      <Router />
+      <HelmetComponent />
+    </>
   );
 }
 
