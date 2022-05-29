@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 
-const HeaderLeft = () => {
+function HeaderLeft() {
   const navigate = useNavigate();
 
   const handleClick = () => {

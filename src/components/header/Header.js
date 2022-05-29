@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import HeaderLeft from "./HeaderLeft";
 import HeaderRight from "./HeaderRight";
+import HeaderMid from "./HeaderMid";
 
 function Header() {
   return (
     <StHeader>
       <HeaderLeft />
-      <StMidWrap></StMidWrap>
-      <HeaderRight />
+      <HeaderMid />
+      {/* <HeaderRight /> */}
     </StHeader>
   );
 }
@@ -27,9 +28,7 @@ const StHeader = styled.div`
   background-color: white;
 `;
 
-const StMidWrap = styled.div`
-  text-align: center;
-`;
+
 
 export default Header;
 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdRefresh } from "react-icons/md";
 
-const HeaderRight = () => {
+function HeaderRight() {
   const handleClick = (e) => {
     // 상황에 맞게 refetch
     console.log(e.target);
