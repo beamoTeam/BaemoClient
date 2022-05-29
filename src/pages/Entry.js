@@ -1,10 +1,10 @@
 import React from 'react';
 
-function App() {
+function Entry() {
   return (
     <div>
     </div>
   );
 }
 
-export default App;
+export default Entry;

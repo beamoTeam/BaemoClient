@@ -1,0 +1,31 @@
+import React from 'react';
+import styled from 'styled-components';
+
+function Header() {
+  return (
+    <StHeader>
+      헤더입니다.
+    </StHeader>
+  );
+}
+
+const StHeader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3.75rem;
+
+  background-color: white;
+
+`;
+
+export default Header;
+
+// 필요한 기능
+
+// 1. 왼쪽 버튼 ( 뒤로가기, 지도 보기 등 )
+// 2. 가운데 텍스트 ( 페이지 title. ex - 장바구니, 마이페이지 )
+// 3. 오른쪽 버튼 ( 필요따라 새로고침, 햄버거 버튼 )
