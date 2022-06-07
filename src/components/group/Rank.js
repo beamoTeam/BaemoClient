@@ -1,52 +1,78 @@
 import React from "react";
 import styled from "styled-components";
+import IMG from "../../asset/img/list_img.png";
 
 function Rank() {
   return (
-    <StRankWrap>
-      <StHeading>배모 주문 임박!</StHeading>
-      <RankCard />
-    </StRankWrap>
+    <StWrap>
+      <StHeading>* 주문 임박</StHeading>
+      <StCartContainer>
+        <Card />
+        <Card />
+        <Card />
+      </StCartContainer>
+    </StWrap>
   );
 }
 
-function RankCard({ image, restraunt, endTimd, joinNum, currNum }) {
+function Card() {
   return (
-    <StCard>
-      <StImg src={image} alt="브랜드 로고" height="100px" />
-      <p>BBQ치킨 목포대점</p>
-      <p>마감시간 20:35</p>
-      <p>모집인원 1/4</p>
-    </StCard>
+    <StCardWrap>
+      <StImg src={IMG} />
+      <StRow>
+        <StFirstRow>BBQ치킨 목포대점</StFirstRow>
+      </StRow>
+      <StRow>마감 19 : 00</StRow>
+      <StRow>모집 3/4명</StRow>
+    </StCardWrap>
   );
 }
 
-const StRankWrap = styled.ul`
-  width: 100%;
-  height: 10rem;
-  background-color: white;
+const StWrap = styled.div`
+  margin: 0.18rem 0;
+  padding: 10px;
 
-  margin-top: 0.18rem;
+  width: 100%;
+  ${"" /* height: 8rem; */}
+  background-color: white;
 `;
 
-const StCard = styled.div`
-  width: calc(100% / 3);
-  height: 60%;
-  z-index: 10;
+const StCartContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
-  font-size: 0.7rem;
-  margin: 0 0.7rem
+const StHeading = styled.h2`
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+`;
+
+const StCardWrap = styled.div`
+  width: calc(100% / 3.2);
 `;
 
 const StImg = styled.img`
-  height: 50%;
-  border-radius: 5px;
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
 `;
 
-const StHeading = styled.h1`
-  padding: 0.7rem;
-  font-weight: bold;
-  font-size: 1.3rem;
+const StFirstRow = styled.p`
+  color: #0e8bc0;
 `;
+const StRow = styled.p`
+  font-weight: 400;
+  font-size: 0.7rem;
+  padding: 0.15rem 0;
+  text-align: center;
 
+  &:first-child {
+    color: red;
+  }
+
+  &:last-child {
+    color: #09c51c;
+  }
+`;
 export default Rank;

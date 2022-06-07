@@ -1,47 +1,78 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-function List() {
+import LOGO from "../../asset/img/logo_shop.png";
+
+function List({ chattingList }) {
+  if (!chattingList) return <h1>로딩중..</h1>;
   return (
     <StListWrap>
-      <ListItem />
+      {chattingList?.map((chat) => {
+        return <ListItem key={chat.seq} chat={chat} />;
+      })}
     </StListWrap>
   );
 }
 
-function ListItem({ image }) {
+function ListItem({ chat }) {
+  const { orderTime, maxPersonnel, restaurant, seq } = chat;
   return (
-    <StListItem>
-      <img src={image} alt="LOGO" />
-      <div>
-        <p>BBQ치킨 목포대점</p>
-        <p>
-          <span>마감 21:00</span>
-          <span>모집 2/4</span>
-        </p>
-      </div>
-    </StListItem>
+    <Link to={`menu`}>
+      <StListItem>
+        <StImg src={LOGO} alt="LOGO" />
+        <StTextBox>
+          <StP className="color__blue">{restaurant.name}</StP>
+          <p>
+            <StText>마감 {orderTime.split(" ")[1]}</StText>
+            <StText className="color__green"> 모집 2/{maxPersonnel}</StText>
+          </p>
+        </StTextBox>
+      </StListItem>
+    </Link>
   );
 }
-
 const StListWrap = styled.ul`
   width: 100%;
-  height: 20.15rem;
   overflow: auto;
 
-  margin-top: 0.18rem;
-  ${"" /* padding: 0.7rem; */}
+  margin-top: 0.2rem;
 `;
 
 const StListItem = styled.li`
   display: flex;
-  
+  padding: 10px;
+
   width: 100%;
   height: calc(100% / 5);
   margin-bottom: 0.18rem;
 
   background-color: white;
 `;
-export default List;
 
-// 차트놀이 워드클라우드에 글자가 겹치는 현상이 종종있는데 수정이 가능한 걸까요? 글자크기가 옆에 연결망보다 작은 것 같은데, 조금 더 키울 수 있나요?
+const StImg = styled.img`
+  height: 2.5rem;
+`;
+const StTextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 0 1.2rem;
+  font-weight: 600;
+  font-size: 0.83rem;
+`;
+
+const StP = styled.p`
+  &.color__blue {
+    color: #0E8BC0;
+  }
+`;
+
+const StText = styled.span`
+  &.color__green {
+    color: #09C51C;
+    margin-left: 10px;
+  }
+`;
+export default List;

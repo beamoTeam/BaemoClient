@@ -1,0 +1,260 @@
+.topMenu {
+  background-color: #2d2d2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.left ul {
+  display: flex;
+  align-items: center;
+}
+
+.right ul {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.left ul li {
+  list-style: none;
+  color: white;
+  width: 150px;
+  text-align: center;
+}
+
+.right ul li {
+  list-style: none;
+  color: white;
+  text-align: center;
+  width: 98px;
+}
+
+.left .order {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.left .store {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.right .name {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.right .point {
+  text-decoration: none;
+  color: rgb(252, 169, 169);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.right .mypage {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.right .service {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.right .logout {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.sidebar {
+  background-color: white;
+  position: fixed;
+  border-style: solid;
+  top: 60px;
+  left: 8px;
+  width: 200px;
+  height: 300px;
+  padding: 20px 0;
+}
+
+.sidebar .receipt {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar .receipt h3 {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.sidebar .receipt p {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.sidebar .receipt img {
+  display: block;
+  width: 50px;
+  height: 40px;
+  border-radius: 10%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+/* ---- MAIN ---- */
+.orders-container {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 96vh;
+}
+
+/* ORDER TYPE */
+.order-type-container {
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid silver;
+
+  overflow: auto;
+
+  text-align: center;
+
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.order-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 25%;
+  box-sizing: border-box;
+  border-bottom: 1px solid silver;
+}
+
+/* ORDER INFO */
+.order-info-container {
+  flex: 9;
+  box-sizing: border-box;
+}
+
+.order-info-card {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid silver;
+  width: 100%;
+  /* height: 25%; */
+}
+
+/* TIME */
+.order-time {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+/* INFO */
+.order-menus {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+/* RECEIPT BUTTON */
+.receipt-btn-section {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.receipt-btn:nth-child(1) {
+  color: black;
+  border: 1px solid silver;
+  background-color: white;
+}
+
+.receipt-btn {
+  width: 50%;
+  height: 80%;
+  border: 1px solid black;
+  background-color: #8b2cf5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: white;
+  margin: 1rem;
+  max-width: 150px;
+}
+
+.order-addr,
+.menu-info {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.menus {
+  color: #929292;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+.menu-card-section {
+  display: flex;
+  margin-top: 15px;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 150px;
+  background-color: #ccc6c6;
+}
+
+.card-title {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #8b2cf5;
+}
+
+.card-content {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-alert {
+  background-color: #8b2cf5;
+  border-radius: 25px;
+  color: white;
+  padding: 0.3rem 0.6rem;
+}
