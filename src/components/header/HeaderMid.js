@@ -5,16 +5,24 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 function HeaderMid() {
   const [toggleApi, setToggleApi] = useState(false);
+  const [address, setAdress] = useState(null);
 
   const handleToggle = () => {
-    setToggleApi(prev => !prev);
-  }
+    setToggleApi((prev) => !prev);
+  };
 
   return (
     <StMidWrap>
-      {toggleApi && <DaumPostcode handleToggle={handleToggle} />}
+      {toggleApi && (
+        <DaumPostcode handleToggle={handleToggle} setAdress={setAdress} />
+      )}
       <div onClick={handleToggle}>
-        주소를 입력해 주세요 <MdOutlineKeyboardArrowDown />
+        <span>
+          {address
+            ? address.split(" ").slice(2, 4).join(" ")
+            : "주소를 입력해 주세요"}
+        </span>
+        <MdOutlineKeyboardArrowDown />
       </div>
     </StMidWrap>
   );

@@ -1,11 +1,13 @@
 import React from "react";
-import { Category, Filter } from "../components/group/index";
+import { Category, Filter, Rank, List } from "../components/group/index";
 
 function Group() {
   return (
     <>
       <Category />
       <Filter />
+      <Rank />
+      <List />
     </>
   );
 }

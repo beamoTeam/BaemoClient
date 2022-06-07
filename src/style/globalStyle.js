@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     width: 100%;
-    height: 100%;
+    height: 90%;
     font-weigth: bold;
     font-family: 'Gothic A1', sans-serif;
     background-color: #F5F4F2;

@@ -2,11 +2,7 @@ import React from "react";
 import DaumPostcode from "react-daum-postcode";
 import styled from "styled-components";
 
-const Postcode = ({handleToggle}) => {
-  const handleClose = () => {
-    console.log("검색 종료시 api 요청");
-  };
-
+const Postcode = ({handleToggle, setAdress}) => {
   const handleComplete = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -21,7 +17,8 @@ const Postcode = ({handleToggle}) => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    setAdress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    handleToggle(false);
   };
 
   return (
@@ -29,7 +26,7 @@ const Postcode = ({handleToggle}) => {
       <StWrap onClick={handleToggle} />
       <DaumPostcode
         onComplete={handleComplete}
-        onClose={handleClose}
+        autoClose={false}
         style={styles}
       />
     </>
