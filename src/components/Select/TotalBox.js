@@ -1,16 +1,34 @@
 import React from "react";
 import styled from "styled-components";
+import { addMenuToCart } from "../../api";
+import { useChatSeqState } from "../../recoil/atom";
+import { useNavigate } from "react-router-dom";
 
-function TotalBox() {
+function TotalBox({ menuInfo }) {
+  const navigate = useNavigate();
+  const { chatSeq } = useChatSeqState();
+  const { count, price } = menuInfo;
+
+  const addToCart = async (u_seq, c_seq, data) => {
+    try {
+      await addMenuToCart(u_seq, c_seq, data);
+      navigate(-1, { replace: true });
+    } catch (err) {
+      throw new Error(`${err} - 장바구니에 메뉴 담을때 에러`);
+    }
+  };
+
   return (
     <StTotalWrap>
       <StTotalText>
-        <div>총 주문금액</div>
-        <div>20000원</div>
+        <p>총 주문금액</p>
+        <p>{((count + 1) * price).toLocaleString()}원</p>
       </StTotalText>
-      <StMinPrice>최소주문금액 16000</StMinPrice>
+      <StMinPrice>최소주문금액 16,000원</StMinPrice>
       <div>
-        <StAddToCartBtn>장바구니에 추가</StAddToCartBtn>
+        <StAddToCartBtn onClick={() => addToCart(1, chatSeq, menuInfo)}>
+          장바구니에 추가
+        </StAddToCartBtn>
       </div>
     </StTotalWrap>
   );
@@ -40,10 +58,12 @@ const StTotalText = styled.div`
 const StMinPrice = styled.div`
   margin-top: 1rem;
   padding: 0.5rem 0;
-  color: #929292;
+
   text-align: center;
-  font-size: 0.8rem;
+
   font-weight: 600;
+  font-size: 0.8rem;
+  color: #929292;
 `;
 
 const StAddToCartBtn = styled.div`

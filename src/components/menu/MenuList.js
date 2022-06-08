@@ -35,7 +35,7 @@ function MenuList() {
 function MenuItem({ menu }) {
   const { name, price, seq } = menu;
   return (
-    <Link to={`/menuSelection/${seq}`}>
+    <Link to={`/select/${seq}`}>
       <StLI>
         <StTextWrap>
           <p>{name}</p>

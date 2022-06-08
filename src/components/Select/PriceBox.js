@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-function PriceBox({ price }) {
+function PriceBox({ menuInfo }) {
   return (
     <StPriceBox>
       <p>가격</p>
-      <p>{price?.toLocaleString()}원</p>
+      <p>{menuInfo?.price?.toLocaleString()}원</p>
     </StPriceBox>
   );
 }

@@ -7,14 +7,22 @@ import {
   SelectBox,
   TotalBox,
 } from "../components/Select/index";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { getDetailMenuByMenuId } from "../api";
 
 function Select() {
   const params = useParams();
   const { m_seq } = params;
-  const [menuInfo, setMenuInfo] = useState(null);
+  const [menuInfo, setMenuInfo] = useState({
+    seq: null,
+    category: null,
+    name: null,
+    img: null,
+    price: null,
+    restaurant_seq: null,
+    count: null
+  });
 
   useEffect(() => {
     const getDetailMenu = async () => {
@@ -28,16 +36,16 @@ function Select() {
     getDetailMenu();
   }, [m_seq]);
 
-  if(!menuInfo) return <h1>로딩중..</h1>
-  const { img, name, price, restaurant_seq } = menuInfo;
+  if (!menuInfo) return <h1>로딩중..</h1>;
+
   return (
     <StWrap>
-      <ImgBox img={img} />
-      <NameBox name={name} />
-      <PriceBox price={price} />
-      <SelectBox />
-      <CountBox />
-      <TotalBox r_seq={restaurant_seq} />
+      <ImgBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <NameBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <PriceBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <SelectBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <CountBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <TotalBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
     </StWrap>
   );
 }
@@ -45,6 +53,5 @@ function Select() {
 const StWrap = styled.div`
   padding: 4rem 0;
 `;
-
 
 export default Select;

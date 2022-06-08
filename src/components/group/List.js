@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { chatSeqState } from "../../recoil/atom";
+import {useSetRecoilState} from 'recoil';
 
 import LOGO from "../../asset/img/logo_shop.png";
 
@@ -16,20 +18,24 @@ function List({ chattingList }) {
 }
 
 function ListItem({ chat }) {
+  const setChatSeq = useSetRecoilState(chatSeqState);
+  
   const { orderTime, maxPersonnel, restaurant, seq } = chat;
   return (
-    <Link to={`menu/${seq}`}>
-      <StListItem>
-        <StImg src={LOGO} alt="LOGO" />
-        <StTextBox>
-          <StP className="color__blue">{restaurant.name}</StP>
-          <p>
-            <StText>마감 {orderTime.split(" ")[1]}</StText>
-            <StText className="color__green"> 모집 2/{maxPersonnel}</StText>
-          </p>
-        </StTextBox>
-      </StListItem>
-    </Link>
+    <div onClick={() => setChatSeq(seq)}>
+      <Link to={`menu/${seq}`}>
+        <StListItem>
+          <StImg src={LOGO} alt="LOGO" />
+          <StTextBox>
+            <StP className="color__blue">{restaurant.name}</StP>
+            <p>
+              <StText>마감 {orderTime.split(" ")[1]}</StText>
+              <StText className="color__green"> 모집 2/{maxPersonnel}</StText>
+            </p>
+          </StTextBox>
+        </StListItem>
+      </Link>
+    </div>
   );
 }
 const StListWrap = styled.ul`
@@ -65,13 +71,13 @@ const StTextBox = styled.div`
 
 const StP = styled.p`
   &.color__blue {
-    color: #0E8BC0;
+    color: #0e8bc0;
   }
 `;
 
 const StText = styled.span`
   &.color__green {
-    color: #09C51C;
+    color: #09c51c;
     margin-left: 10px;
   }
 `;

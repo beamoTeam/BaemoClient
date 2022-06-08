@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function NameBox({ name }) {
+function NameBox({ menuInfo ,setMenuInfo }) {
   return (
     <StNameBox>
-      <p>{name}</p>
+      <p>{menuInfo?.name}</p>
     </StNameBox>
   );
 }
