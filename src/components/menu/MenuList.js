@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import LOGO from "../../asset/img/logo_shop.png";
 import { getAllMenuByRestaurant } from "../../api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import LOGO from "../../asset/img/logo_shop.png";
 
 function MenuList() {
+  const params = useParams();
   const [menuList, setMenuList] = useState(null);
-
+  const { r_seq } = params;
+  
   useEffect(() => {
     const getMenuList = async () => {
       try {
-        const res = await getAllMenuByRestaurant();
+        const res = await getAllMenuByRestaurant(r_seq);
         setMenuList(res.data);
       } catch (err) {
         throw new Error(`${err} - 특정 음식점의 메뉴 가져올때 에러`);
       }
     };
     getMenuList();
-  }, []);
+  }, [r_seq]);
 
   if (!menuList) return <h1>로딩중..</h1>;
 
@@ -31,7 +33,7 @@ function MenuList() {
 }
 
 function MenuItem({ menu }) {
-  const { name, price, seq, img } = menu;
+  const { name, price, seq } = menu;
   return (
     <Link to={`/menuSelection/${seq}`}>
       <StLI>

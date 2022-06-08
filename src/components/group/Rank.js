@@ -61,7 +61,7 @@ const StImg = styled.img`
 const StFirstRow = styled.p`
   color: #0e8bc0;
 `;
-const StRow = styled.p`
+const StRow = styled.div`
   font-weight: 400;
   font-size: 0.7rem;
   padding: 0.15rem 0;

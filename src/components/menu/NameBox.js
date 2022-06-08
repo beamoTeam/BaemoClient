@@ -20,12 +20,12 @@ function NameBox() {
 
 export default NameBox;
 const StNameWrap = styled.div`
+  position: relative;
   display: flex;
 
   margin: 0.18rem;
   padding: 10px;
 
-  width: 100%;
   height: 4rem;
 
   background-color: white;
@@ -41,7 +41,7 @@ const StShareBtn = styled.img`
   right: 10px;
   top: 50%;
 
-  transform: translateY(15%);
+  transform: translateY(-45%);
 `;
 
 const StReviewWrap = styled.div``;

@@ -12,7 +12,6 @@ function RepresentImg() {
 
 const StImgBox = styled.div`
   position: relative;
-  margin-top: 4rem;
 `;
 
 const StImg = styled.img`

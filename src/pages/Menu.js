@@ -6,17 +6,28 @@ import {
   InfoBox,
   SlideMenu,
 } from "../components/menu/index";
+import styled from "styled-components";
 
 function Menu() {
   return (
-    <div style={{"overflow": "auto"}}>
+    <StWrap>
       <RepresentImg />
       <NameBox />
       <InfoBox />
       <SlideMenu />
       <MenuList />
-    </div>
+    </StWrap>
   );
 }
 
+const StWrap = styled.div`
+  padding: 4rem 0;
+`;
+
+
 export default Menu;
+
+
+
+
+

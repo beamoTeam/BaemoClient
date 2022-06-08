@@ -18,7 +18,7 @@ function List({ chattingList }) {
 function ListItem({ chat }) {
   const { orderTime, maxPersonnel, restaurant, seq } = chat;
   return (
-    <Link to={`menu`}>
+    <Link to={`menu/${seq}`}>
       <StListItem>
         <StImg src={LOGO} alt="LOGO" />
         <StTextBox>
