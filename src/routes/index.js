@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "../components/header/index";
 import { Footer } from "../components/footer/index";
 import CartBtn from "../components/cart/CartBtn";
-import { Group, Menu, Restaurant, Select, Cart } from "../pages/index";
+import { Group, Menu, Restaurant, Select, Cart, NotFound } from "../pages/index";
 
 function Router() {
   return (
@@ -20,7 +20,7 @@ function Router() {
           <Route path=":m_seq" element={<Select />} />
         </Route>
         <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<h1>404</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <CartBtn />
       <Footer />

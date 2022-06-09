@@ -3,8 +3,13 @@ import styled from "styled-components";
 import HeaderLeft from "./HeaderLeft";
 import HeaderRight from "./HeaderRight";
 import HeaderMid from "./HeaderMid";
+import { useRecoilValue } from "recoil";
+import { visibilityState} from "../../recoil/atom";
 
 function Header() {
+  const visible = useRecoilValue(visibilityState)
+  if(!visible) return null;
+
   return (
     <StHeader>
       <HeaderLeft />
@@ -30,8 +35,6 @@ const StHeader = styled.div`
 
   z-index: 10;
 `;
-
-
 
 export default Header;
 

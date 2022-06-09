@@ -1,10 +1,10 @@
 import { atom, selector, useRecoilState } from "recoil";
-import { recoilPersist } from 'recoil-persist'
+import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist({
-  key: 'c_seq', // this key is using to store data in local storage
+  key: "c_seq", // this key is using to store data in local storage
   storage: localStorage, // configurate which stroage will be used to store the data
-})
+});
 
 // Chatting Seq
 export const chatSeqState = atom({
@@ -36,3 +36,14 @@ export const useCartState = () => {
   const [cart, setCart] = useRecoilState(cartState);
   return { cart, setCart };
 };
+
+// Visibility
+export const visibilityState = atom({
+  key: "visibilityState",
+  default: true,
+});
+
+export function useVisibilityState() {
+  const [visibility, setVisibility] = useRecoilState(visibilityState);
+  return { visibility, setVisibility };
+}

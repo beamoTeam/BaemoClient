@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { BiCommentAdd } from "react-icons/bi";
 import { BsChatLeftDotsFill } from "react-icons/bs";
 import { IoMdHome, IoMdListBox, IoMdPerson } from "react-icons/io";
+import { useRecoilValue } from "recoil";
+import { visibilityState } from "../../recoil/atom";
 
 const NAV = [
   { title: "홈", icon: <IoMdHome />, url: "/" },
@@ -14,6 +16,8 @@ const NAV = [
 ];
 
 function Footer() {
+  const visible = useRecoilValue(visibilityState);
+  if (!visible) return null;
   return (
     <StFooter>
       {NAV.map((nav) => (

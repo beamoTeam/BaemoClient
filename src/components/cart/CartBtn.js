@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { getCartByUser } from "../../api";
 import { filterSameMenu } from "../../utils/filter";
-import { useCartState, useChatSeqState } from "../../recoil/atom";
+import { useCartState, useChatSeqState, visibilityState } from "../../recoil/atom";
+import { useRecoilValue } from "recoil";
 
 function CartBtn() {
+  const visible = useRecoilValue(visibilityState);
   const { chatSeq } = useChatSeqState();
   const {cart, setCart} = useCartState();
-
+  
   useEffect(() => {
+    if (!visible) return;
     if (!chatSeq) return;
     const getCartItems = async () => {
       try {
@@ -22,7 +25,8 @@ function CartBtn() {
     };
     getCartItems();
   }, [chatSeq, setCart]);
-
+  
+  if (!visible) return null;
   if (cart.length === 0) return null;
 
   return (

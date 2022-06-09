@@ -27,3 +27,7 @@ export function getCartByUser(u_seq, c_seq) {
 export function postOrder(u_seq = 1, c_seq) {
   return axios.post(`/api/order/${u_seq}/${c_seq}`);
 }
+
+export function getOrdersForRestaurant(c_seq = 1) {
+  return axios.get(`/api/order/total/${c_seq}`)
+}

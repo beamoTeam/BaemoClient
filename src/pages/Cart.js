@@ -19,9 +19,10 @@ function Cart() {
   const resetCartState = useResetRecoilState(cartState);
   const { chatSeq } = useChatSeqState();
   const { cart} = useCartState();
+  
   const handleOrder = async () => {
     try {
-      const res = await postOrder(1, chatSeq);
+      await postOrder(1, chatSeq);
       alert("주문이 완료되었습니다.");
       // 카트, chatSeq 비우기
       resetCartState();
