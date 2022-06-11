@@ -4,29 +4,28 @@ import { Link } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { getCartByUser } from "../../api";
 import { filterSameMenu } from "../../utils/filter";
-import { useCartState, useChatSeqState, visibilityState } from "../../recoil/atom";
-import { useRecoilValue } from "recoil";
+import { useCartState, useChatSeqState, useUserSeqState } from "../../recoil/atom";
 
 function CartBtn() {
-  const visible = useRecoilValue(visibilityState);
+  const { userSeq } = useUserSeqState();
   const { chatSeq } = useChatSeqState();
-  const {cart, setCart} = useCartState();
-  
+  const { cart, setCart } = useCartState();
+
   useEffect(() => {
-    if (!visible) return;
     if (!chatSeq) return;
     const getCartItems = async () => {
       try {
-        const res = await getCartByUser(1, chatSeq);
-        setCart(filterSameMenu(res.data.basketMenuList));
+        const res = await getCartByUser(userSeq, chatSeq);
+        console.log(res.data);
+        setCart(filterSameMenu(res?.data?.basketMenuList));
       } catch (err) {
         throw new Error(`${err} - User 장바구니 GET 에러`);
       }
     };
     getCartItems();
-  }, [chatSeq, setCart]);
+  }, [chatSeq, userSeq, setCart]);
   
-  if (!visible) return null;
+  if (!cart) return null;
   if (cart.length === 0) return null;
 
   return (

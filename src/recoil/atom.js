@@ -2,7 +2,7 @@ import { atom, selector, useRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist({
-  key: "c_seq", // this key is using to store data in local storage
+  key: "seq", // this key is using to store data in local storage
   storage: localStorage, // configurate which stroage will be used to store the data
 });
 
@@ -47,3 +47,27 @@ export function useVisibilityState() {
   const [visibility, setVisibility] = useRecoilState(visibilityState);
   return { visibility, setVisibility };
 }
+
+// LOGIN
+export const userSeqState = atom({
+  key: "userSeqState",
+  default: true,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const useUserSeqState = () => {
+  const [userSeq, setUserSeq] = useRecoilState(userSeqState);
+  return { userSeq, setUserSeq };
+};
+
+// ADDRESS
+export const addrState = atom({
+  key: "addrState",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const useAddrState = () => {
+  const [addr, setAddr] = useRecoilState(addrState);
+  return { addr, setAddr };
+};

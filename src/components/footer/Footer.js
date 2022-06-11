@@ -10,9 +10,9 @@ import { visibilityState } from "../../recoil/atom";
 const NAV = [
   { title: "홈", icon: <IoMdHome />, url: "/" },
   { title: "채팅", icon: <BsChatLeftDotsFill />, url: "/chatting" },
-  { title: "방만들기", icon: <BiCommentAdd />, url: "/create" },
+  { title: "방만들기", icon: <BiCommentAdd />, url: "/making" },
   { title: "주문내역", icon: <IoMdListBox />, url: "/history" },
-  { title: "프로필", icon: <IoMdPerson />, url: "/profile" },
+  { title: "프로필", icon: <IoMdPerson />, url: "/mypage" },
 ];
 
 function Footer() {

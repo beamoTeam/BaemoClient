@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { chatSeqState } from "../../recoil/atom";
-import {useSetRecoilState} from 'recoil';
+import { useChatSeqState } from "../../recoil/atom";
 
 import LOGO from "../../asset/img/logo_shop.png";
 
 function List({ chattingList }) {
   if (!chattingList) return <h1>로딩중..</h1>;
+
   return (
     <StListWrap>
       {chattingList?.map((chat) => {
@@ -18,19 +18,20 @@ function List({ chattingList }) {
 }
 
 function ListItem({ chat }) {
-  const setChatSeq = useSetRecoilState(chatSeqState);
+  const {setChatSeq} = useChatSeqState();
   
-  const { orderTime, maxPersonnel, restaurant, seq } = chat;
+  const { orderTime, maxPersonnel, restaurant, seq: c_seq } = chat;
+  const { seq: r_seq } = restaurant;
   return (
-    <div onClick={() => setChatSeq(seq)}>
-      <Link to={`menu/${seq}`}>
+    <div onClick={() => setChatSeq(c_seq)}>
+      <Link to={`menu/${r_seq}`}>
         <StListItem>
           <StImg src={LOGO} alt="LOGO" />
           <StTextBox>
             <StP className="color__blue">{restaurant.name}</StP>
             <p>
               <StText>마감 {orderTime.split(" ")[1]}</StText>
-              <StText className="color__green"> 모집 2/{maxPersonnel}</StText>
+              <StText className="color__green"> 모집 1/{maxPersonnel}</StText>
             </p>
           </StTextBox>
         </StListItem>

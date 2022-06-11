@@ -1,10 +1,12 @@
 import React from "react";
-import { useCartState, useChatSeqState } from "../recoil/atom";
 import styled from "styled-components";
 import { postOrder } from "../api";
 import { useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
-import { chatSeqState, cartState } from "../recoil/atom";
+import {
+  useCartState,
+  useChatSeqState,
+  useUserSeqState,
+} from "../recoil/atom";
 import {
   AddMore,
   DeliveryFee,
@@ -15,18 +17,17 @@ import {
 
 function Cart() {
   const navigate = useNavigate();
-  const resetChatSeqState = useResetRecoilState(chatSeqState);
-  const resetCartState = useResetRecoilState(cartState);
-  const { chatSeq } = useChatSeqState();
-  const { cart} = useCartState();
-  
+  const { userSeq } = useUserSeqState();
+  const { cart, setCart } = useCartState();
+  const { chatSeq, setChatSeq } = useChatSeqState();
+
   const handleOrder = async () => {
     try {
-      await postOrder(1, chatSeq);
+      await postOrder(userSeq, chatSeq);
       alert("주문이 완료되었습니다.");
       // 카트, chatSeq 비우기
-      resetCartState();
-      resetChatSeqState();
+      setCart(null);
+      setChatSeq(null);
       navigate("/", { replace: true });
     } catch (err) {
       throw new Error(`${err} - 장바구니 내용 주문할떄 에러`);

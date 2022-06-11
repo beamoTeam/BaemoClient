@@ -232,8 +232,8 @@
 .menu-card {
   display: flex;
   flex-direction: column;
-  width: 200px;
-  height: 150px;
+  width: 15rem;
+  height: auto;
   background-color: #ccc6c6;
   margin: 0 5px;
 }

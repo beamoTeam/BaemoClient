@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Category, Filter, Rank, List } from "../components/group/index";
 import { getAllChattingRoom } from "../api";
+import CartBtn from "../components/cart/CartBtn";
+import { useNavigate } from 'react-router-dom';
+import { useUserSeqState } from "../recoil/atom";
 
 function Group() {
+  const navigate = useNavigate();
+  const { userSeq } = useUserSeqState();
   const [chattingList, setchattingList] = useState(null);
 
   useEffect(() => {
+    if (!userSeq) navigate("/login");
     async function test() {
       try {
         const res = await getAllChattingRoom();
@@ -15,7 +21,7 @@ function Group() {
       }
     }
     test();
-  }, []);
+  }, [navigate, userSeq]);
   
   return (
     <>
@@ -23,6 +29,7 @@ function Group() {
       <Filter />
       <Rank />
       <List chattingList={chattingList} />
+      <CartBtn />
     </>
   );
 }

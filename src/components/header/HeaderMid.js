@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DaumPostcode from "./Postcode";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { useAddrState } from "../../recoil/atom";
 
 function HeaderMid() {
   const [toggleApi, setToggleApi] = useState(false);
-  const [address, setAdress] = useState(null);
+  const { addr, setAddr } = useAddrState();
 
   const handleToggle = () => {
     setToggleApi((prev) => !prev);
@@ -14,12 +15,12 @@ function HeaderMid() {
   return (
     <StMidWrap>
       {toggleApi && (
-        <DaumPostcode handleToggle={handleToggle} setAdress={setAdress} />
+        <DaumPostcode handleToggle={handleToggle} setAddr={setAddr} />
       )}
       <div onClick={handleToggle}>
         <span>
-          {address
-            ? address.split(" ").slice(2, 4).join(" ")
+          {addr
+            ? addr.split(" ").slice(2, 4).join(" ")
             : "주소를 입력해 주세요"}
         </span>
         <MdOutlineKeyboardArrowDown />

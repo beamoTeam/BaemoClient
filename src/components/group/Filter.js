@@ -7,6 +7,9 @@ function Filter() {
   const [active, setActive] = useState(null);
 
   const handleClick = (idx) => {
+    if (active === idx) {
+      return setActive(null);
+    }
     setActive(idx)
   }
 

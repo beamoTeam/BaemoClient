@@ -1,12 +1,14 @@
 export function filterSameMenu(menus) {
-  const tmp = {};
+  let tmp = {};
   menus.forEach((menu) => {
-    const key = menu.name;
+    let key = menu.name;
     if (!tmp[key]) {
       tmp[key] = menu;
     } else {
-      tmp[key].count += menu.count;
+      let n = tmp[key].count + menu.count;
+      tmp[key].count = n; // 여기서 read only 에러
     }
   });
+  // console.log(Object.keys(tmp).map((menu) => tmp[menu]))
   return Object.keys(tmp).map((menu) => tmp[menu]);
 }

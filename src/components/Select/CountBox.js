@@ -12,7 +12,7 @@ function CountBox({ menuInfo, setMenuInfo }) {
         >
           -
         </StBtn>
-        <StCountText>{String(menuInfo?.count + 1)}</StCountText>
+        <StCountText>{String(menuInfo?.count)}</StCountText>
         <StBtn onClick={() => plus(menuInfo, setMenuInfo)}>+</StBtn>
       </StBtnWrap>
     </StCountWrap>

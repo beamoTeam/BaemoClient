@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
 import {
   CountBox,
-  ImgBox,
-  NameBox,
-  PriceBox,
+  InfoBox,
   SelectBox,
   TotalBox,
 } from "../components/Select/index";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { getDetailMenuByMenuId } from "../api";
+import { getDetailMenuByMenuId, addMenuToCart } from "../api";
+import { useCartState, useChatSeqState, useUserSeqState } from "../recoil/atom";
+import { useNavigate } from "react-router-dom";
+import {filterSameMenu} from "../utils/filter";
 
 function Select() {
-  const params = useParams();
-  const { m_seq } = params;
-  const [menuInfo, setMenuInfo] = useState({
-    seq: null,
-    category: null,
-    name: null,
-    img: null,
-    price: null,
-    restaurant_seq: null,
-    count: null
-  });
+  const navigate = useNavigate();
+  const { m_seq } = useParams();
+  const { cart, setCart } = useCartState();
+  const { chatSeq } = useChatSeqState();
+  const { userSeq } = useUserSeqState();
+  const [menuInfo, setMenuInfo] = useState(null);
+
+  const addToCart = async () => {
+    try {
+      await addMenuToCart(userSeq, chatSeq, menuInfo);
+      // console.log(filterSameMenu(cart.concat(menuInfo)))
+      // setCart(filterSameMenu());
+      navigate(-1, { replace: true });
+    } catch (err) {
+      throw new Error(`${err} - 장바구니에 메뉴 담을때 에러`);
+    }
+  };
 
   useEffect(() => {
     const getDetailMenu = async () => {
@@ -40,12 +47,10 @@ function Select() {
 
   return (
     <StWrap>
-      <ImgBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
-      <NameBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
-      <PriceBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <InfoBox menuInfo={menuInfo} />
       <SelectBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
       <CountBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
-      <TotalBox menuInfo={menuInfo} setMenuInfo={setMenuInfo} />
+      <TotalBox menuInfo={menuInfo} addToCart={addToCart}  />
     </StWrap>
   );
 }

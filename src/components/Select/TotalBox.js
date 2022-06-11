@@ -1,32 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { addMenuToCart } from "../../api";
-import { useChatSeqState } from "../../recoil/atom";
-import { useNavigate } from "react-router-dom";
 
-function TotalBox({ menuInfo }) {
-  const navigate = useNavigate();
-  const { chatSeq } = useChatSeqState();
+function TotalBox({ menuInfo, addToCart }) {
   const { count, price } = menuInfo;
-
-  const addToCart = async (u_seq, c_seq, data) => {
-    try {
-      await addMenuToCart(u_seq, c_seq, data);
-      navigate(-1, { replace: true });
-    } catch (err) {
-      throw new Error(`${err} - 장바구니에 메뉴 담을때 에러`);
-    }
-  };
 
   return (
     <StTotalWrap>
       <StTotalText>
         <p>총 주문금액</p>
-        <p>{((count + 1) * price).toLocaleString()}원</p>
+        <p>{((count) * price).toLocaleString()}원</p>
       </StTotalText>
       <StMinPrice>최소주문금액 16,000원</StMinPrice>
       <div>
-        <StAddToCartBtn onClick={() => addToCart(1, chatSeq, menuInfo)}>
+        <StAddToCartBtn onClick={addToCart}>
           장바구니에 추가
         </StAddToCartBtn>
       </div>
