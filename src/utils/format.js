@@ -1,4 +1,3 @@
-export function digitFormatter(num) {
-  if (num < 10) return `0${num}`;
-  return num;
+export function digitFormatter(number) {
+  return number < 10 ? `0${number}` : number;
 }

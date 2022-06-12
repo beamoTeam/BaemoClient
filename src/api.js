@@ -1,45 +1,64 @@
 import axios from "axios";
 
-export function getOrders(c_seq = 1) {
-  return axios.get(`/api/order/total/${c_seq}`);
-}
-
-export function getAllChattingRoom() {
-  return axios.get(`/api/chatroom`);
-}
-
-export function getAllMenuByRestaurant(r_seq) {
-  return axios.get(`/api/restaurant/${r_seq}/menu`);
-}
-
-export function getDetailMenuByMenuId(m_seq) {
-  return axios.get(`/api/menu/${m_seq}`);
+// BASKET
+export function getCartByUser(u_seq, c_seq) {
+  return axios.get(`/api/basket/${u_seq}/${c_seq}`);
 }
 
 export function addMenuToCart(u_seq, c_seq, data) {
   return axios.post(`/api/basket/${u_seq}/${c_seq}`, data);
 }
 
-export function getCartByUser(u_seq, c_seq) {
-  return axios.get(`/api/basket/${u_seq}/${c_seq}`);
-}
-
-export function postOrder(u_seq, c_seq) {
-  return axios.post(`/api/order/${u_seq}/${c_seq}`);
-}
-
-export function getOrdersForRestaurant(c_seq = 1) {
-  return axios.get(`/api/order/total/${c_seq}`)
+// CHATTING
+export function getAllChattingRoom() {
+  return axios.get(`/api/chatroom`);
 }
 
 export function makeNewGroup(u_seq, data) {
   return axios.post(`/api/chatroom/${u_seq}`, data)
 }
 
+export function enterChattingRoom(u_seq, c_seq) {
+  return axios.post(`/api/chatroom/${u_seq}/${c_seq}`);
+}
+
+// MENU
+export function getDetailMenuByMenuId(m_seq) {
+  return axios.get(`/api/menu/${m_seq}`);
+}
+
+// ORDER
+/////////////////////
+// 유저번호로 주문 조회 //
+/////////////////////
+export function getMyOrders(u_seq) {
+  return axios.post(`/api/order/${u_seq}`);
+}
+
+export function postOrder(u_seq, c_seq) {
+  return axios.post(`/api/order/${u_seq}/${c_seq}`);
+}
+
+///////////////////////
+// 음식점 번호로 주문 조회 //
+///////////////////////
+export function getOrdersByRestaurant(r_seq) {
+  return axios.get(`/api/order/restaurant/${r_seq}`);
+}
+
+export function getOrdersForRestaurant(c_seq = 1) {
+  return axios.get(`/api/order/total/${c_seq}`)
+}
+
+// RESTAURANT
 export function getAllRestaurant() {
   return axios.get(`/api/restaurant`)
 }
 
-export function enterChattingRoom(u_seq, c_seq) {
-  return axios.post(`/api/chatroom/${u_seq}/${c_seq}`);
+export function getAllMenuByRestaurant(r_seq) {
+  return axios.get(`/api/restaurant/${r_seq}/menu`);
 }
+
+
+// 사용자 전체 출력
+// GET /api/user
