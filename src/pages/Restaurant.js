@@ -12,19 +12,14 @@ function Restaurant() {
   useVisibility();
   useEffect(() => {
     async function getOrders() {
-      console.log('!!@#!@')
+      console.log('@ _ @')
       try {
         const res = await getOrdersForRestaurant();
-        console.log(res)
-        console.log(res.data)
         setOrders(res.data);
       } catch (err) {
         console.log(err.response);
-        // throw new Error(`${err} - 사장님 페이지 주문 받아올때 에러`);
       }
     }
-    // getOrders();
-    // fetchOrderHistoryByRestaurntId(r_seq);
     setInterval(getOrders, 2000);
   }, []);
 
