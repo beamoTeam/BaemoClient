@@ -12,6 +12,8 @@ function HeaderMid() {
     setToggleApi((prev) => !prev);
   };
 
+  const splitedAddr = addr?.split(" (")[0].split(" ");
+  const len = splitedAddr?.length;
   return (
     <StMidWrap>
       {toggleApi && (
@@ -20,7 +22,7 @@ function HeaderMid() {
       <div onClick={handleToggle}>
         <span>
           {addr
-            ? addr.split(" ").slice(2, 4).join(" ")
+            ? splitedAddr.slice(len-3, len).join(" ")
             : "주소를 입력해 주세요"}
         </span>
         <MdOutlineKeyboardArrowDown />

@@ -27,7 +27,8 @@ function Select() {
       // setCart(filterSameMenu());
       navigate(-1, { replace: true });
     } catch (err) {
-      throw new Error(`${err} - 장바구니에 메뉴 담을때 에러`);
+      console.log(err.response);
+      // throw new Error(`${err} - 장바구니에 메뉴 담을때 에러`);
     }
   };
 

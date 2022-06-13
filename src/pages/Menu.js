@@ -8,10 +8,12 @@ import {
 import styled from "styled-components";
 import { enterChattingRoom, getAllMenuByRestaurant } from "../api";
 import { useUserSeqState, useChatSeqState } from "../recoil/atom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import CartBtn from "../components/cart/CartBtn";
 
 function Menu() {
+  const navigate = useNavigate();
   const { r_seq } = useParams();
   const { userSeq: u_seq } = useUserSeqState();
   const { chatSeq: c_seq } = useChatSeqState();
@@ -30,7 +32,12 @@ function Menu() {
       const res = await enterChattingRoom(u_seq, c_seq);
       setInfo(res.data);
     } catch (err) {
-      throw new Error(`${err} - 채팅방 입장할때 에러`);
+      console.log(err.response)
+      if(err.response.status === 400) {
+        alert("최대 인원 초과입니다.");
+        return navigate("/", { replace: true });
+      }
+      // throw new Error(`${err} - 채팅방 입장할때 에러`);
     }
   };
 

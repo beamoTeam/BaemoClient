@@ -9,10 +9,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useVisibility } from "../../hook/useVisibility";
 import { useUserSeqState } from "../../recoil/atom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const theme = createTheme();
 
 export default function Login() {
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   useVisibility();
   const { setUserSeq } = useUserSeqState();

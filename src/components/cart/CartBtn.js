@@ -16,7 +16,6 @@ function CartBtn() {
     const getCartItems = async () => {
       try {
         const res = await getCartByUser(userSeq, chatSeq);
-        console.log(res.data);
         setCart(filterSameMenu(res?.data?.basketMenuList));
       } catch (err) {
         throw new Error(`${err} - User 장바구니 GET 에러`);

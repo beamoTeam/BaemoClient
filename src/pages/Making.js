@@ -19,19 +19,19 @@ function Making() {
   const [userSelect, setUserSelect] = useState({
     phone: '',
     detailAddr: '',
-    maxPersonnel: '',
+    maxPersonnel: 2,
     restaurant: '',
     orderTime: '',
     restaurant_seq: null,
   });
 
   const handleCreate = async () => {
-    const { detailAddr, maxPersonnel, restaurant: name, orderTime, restaurant_seq } = userSelect;
+    const { detailAddr, maxPersonnel, orderTime, restaurant_seq } = userSelect;
     try {
       const data = {
-        "address": `${addr} ${detailAddr}`,
+        address: addr,
+        detail_address: detailAddr,
         maxPersonnel,
-        name,
         orderTime,
         restaurant_seq
       }
@@ -41,7 +41,8 @@ function Making() {
       setChatSeq(c_seq);
       navigate(`/menu/${r_seq}`, { replace: true });
     } catch (err) {
-      throw new Error(`${err} - 방만들때 POST 에러`);
+      console.log(err.response)
+      // throw new Error(`${err.response}`);
     }
   };
 

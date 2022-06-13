@@ -30,14 +30,15 @@ function Cart() {
       setChatSeq(null);
       navigate("/", { replace: true });
     } catch (err) {
-      throw new Error(`${err} - 장바구니 내용 주문할떄 에러`);
+      console.log(err.response);
+      // throw new Error(`${err} - 장바구니 내용 주문할떄 에러`);
     }
   };
 
   return (
     <StWrap>
       <NameBox />
-      {cart.map((item) => (
+      {cart?.map((item) => (
         <MenuBox key={item.menu_seq} item={item} />
       ))}
       <AddMore menu={cart} />

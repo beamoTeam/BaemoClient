@@ -4,11 +4,12 @@ import styled from "styled-components";
 function PersonnelBox({ setUserSelect }) {
   const number = [2, 3, 4];
   const handleChange = (e) => {
-    setUserSelect(prev => ({
+    setUserSelect((prev) => ({
       ...prev,
-      maxPersonnel: e.target.value
-    }))
-  }
+      maxPersonnel: e.target.value,
+    }));
+  };
+  // selected
   return (
     <StWrap>
       <StHeading>모집인원</StHeading>
@@ -41,7 +42,6 @@ const StHeading = styled.p`
   margin: 0.5rem 0;
 `;
 const StSelectBox = styled.select`
-
   width: 8rem;
   border: 1px solid #881fc8;
   padding: 0.4rem;

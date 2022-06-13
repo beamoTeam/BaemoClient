@@ -23,7 +23,6 @@ const StUL = styled.ul`
   justify-content: space-around;
   align-items: center;
 
-  margin-top: 3.9rem;
   background-color: white;
 
   font-size: 0.9rem;

@@ -20,7 +20,7 @@ function List({ chattingList }) {
 function ListItem({ chat }) {
   const {setChatSeq} = useChatSeqState();
   
-  const { orderTime, maxPersonnel, restaurant, seq: c_seq } = chat;
+  const { orderTime, maxPersonnel, name, restaurant, seq: c_seq } = chat;
   const { seq: r_seq } = restaurant;
   return (
     <div onClick={() => setChatSeq(c_seq)}>
@@ -28,7 +28,7 @@ function ListItem({ chat }) {
         <StListItem>
           <StImg src={LOGO} alt="LOGO" />
           <StTextBox>
-            <StP className="color__blue">{restaurant.name}</StP>
+            <StP className="color__blue">{name}</StP>
             <p>
               <StText>마감 {orderTime.split(" ")[1]}</StText>
               <StText className="color__green"> 모집 1/{maxPersonnel}</StText>
