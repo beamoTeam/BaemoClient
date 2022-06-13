@@ -35,6 +35,8 @@ function Cart() {
     }
   };
 
+  if (!cart) return null;
+
   return (
     <StWrap>
       <NameBox />

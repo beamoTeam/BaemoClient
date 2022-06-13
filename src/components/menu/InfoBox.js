@@ -11,7 +11,6 @@ function InfoBox({ enterChatRoom }) {
   }, [enterChatRoom]);
 
   if (!info) return <h1>로딩중..</h1>;
-  console.log({info})
   //////////////////////////////////////////////////////
   // if(!info.restaurant) return <h1>로딩중..</h1>;
   // if(!info.maxPersonnel) return <h1>로딩중..</h1>;

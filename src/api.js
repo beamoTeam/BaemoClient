@@ -47,7 +47,7 @@ export function getOrderHistoryByRestaurantId(r_seq) {
 }
 
 export function getOrdersForRestaurant(r_seq) {
-  return axios.get(`/api/order/total/${6}`)
+  return axios.get(`/api/order/total/${9}`)
 }
 
 // RESTAURANT
