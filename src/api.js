@@ -14,6 +14,11 @@ export function getAllChattingRoom() {
   return axios.get(`/api/chatroom`);
 }
 
+export function getAllChattingRoomByAddress(data) {
+  return axios.post(`/api/chatroom`, data);
+}
+
+
 export function makeNewGroup(u_seq, data) {
   return axios.post(`/api/chatroom/${u_seq}`, data)
 }
@@ -47,7 +52,7 @@ export function getOrderHistoryByRestaurantId(r_seq) {
 }
 
 export function getOrdersForRestaurant(r_seq) {
-  return axios.get(`/api/order/total/${9}`)
+  return axios.get(`/api/order/total/${12}`)
 }
 
 // RESTAURANT
