@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Header, Main } from "../components/restaurant/index";
 import { useVisibility } from "../hook/useVisibility";
-import { getOrdersForRestaurant, getOrderHistoryByRestaurantId } from "../api";
+import { getOrdersForRestaurant } from "../api";
 import { useParams } from "react-router-dom";
 import "../components/restaurant/restaurant.css";
 
 function Restaurant() {
   const { r_seq } = useParams();
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(null);
+  const ordersRef = useRef(null);
 
   useVisibility();
   useEffect(() => {
     async function getOrders() {
-      console.log('@ _ @')
+      console.log("Fetch was executed.");
       try {
-        const res = await getOrdersForRestaurant();
+        const res = await getOrdersForRestaurant(r_seq);
+        if (ordersRef.current === res.data) return;
+        console.log("Data updated.");
+        ordersRef.current = res.data;
         setOrders(res.data);
       } catch (err) {
         console.log(err.response);
       }
     }
-    setInterval(getOrders, 2000);
-  }, []);
+    let id = setInterval(getOrders, 2000);
+    return () => clearInterval(id);
+  }, [r_seq]);
 
-  if (orders.length === 0 || !orders) return <h1>로딩중..</h1>
+  if (!orders) return <h1>로딩중..</h1>;
   return (
     <>
       <Header />
@@ -32,13 +37,4 @@ function Restaurant() {
   );
 }
 
-async function fetchOrderHistoryByRestaurntId(r_seq) {
-  try {
-    const res = await getOrderHistoryByRestaurantId(r_seq);
-    console.log("음식점 주문들");
-    console.log(res.data);
-  } catch (err) {
-    throw new Error(`${err} - 음식점 번호로 주문 받을떄 에러`)
-  }
-}
 export default Restaurant;

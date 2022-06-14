@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useChatSeqState } from "../../recoil/atom";
-
+import { useAddrState } from "../../recoil/atom";
 import LOGO from "../../asset/img/logo_shop.png";
 
 function List({ chattingList }) {
+  const { addr } = useAddrState();
+  if (!addr) return <StNoMsg>주소를 선택해 주세요</StNoMsg>;
   if (!chattingList) return <h1>로딩중..</h1>;
+  if (chattingList.length === 0) return <StNoMsg><Link to="/making">모임을 만들어 보세요</Link></StNoMsg>;
 
   return (
     <StListWrap>
@@ -18,8 +21,8 @@ function List({ chattingList }) {
 }
 
 function ListItem({ chat }) {
-  const {setChatSeq} = useChatSeqState();
-  
+  const { setChatSeq } = useChatSeqState();
+
   const { orderTime, maxPersonnel, name, restaurant, seq: c_seq } = chat;
   const { seq: r_seq } = restaurant;
   return (
@@ -40,6 +43,7 @@ function ListItem({ chat }) {
   );
 }
 const StListWrap = styled.ul`
+  position: relative;
   width: 100%;
   overflow: auto;
 
@@ -82,4 +86,16 @@ const StText = styled.span`
     margin-left: 10px;
   }
 `;
+
+const StNoMsg = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 17rem;
+  display: flex;
+  font-weight: 600;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default List;
