@@ -1,0 +1,30 @@
+.globalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+  border: 1px solid black;
+
+  height: 50px;
+}
+
+.mapButton {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mapButton svg {
+  width: 100%;
+  height: 100%;
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+}
+
+.addr {
+  font-size: 1rem;
+  max-width: 13rem;
+}
