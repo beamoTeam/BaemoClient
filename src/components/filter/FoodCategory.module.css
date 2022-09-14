@@ -1,5 +1,6 @@
 .foodCategory {
-  padding: 0 15px;
+  padding: var(--default-padding);
+  margin: 0;
   margin-top: 50px;
 
   display: flex;

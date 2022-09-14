@@ -1,13 +1,13 @@
 import { IonContent, IonPage } from "@ionic/react";
-import FoodCategory from "../components/foods/FoodCategory";
+import FoodCategory from "../components/filter/FoodCategory";
+import SortFilter from "../components/filter/SortFilter";
 
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <IonContent>
-          <FoodCategory />
-        </IonContent>
+        <FoodCategory />
+        <SortFilter />
       </IonContent>
     </IonPage>
   );
