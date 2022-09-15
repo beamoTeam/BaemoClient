@@ -24,6 +24,7 @@ const GlobalHeader: React.FC = () => {
             Back
           </IonIcon>
         </div>
+
         <div
           className={css.headerMain}
           id="open-address-modal"

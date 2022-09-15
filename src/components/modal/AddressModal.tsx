@@ -27,7 +27,7 @@ export default function AddressModal({ toggle, setToggle }: AddressModalProps) {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    setAddr(fullAddress);
+    setAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
   };
 
   return (
@@ -36,8 +36,8 @@ export default function AddressModal({ toggle, setToggle }: AddressModalProps) {
       isOpen={toggle}
       showBackdrop={true}
       backdropDismiss={true}
-      initialBreakpoint={0.37}
-      breakpoints={[0, 0.25, 0.5, 0.75]}
+      initialBreakpoint={0.7}
+      breakpoints={[0, 1, 1, 1]}
       handleBehavior="cycle"
     >
       <IonContent className="ion-padding">

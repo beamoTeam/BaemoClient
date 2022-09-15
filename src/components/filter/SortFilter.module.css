@@ -14,14 +14,3 @@
 .filter::-webkit-scrollbar {
   display: none;
 }
-
-.item {
-  list-style: none;
-
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  margin-right: 10px;
-
-  border: 1px solid;
-  border-radius: 20px;
-}

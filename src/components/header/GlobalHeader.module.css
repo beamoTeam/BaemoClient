@@ -4,9 +4,11 @@
   justify-content: space-between;
 
   padding: 0 20px;
-  border: 1px solid black;
 
   height: 50px;
+
+  z-index: 1000;
+  background-color: white;
 }
 
 .mapButton {
@@ -22,6 +24,7 @@
 .headerMain {
   display: flex;
   align-items: center;
+  /* width: 300px; */
 }
 
 .addr {
