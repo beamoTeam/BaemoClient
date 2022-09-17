@@ -1,4 +1,4 @@
-export interface Group {
+export interface GroupModel {
   address: string;
   createDateTime: string;
   detail_address: string;
@@ -12,7 +12,7 @@ export interface Group {
   updatedDateTime?: string;
 } 
 
-interface Restaurant {
+interface RestaurantModel {
   address: string;
   category: string;
   createdDateTime: string;
@@ -20,7 +20,7 @@ interface Restaurant {
   img: string;
   latitude: number;
   longitude: number;
-  maxMember: 4;
+  maxMember: number;
   name: string;
   phone: number;
   seq: number;

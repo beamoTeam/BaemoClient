@@ -18,9 +18,6 @@ import {
   addCircleOutline,
   homeOutline,
 } from "ionicons/icons";
-import Home from "./pages/Home";
-import MakeChat from "./pages/MakeChat";
-import GlobalHeader from "./components/header/GlobalHeader";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -40,6 +37,12 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
+/* Page */
+import GlobalHeader from "./components/header/GlobalHeader";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
+import MakeChat from "./pages/MakeChat";
+
 setupIonicReact();
 
 const App: React.FC = () => {
@@ -52,7 +55,8 @@ const App: React.FC = () => {
             {/* Router */}
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
-              <Route path="/make-chat" component={MakeChat} />
+              <Route exact path="/make-chat" component={MakeChat} />
+              <Route exact path="/menu/:r_seq" component={Menu} />
               <Redirect to="/home" />
             </IonRouterOutlet>
             {/* Tab Menu */}

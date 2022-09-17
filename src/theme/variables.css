@@ -78,6 +78,10 @@ http://ionicframework.com/docs/theming/ */
   --default-padding: 0 15px;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors

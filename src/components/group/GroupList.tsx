@@ -2,17 +2,17 @@ import {
   IonList,
   IonItem,
   IonImg,
-  IonNavLink,
   IonIcon,
   IonListHeader,
   IonLabel,
 } from "@ionic/react";
-import { Group } from "../../types/group";
+import { Link } from "react-router-dom";
+import { GroupModel } from "../../types/group";
 import { personCircleOutline, radioButtonOffOutline } from "ionicons/icons";
 import css from "./GroupList.module.css";
 
 interface GroupListProps {
-  groupList: Group[];
+  groupList: GroupModel[];
 }
 
 export default function GroupList({ groupList }: GroupListProps) {
@@ -23,7 +23,7 @@ export default function GroupList({ groupList }: GroupListProps) {
       </IonListHeader>
 
       {groupList.map((group) => (
-        <IonNavLink key={group.seq} routerDirection="forward">
+        <Link key={group.seq} to={`menu/${group.restaurant.seq}`}>
           <IonItem>
             <IonImg src="./avatar-finn.png" />
             <IonLabel>
@@ -43,7 +43,7 @@ export default function GroupList({ groupList }: GroupListProps) {
               </p>
             </IonLabel>
           </IonItem>
-        </IonNavLink>
+        </Link>
       ))}
     </IonList>
   );

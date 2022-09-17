@@ -1,18 +1,14 @@
-import { Dispatch, SetStateAction } from "react";
-import { IonModal, IonContent, IonLabel } from "@ionic/react";
-import DaumPostcodeEmbed from "react-daum-postcode";
-import { useAddrState } from "../../recoil/addrState";
+import { useAddrState } from "../../lib/recoil/addrState";
+import PostCode from "./PostCode";
+import SheetModal from "./SheetModal";
+import { useModalState } from "../../lib/recoil/modalState";
 
-interface AddressModalProps {
-  toggle: boolean;
-  setToggle: Dispatch<SetStateAction<boolean>>;
-}
-
-export default function AddressModal({ toggle, setToggle }: AddressModalProps) {
+export default function AddressModal() {
   const [, setAddr] = useAddrState();
+  const [, setModal] = useModalState();
 
   const onComplete = (data: any) => {
-    setToggle((prev) => !prev);
+    setModal(null);
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -31,22 +27,8 @@ export default function AddressModal({ toggle, setToggle }: AddressModalProps) {
   };
 
   return (
-    <IonModal
-      trigger="open-address-modal"
-      isOpen={toggle}
-      showBackdrop={true}
-      backdropDismiss={true}
-      initialBreakpoint={0.7}
-      breakpoints={[0, 1, 1, 1]}
-      handleBehavior="cycle"
-    >
-      <IonContent className="ion-padding">
-        <div className="ion-margin-top">
-          <IonLabel>
-            <DaumPostcodeEmbed onComplete={onComplete} />
-          </IonLabel>
-        </div>
-      </IonContent>
-    </IonModal>
+    <SheetModal>
+      <PostCode onComplete={onComplete} />
+    </SheetModal>
   );
 }

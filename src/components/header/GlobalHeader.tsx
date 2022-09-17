@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { useAddrState } from "../../recoil/addrState";
+import React from "react";
+import { useAddrState } from "../../lib/recoil/addrState";
 import { IonHeader, IonIcon, IonTitle } from "@ionic/react";
 import { chevronDownOutline, locationOutline } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
+import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
-
 import AddressModal from "../modal/AddressModal";
+import ModalContainer from "../modal/ModalPortal";
 
 const GlobalHeader: React.FC = () => {
   let history = useHistory();
   const [addr] = useAddrState();
-  const [toggle, setToggle] = useState(false);
+  const [, setModal] = useModalState();
+
+  const setAddressModal = () => {
+    setModal(<AddressModal />);
+  };
 
   return (
     <>
@@ -28,7 +33,7 @@ const GlobalHeader: React.FC = () => {
         <div
           className={css.headerMain}
           id="open-address-modal"
-          onClick={() => setToggle((prev) => !prev)}
+          onClick={setAddressModal}
         >
           <IonTitle className={css.addr}>
             {addr || "주소를 선택해주세요"}
@@ -37,7 +42,7 @@ const GlobalHeader: React.FC = () => {
         </div>
 
         <div></div>
-        <AddressModal toggle={toggle} setToggle={setToggle} />
+        <ModalContainer />
       </IonHeader>
     </>
   );

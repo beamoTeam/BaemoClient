@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {
-  IonContent,
-  IonPage,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-} from "@ionic/react";
-import { cartOutline } from "ionicons/icons";
+import { IonContent, IonPage } from "@ionic/react";
 import FoodCategory from "../components/filter/FoodCategory";
 import SortFilter from "../components/filter/SortFilter";
 import Test from "../lib/api/GroupOrderService";
-import { Group } from "../types/group";
+import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
+import FloatButton from "../components/button/FloatButton";
 
 const Home: React.FC = () => {
-  const [groupList, setGroupList] = useState<Group[] | null>(null);
+  const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -34,12 +28,7 @@ const Home: React.FC = () => {
         {/* <Banner /> */}
         <GroupList groupList={groupList} />
       </IonContent>
-
-      <IonFab vertical="bottom" horizontal="end" slot="fixed">
-        <IonFabButton>
-          <IonIcon icon={cartOutline} />
-        </IonFabButton>
-      </IonFab>
+      <FloatButton />
     </IonPage>
   );
 };
