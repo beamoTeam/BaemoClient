@@ -42,6 +42,7 @@ import GlobalHeader from "./components/header/GlobalHeader";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import MakeChat from "./pages/MakeChat";
+import ModalContainer from "./components/modal/common/ModalPortal";
 
 setupIonicReact();
 
@@ -88,6 +89,7 @@ const App: React.FC = () => {
             </IonTabBar>
           </IonTabs>
         </IonReactRouter>
+        <ModalContainer />
       </IonApp>
     </RecoilRoot>
   );

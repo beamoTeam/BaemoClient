@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
-import ModalContainer from "../modal/ModalPortal";
 
 const GlobalHeader: React.FC = () => {
   let history = useHistory();
@@ -42,7 +41,6 @@ const GlobalHeader: React.FC = () => {
         </div>
 
         <div></div>
-        <ModalContainer />
       </IonHeader>
     </>
   );

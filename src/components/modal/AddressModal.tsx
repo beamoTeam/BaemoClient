@@ -1,14 +1,14 @@
 import { useAddrState } from "../../lib/recoil/addrState";
-import PostCode from "./PostCode";
-import SheetModal from "./SheetModal";
 import { useModalState } from "../../lib/recoil/modalState";
+import DaumPostcodeEmbed from "react-daum-postcode";
+import SheetModal from "./common/SheetModal";
 
 export default function AddressModal() {
   const [, setAddr] = useAddrState();
   const [, setModal] = useModalState();
 
   const onComplete = (data: any) => {
-    setModal(null);
+    setTimeout(() => setModal(null), 1);
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -23,12 +23,12 @@ export default function AddressModal() {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    setAddr(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    setAddr(fullAddress);
   };
 
   return (
     <SheetModal>
-      <PostCode onComplete={onComplete} />
+      <DaumPostcodeEmbed onComplete={onComplete} />
     </SheetModal>
   );
 }
