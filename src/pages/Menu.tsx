@@ -12,7 +12,6 @@ export default function Menu() {
   useEffect(() => {
     (async () => {
       const data = await restaurantService.fetchAllMenus(r_seq);
-      console.log(data);
       setMenus(data);
     })();
   }, [r_seq]);
