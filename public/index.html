@@ -21,8 +21,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Ionic App" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <script type="text/javascript" defer
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_MAP_KEY%&libraries=services,clusterer"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_MAP_KEY%&libraries=services,clusterer&autoload=false"></script>
+  <script type="text/javascript">
+    kakao.maps.load(function () {
+      var map = new kakao.maps.Map();
+    });
+  </script>
 </head>
 
 <body>

@@ -2,13 +2,14 @@ import React from "react";
 import { useAddrState } from "../../lib/recoil/addrState";
 import { IonHeader, IonIcon, IonTitle } from "@ionic/react";
 import { chevronDownOutline, locationOutline } from "ionicons/icons";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
+import KakaoMapModal from "../modal/KakaoMapModal";
 
 const GlobalHeader: React.FC = () => {
-  let history = useHistory();
+  // let history = useHistory();
   const [addr] = useAddrState();
   const [, setModal] = useModalState();
 
@@ -16,19 +17,17 @@ const GlobalHeader: React.FC = () => {
     setModal(<AddressModal />);
   };
 
+  const setMapModal = () => {
+    console.log("씨발");
+    setModal(<KakaoMapModal />);
+  };
+
   return (
     <>
       <IonHeader className={css.globalHeader}>
-        <div>
-          <IonIcon
-            className={css.mapButton}
-            icon={locationOutline}
-            onClick={history.goBack}
-          >
-            Back
-          </IonIcon>
+        <div onClick={setMapModal} style={{ background: "red" }}>
+          <IonIcon className={css.mapButton} icon={locationOutline} />
         </div>
-
         <div
           className={css.headerMain}
           id="open-address-modal"
@@ -39,7 +38,6 @@ const GlobalHeader: React.FC = () => {
           </IonTitle>
           <IonIcon icon={chevronDownOutline}>Back</IonIcon>
         </div>
-
         <div></div>
       </IonHeader>
     </>
