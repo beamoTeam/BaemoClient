@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Map() {
+export default function KakaoMap() {
   return (
     <Map
       center={{ lat: 33.5563, lng: 126.79581 }}
