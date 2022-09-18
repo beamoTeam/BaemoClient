@@ -1,15 +1,12 @@
-import React from "react";
 import { useAddrState } from "../../lib/recoil/addrState";
 import { IonHeader, IonIcon, IonTitle } from "@ionic/react";
 import { chevronDownOutline, locationOutline } from "ionicons/icons";
-// import { useHistory } from "react-router-dom";
 import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
 
-const GlobalHeader: React.FC = () => {
-  // let history = useHistory();
+export default function GlobalHeader() {
   const [addr] = useAddrState();
   const [, setModal] = useModalState();
 
@@ -18,7 +15,6 @@ const GlobalHeader: React.FC = () => {
   };
 
   const setMapModal = () => {
-    console.log("씨발");
     setModal(<KakaoMapModal />);
   };
 
@@ -46,6 +42,4 @@ const GlobalHeader: React.FC = () => {
       </IonHeader>
     </>
   );
-};
-
-export default GlobalHeader;
+}

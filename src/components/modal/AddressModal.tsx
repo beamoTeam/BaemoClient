@@ -27,7 +27,7 @@ export default function AddressModal() {
   };
 
   return (
-    <SheetModal trigger="open-address-modal">
+    <SheetModal>
       <DaumPostcodeEmbed onComplete={onComplete} />
     </SheetModal>
   );

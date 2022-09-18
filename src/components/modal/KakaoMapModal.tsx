@@ -4,7 +4,7 @@ import KakaoMap from "../map/KakaoMap";
 export default function KakaoMapModal() {
   return (
     <div>
-      <SheetModal trigger="open-map-modal">
+      <SheetModal>
         <KakaoMap />
       </SheetModal>
     </div>
