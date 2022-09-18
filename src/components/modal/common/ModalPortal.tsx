@@ -7,11 +7,11 @@ interface ModalPortalProps {
 }
 
 export default function ModalContainer() {
-  const [modal, setModal] = useModalState();
+  const [modal] = useModalState();
   console.log(modal);
   return (
     <Portal>
-      <div onClick={() => setModal(null)}>{modal}</div>
+      <div>{modal}</div>
     </Portal>
   );
 }
