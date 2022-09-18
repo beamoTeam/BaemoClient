@@ -25,7 +25,11 @@ const GlobalHeader: React.FC = () => {
   return (
     <>
       <IonHeader className={css.globalHeader}>
-        <div onClick={setMapModal} style={{ background: "red" }}>
+        <div
+          id="open-map-modal"
+          onClick={setMapModal}
+          style={{ background: "red" }}
+        >
           <IonIcon className={css.mapButton} icon={locationOutline} />
         </div>
         <div
