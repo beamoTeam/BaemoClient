@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-export default function useNavigate() {
+export function useNavigate() {
   const history = useHistory();
 
   const navigate = (url: string, props = { replace: false }) => {

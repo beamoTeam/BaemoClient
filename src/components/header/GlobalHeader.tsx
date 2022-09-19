@@ -5,6 +5,7 @@ import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
+import LoginModal from "../modal/LoginModal";
 
 export default function GlobalHeader() {
   const [addr] = useAddrState();
@@ -16,6 +17,10 @@ export default function GlobalHeader() {
 
   const setMapModal = () => {
     setModal(<KakaoMapModal />);
+  };
+
+  const setLoginModal = () => {
+    setModal(<LoginModal />);
   };
 
   return (
@@ -30,7 +35,7 @@ export default function GlobalHeader() {
           </IonTitle>
           <IonIcon icon={chevronDownOutline} />
         </div>
-        <div></div>
+        <div onClick={setLoginModal}>로그인</div>
       </IonHeader>
     </>
   );

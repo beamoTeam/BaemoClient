@@ -1,7 +1,10 @@
 import { useEffect } from "react";
+import { useNavigate } from "../hooks/useNavigate";
 import loginService from "../lib/api/LoginService";
 
 export default function KakaoRedirect() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get("code");
     (async () => {
