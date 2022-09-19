@@ -5,7 +5,7 @@ import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
-import LoginModal from "../modal/LoginModal";
+// import LoginModal from "../modal/LoginModal";
 
 export default function GlobalHeader() {
   const [addr] = useAddrState();
@@ -19,8 +19,13 @@ export default function GlobalHeader() {
     setModal(<KakaoMapModal />);
   };
 
-  const setLoginModal = () => {
-    setModal(<LoginModal />);
+  // const setLoginModal = () => {
+  //   setModal(<LoginModal />);
+  // };
+
+  const kakaoLogin = () => {
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+    console.log(2);
   };
 
   return (
@@ -35,7 +40,7 @@ export default function GlobalHeader() {
           </IonTitle>
           <IonIcon icon={chevronDownOutline} />
         </div>
-        <div onClick={setLoginModal}>로그인</div>
+        <div onClick={kakaoLogin}>로그인</div>
       </IonHeader>
     </>
   );

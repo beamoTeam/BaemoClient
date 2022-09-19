@@ -38,15 +38,18 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 /* Page */
-import GlobalHeader from "./components/header/GlobalHeader";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import MakeChat from "./pages/MakeChat";
+import KakaoRedirect from "./pages/KakaoRedirect";
+
+/* Components */
+import GlobalHeader from "./components/header/GlobalHeader";
 import ModalContainer from "./components/modal/common/ModalPortal";
 
 setupIonicReact();
 
-const App: React.FC = () => {
+export default function App() {
   return (
     <RecoilRoot>
       <IonApp>
@@ -58,6 +61,11 @@ const App: React.FC = () => {
               <Route exact path="/home" component={Home} />
               <Route exact path="/make-chat" component={MakeChat} />
               <Route exact path="/menu/:r_seq" component={Menu} />
+              <Route
+                exact
+                path={process.env.REACT_APP_KAKAO_REDIRECT_URI}
+                component={KakaoRedirect}
+              />
               <Redirect to="/home" />
             </IonRouterOutlet>
             {/* Tab Menu */}
@@ -93,5 +101,4 @@ const App: React.FC = () => {
       </IonApp>
     </RecoilRoot>
   );
-};
-export default App;
+}

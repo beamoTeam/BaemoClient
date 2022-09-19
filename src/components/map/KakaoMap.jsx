@@ -18,7 +18,6 @@ export default function KakaoMap() {
           <div
             style={{
               backgroundColor: "#fff",
-              color: "#000",
               background: "#3880ff",
               borderRadius: "50%",
               width: "35px",
