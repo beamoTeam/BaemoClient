@@ -21,22 +21,14 @@ export default function GlobalHeader() {
   return (
     <>
       <IonHeader className={css.globalHeader}>
-        <div
-          id="open-map-modal"
-          onClick={setMapModal}
-          style={{ background: "red" }}
-        >
-          <IonIcon className={css.mapButton} icon={locationOutline} />
+        <div onClick={setMapModal}>
+          <IonIcon icon={locationOutline} className={css.mapButton} />
         </div>
-        <div
-          className={css.headerMain}
-          id="open-address-modal"
-          onClick={setAddressModal}
-        >
+        <div onClick={setAddressModal} className={css.headerMain}>
           <IonTitle className={css.addr}>
             {addr || "주소를 선택해주세요"}
           </IonTitle>
-          <IonIcon icon={chevronDownOutline}>Back</IonIcon>
+          <IonIcon icon={chevronDownOutline} />
         </div>
         <div></div>
       </IonHeader>

@@ -8,7 +8,7 @@ interface ModalPortalProps {
 
 export default function ModalContainer() {
   const [modal] = useModalState();
-  console.log(modal);
+
   return (
     <Portal>
       <div>{modal}</div>
