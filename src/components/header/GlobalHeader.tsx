@@ -28,6 +28,10 @@ export default function GlobalHeader() {
     console.log(2);
   };
 
+  const logOut = () => {
+    console.log("로그아웃 버튼 클릭");
+  };
+
   return (
     <>
       <IonHeader className={css.globalHeader}>
@@ -40,6 +44,7 @@ export default function GlobalHeader() {
           </IonTitle>
           <IonIcon icon={chevronDownOutline} />
         </div>
+        <div onClick={logOut}>로그아웃</div>
         <div onClick={kakaoLogin}>로그인</div>
       </IonHeader>
     </>
