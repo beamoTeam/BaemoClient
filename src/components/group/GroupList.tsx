@@ -23,7 +23,7 @@ export default function GroupList({ groupList }: GroupListProps) {
       </IonListHeader>
 
       {groupList.map((group) => (
-        <Link key={group.seq} to={`menu/${group.restaurant.seq}`}>
+        <Link key={group.seq} to={`restaurant/${group.restaurant.seq}`}>
           <IonItem>
             <IonImg src="./avatar-finn.png" />
             <IonLabel>

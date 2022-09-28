@@ -1,8 +1,12 @@
 import AxiosClient from "./config";
 
 class RestaurantService extends AxiosClient { 
-  async fetchAllMenus(r_seq: string) {
+  fetchAllMenus(r_seq: string) {
     return super.get(`/api/restaurant/${r_seq}/menu`);
+  }
+
+  fetchDetailMenus(m_seq: string) {
+    return super.get(`/api/menu/${m_seq}`);
   }
 }
 

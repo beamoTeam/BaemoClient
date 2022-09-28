@@ -39,10 +39,11 @@ import "./theme/variables.css";
 
 /* Page */
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
+import Restaurant from "./pages/Restaurant";
 import MakeChat from "./pages/MakeChat";
 import KakaoRedirect from "./pages/KakaoRedirect";
-
+import MenuDetail from "./pages/MenuDetail";
+import Chatting from "./pages/Chatting";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import ModalContainer from "./components/modal/common/ModalPortal";
@@ -60,7 +61,14 @@ export default function App() {
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
               <Route exact path="/make-chat" component={MakeChat} />
-              <Route exact path="/menu/:r_seq" component={Menu} />
+              <Route exact path="/restaurant/:r_seq" component={Restaurant} />
+              <Route exact path="/chatting" component={Chatting} />
+              <Route
+                exact
+                path="/restaurant/:r_seq/menu/:m_seq"
+                component={MenuDetail}
+              />
+              {/* <Route exact path="/menu/:r_seq" component={Menu} /> */}
               <Route
                 exact
                 path={process.env.REACT_APP_KAKAO_REDIRECT_URI}

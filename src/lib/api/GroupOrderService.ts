@@ -1,11 +1,11 @@
 import AxiosClient from "./config";
 
 class GroupOrderService extends AxiosClient { 
-  async fetchGroupList() {
+  fetchGroupList() {
     return super.get("/api/chatroom");  
   }
 
-  async getAllChattingRoomByAddress(data: string) {
+  getAllChattingRoomByAddress(data: string) {
     return super.post(`/api/chatroom`, data)
   }
 }

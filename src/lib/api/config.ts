@@ -5,7 +5,7 @@ export default class AxiosClient {
     timeout: 5000
   });
 
-  async get(url: string): Promise<any> {
+  public async get(url: string): Promise<any> {
     try {
       const res = await this.client.get(url);
       if (res.status === 200) {
@@ -17,7 +17,7 @@ export default class AxiosClient {
     }
   }
 
-  async post(url: string, data: any): Promise<any> {
+  public async post(url: string, data: any): Promise<any> {
     try {
       const res = await this.client.post(url, data);
       if (res.status === 200) {
