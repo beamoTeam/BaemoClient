@@ -49,7 +49,6 @@ export default function MenuDetail() {
   }, [m_seq]);
 
   const decrement = useCallback(() => {
-    console.log();
     setQuantity(Math.max(1, quantity - 1));
   }, [quantity, setQuantity]);
 

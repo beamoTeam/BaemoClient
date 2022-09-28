@@ -10,5 +10,5 @@ class GroupOrderService extends AxiosClient {
   }
 }
 
-const Test = new GroupOrderService();
-export default Test;
+const groupOrderService = new GroupOrderService();
+export default groupOrderService;

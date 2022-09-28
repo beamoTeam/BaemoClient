@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IonContent, IonPage } from "@ionic/react";
 import FoodCategory from "../components/filter/FoodCategory";
 import SortFilter from "../components/filter/SortFilter";
-import Test from "../lib/api/GroupOrderService";
+import groupOrderService from "../lib/api/GroupOrderService";
 import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
 import FloatButton from "../components/button/FloatButton";
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await Test.fetchGroupList();
+      const data = await groupOrderService.fetchGroupList();
       setGroupList(data);
     })();
   }, []);
