@@ -3,14 +3,14 @@ import AccessToken from '../../hooks/useToken';
 
 export default class AxiosClient {
   public client = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
-    timeout: 5000
+    // baseURL: process.env.REACT_APP_BASE_URL,
+    timeout: 10000
   });
 
   public authClient = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    // baseURL: process.env.REACT_APP_BASE_URL,
     headers : {
-      Authorization: AccessToken.get(),
+      Authorization: "Bearer " + (AccessToken.get() || "HACK"),
     }
   })
   
