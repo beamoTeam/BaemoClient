@@ -71,7 +71,7 @@ export default function App() {
               {/* <Route exact path="/menu/:r_seq" component={Menu} /> */}
               <Route
                 exact
-                path={process.env.REACT_APP_KAKAO_REDIRECT_URI}
+                path={"/oauth/kakao"} 
                 component={KakaoRedirect}
               />
               <Redirect to="/home" />

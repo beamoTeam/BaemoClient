@@ -6,6 +6,7 @@ import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
 // import LoginModal from "../modal/LoginModal";
+import loginService from "../../lib/api/LoginService";
 
 export default function GlobalHeader() {
   const [addr] = useAddrState();
@@ -28,8 +29,9 @@ export default function GlobalHeader() {
     console.log(2);
   };
 
-  const logOut = () => {
-    console.log("로그아웃 버튼 클릭");
+  const logOut = async () => {
+    const res = await loginService.logout();
+    console.log("로그아웃 응답값", res);
   };
 
   return (
