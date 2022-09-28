@@ -1,9 +1,18 @@
 import axios from 'axios';
+import AccessToken from '../../hooks/useToken';
 
 export default class AxiosClient {
   public client = axios.create({
+    baseURL: process.env.REACT_APP_BASE_URL,
     timeout: 5000
   });
+
+  public authClient = axios.create({
+    baseURL: process.env.REACT_APP_BASE_URL,
+    headers : {
+      Authorization: AccessToken.get(),
+    }
+  })
 
   async get(url: string): Promise<any> {
     try {

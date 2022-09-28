@@ -1,0 +1,22 @@
+<body>
+    <button id="btn2">kakao 로그 아웃</button>
+    <script type="module">
+    const button = document.getElementById('btn2');
+    const SERVER_URL = 'http://127.0.0.1:8000/oauth/logout';
+    button.addEventListener('click', () => {
+        
+
+        fetch(`${SERVER_URL}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        }).then(res => res.json()).then(json => alert(json.messsage));
+
+        })
+
+    </script>
+    
+
+
+</body>
