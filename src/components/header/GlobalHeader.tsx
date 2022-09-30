@@ -7,6 +7,7 @@ import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
 // import LoginModal from "../modal/LoginModal";
 import loginService from "../../lib/api/LoginService";
+import AccessToken from "../../hooks/useToken";
 
 export default function GlobalHeader() {
   const [addr] = useAddrState();
@@ -26,12 +27,11 @@ export default function GlobalHeader() {
 
   const kakaoLogin = () => {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
-    console.log(2);
   };
 
   const logOut = async () => {
     const res = await loginService.logout();
-    console.log("로그아웃 응답값", res);
+    AccessToken.set(null);
   };
 
   return (
