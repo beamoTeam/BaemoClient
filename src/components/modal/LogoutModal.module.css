@@ -1,0 +1,29 @@
+.logoutText {
+  color: black;
+  font-weight: bold;
+}
+
+.cardModalBtns {
+  /* border: 1px solid black; */
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.cardModalBtns button {
+  width: 4.5rem;
+  height: 2rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.no {
+  background-color: grey;
+}
+
+.yes {
+  background-color: #3980fe;
+}

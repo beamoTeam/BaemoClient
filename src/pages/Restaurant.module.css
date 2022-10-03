@@ -1,0 +1,16 @@
+.title {
+  padding-top: 20px;
+}
+
+.title p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.list ion-list {
+  margin: 0;
+}
+
+.score {
+  font-size: 0.96rem;
+}

@@ -6,7 +6,7 @@ class LoginService extends AxiosClient {
   }
 
   logout() {
-    return this.authClient.get("/oauth/me");
+    return this.authClient.get("/oauth/logout");
   }
 }
 

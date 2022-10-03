@@ -6,9 +6,9 @@ import {
   IonTextarea,
 } from "@ionic/react";
 import { useState } from "react";
-import "./Chatting.css";
+import "./Chat.css";
 
-export default function Chatting() {
+export default function Chat() {
   const [msg, setMsg] = useState<string>("");
 
   return (

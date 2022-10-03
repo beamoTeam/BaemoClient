@@ -7,6 +7,6 @@ const loginState = atom({
 });
 
 export const useLoginState = () => {
-  const [login, setLogin] = useRecoilState<any>(loginState);
-  return [login, setLogin];
+  const [isLogin, setIsLogin] = useRecoilState<any>(loginState);
+  return [isLogin, setIsLogin];
 };

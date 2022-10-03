@@ -8,6 +8,8 @@ export function useNavigate() {
 
     if (replace) {
       history.replace(url);
+    } else if (url === "back") {
+      history.goBack();
     } else {
       history.push(url);
     }

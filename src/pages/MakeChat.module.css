@@ -1,0 +1,30 @@
+.make-chat-content ion-button {
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.addr,
+.restaurant {
+  width: 100%;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.addr ion-button {
+  width: 100%;
+  font-size: 1rem;
+  padding-right: 15px;
+}
+
+.restaurant ion-button {
+  width: 100%;
+  font-size: 1rem;
+  padding-right: 15px;
+}
+
+.makeBtn ion-button {
+  width: 100vw;
+  padding-right: 45px;
+  font-size: 1rem;
+}

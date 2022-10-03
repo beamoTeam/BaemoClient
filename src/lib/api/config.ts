@@ -10,7 +10,7 @@ export default class AxiosClient {
   public authClient = axios.create({
     // baseURL: process.env.REACT_APP_BASE_URL,
     headers : {
-      Authorization: "Bearer " + (AccessToken.get() || "HACK"),
+      Authorization: "Bearer " + AccessToken.get(),
     }
   })
   
@@ -22,7 +22,8 @@ export default class AxiosClient {
       }
     }
     catch (err: any) {
-      throw new Error(err);
+      console.error(err);
+      return err.response;
     }
   }
 
@@ -34,7 +35,8 @@ export default class AxiosClient {
       }
     }
     catch (err: any) {
-      throw new Error(err);
+      console.error(err);
+      return err.response;
     }
   }
 }

@@ -1,25 +1,25 @@
-import { useCallback } from "react";
-
-export default function useLocalStorage() {
-  // const LOCAL_STORAGE = useMemo(() => window.localStorage, []);
-
-  const get = useCallback((key: string) => {
-    const item = window.localStorage.getItem(key);
-
-    if (!item) {
-      throw new Error(`There is no item match with ${key}`);
-    }
-
-    return JSON.parse(item);
-  }, []);
-
-  const set = useCallback((key: string, value: unknown) => {
+const useLocalStorage = {
+  get: (KEY: string) => {
     try {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (err: any) {
-      throw new Error(err);
+      const item = window.localStorage.getItem(KEY);
+      return item;
+      // return window.localStorage.getItem(KEY);
+    } catch (err) {
+      console.error(err);
     }
-  }, []);
+  },
+  set: (KEY: string, VALUE: string) => {
+    try {
+      window.localStorage.setItem(KEY, VALUE);
+    } catch (err) {
+      console.error(err);
+    }
+  },
+};
 
-  return [get, set];
-}
+export default useLocalStorage;
+
+// function refreshExpiredToken(res) {
+//   if (res.status === 401) {
+//   }
+// }

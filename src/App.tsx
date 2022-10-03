@@ -40,10 +40,10 @@ import "./theme/variables.css";
 /* Page */
 import Home from "./pages/Home";
 import Restaurant from "./pages/Restaurant";
-import MakeChat from "./pages/MakeChat";
+import MakeGroup from "./pages/MakeGroup";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import MenuDetail from "./pages/MenuDetail";
-import Chatting from "./pages/Chatting";
+import Chat from "./pages/Chat";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import ModalContainer from "./components/modal/common/ModalPortal";
@@ -60,20 +60,15 @@ export default function App() {
             {/* Router */}
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
-              <Route exact path="/make-chat" component={MakeChat} />
+              <Route exact path="/make-group" component={MakeGroup} />
               <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route exact path="/chatting" component={Chatting} />
+              <Route exact path="/chat/:room_seq" component={Chat} />
               <Route
                 exact
                 path="/restaurant/:r_seq/menu/:m_seq"
                 component={MenuDetail}
               />
-              {/* <Route exact path="/menu/:r_seq" component={Menu} /> */}
-              <Route
-                exact
-                path={"/oauth/kakao"} 
-                component={KakaoRedirect}
-              />
+              <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
               <Redirect to="/home" />
             </IonRouterOutlet>
             {/* Tab Menu */}
@@ -83,7 +78,7 @@ export default function App() {
                 <IonLabel>홈</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="chat">
+              <IonTabButton tab="chat" href="/make-group">
                 <IonIcon icon={chatboxOutline} />
                 <IonLabel>채팅</IonLabel>
               </IonTabButton>
