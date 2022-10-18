@@ -6,10 +6,13 @@ import { useNavigate } from "../../hooks/useNavigate";
 import CardModal from "./common/CardModal";
 import css from "./LogoutModal.module.css";
 import { useLoginState } from "../../lib/recoil/loginState";
+import { useAddrState } from "../../lib/recoil/addrState";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function LogoutModal() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useLoginState();
+  const [, setAddr] = useAddrState();
   const [, setModal] = useModalState();
 
   const close = useCallback(() => {
@@ -21,9 +24,12 @@ export default function LogoutModal() {
       const res = await loginService.logout();
       if (res.status === 200) {
         AccessToken.remove();
+        useLocalStorage.remove("ADDR");
+        setAddr(null);
+
         close();
         setIsLogin(false);
-        navigate("/home", { replace: true });
+        navigate("/home");
       }
     }
   };

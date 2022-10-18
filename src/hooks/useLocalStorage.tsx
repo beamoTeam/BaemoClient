@@ -15,6 +15,13 @@ const useLocalStorage = {
       console.error(err);
     }
   },
+  remove: (KEY: string) => {
+    try {
+      window.localStorage.removeItem(KEY);
+    } catch (err) {
+      console.error(err);
+    }
+  },
 };
 
 export default useLocalStorage;

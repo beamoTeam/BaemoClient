@@ -11,6 +11,7 @@ export function useNavigate() {
     } else if (url === "back") {
       history.goBack();
     } else {
+      // console.log(url);
       history.push(url);
     }
   };

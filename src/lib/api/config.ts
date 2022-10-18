@@ -6,13 +6,7 @@ export default class AxiosClient {
     // baseURL: process.env.REACT_APP_BASE_URL,
     timeout: 10000
   });
-
-  public authClient = axios.create({
-    // baseURL: process.env.REACT_APP_BASE_URL,
-    headers : {
-      Authorization: "Bearer " + AccessToken.get(),
-    }
-  })
+  
   
   public async get(url: string): Promise<any> {
     try {
@@ -39,4 +33,28 @@ export default class AxiosClient {
       return err.response;
     }
   }
+}
+
+export const AuthClient = () => {
+  const token = AccessToken.get();
+  // console.log({ token });
+  const authInstance = axios.create({
+    headers : {
+      Authorization: "Bearer " + token,
+    },
+  })
+  return authInstance;
+}
+
+
+export const ChatClient = () => {
+  const token = AccessToken.get();
+
+  const authInstance = axios.create({
+    headers: {
+      baseUrl: `http://3.94.44.116:3999`,
+      Authorization: "Bearer " +  token,
+    },
+  })
+  return authInstance;
 }

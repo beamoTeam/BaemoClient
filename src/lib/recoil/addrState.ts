@@ -1,8 +1,9 @@
 import { atom, useRecoilState } from 'recoil';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const addrState = atom({
   key: "addrState",
-  default: null,
+  default: useLocalStorage.get("ADDR"),
 });
 
 export const useAddrState = () => {

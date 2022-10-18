@@ -10,6 +10,7 @@ import { useNavigate } from "../../hooks/useNavigate";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import GroupOrderService from "../../lib/api/GroupOrderService";
 import css from "./GroupList.module.css";
+import AccessToken from "../../hooks/useToken";
 
 interface GroupListProps {
   groupList: GroupModel[];
@@ -21,7 +22,6 @@ export default function GroupList({ groupList }: GroupListProps) {
   const enterToGroup = async (c_seq: string, restaurant_seq: string) => {
     try {
       const res = await GroupOrderService.enterGroup(c_seq);
-      console.log(res);
       useLocalStorage.set("CHAT_SEQ", c_seq);
       navigate(`restaurant/${restaurant_seq}`);
     } catch (err: any) {

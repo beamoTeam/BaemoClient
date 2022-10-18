@@ -1,0 +1,49 @@
+.title {
+  display: flex;
+  align-items: center;
+
+  height: 3rem;
+  width: 100%;
+
+  font-weight: 600;
+  font-size: 1.1rem;
+
+  background-color: white;
+}
+
+.menu {
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+.menuInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.price {
+  height: auto;
+  width: 100%;
+
+  padding: 10px;
+  margin-top: 0.18rem;
+
+  background-color: white;
+
+  font-weight: 600;
+}
+
+.quan {
+  display: flex;
+  align-items: center;
+}
+
+.orderButton {
+  width: 80vw;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.orderButton ion-button {
+  width: 100%;
+}

@@ -1,5 +1,6 @@
 import { IonModal } from "@ionic/react";
-import { useModalState } from "../../../lib/recoil/modalState";
+import { modalState, modalPresentState } from "../../../lib/recoil/modalState";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface SheetModalProps {
   children: React.ReactNode;
@@ -7,8 +8,12 @@ interface SheetModalProps {
 }
 
 export default function SheetModal({ children, type }: SheetModalProps) {
-  const [modal, setModal] = useModalState();
-  let present = modal ? true : false;
+  const setModal = useSetRecoilState(modalState);
+  const present = useRecoilValue(modalPresentState);
+
+  const onDidDismiss = () => {
+    setModal(null);
+  };
 
   return (
     <div>
@@ -16,7 +21,7 @@ export default function SheetModal({ children, type }: SheetModalProps) {
         isOpen={present}
         initialBreakpoint={type ? 0.4 : 0.7}
         breakpoints={type ? undefined : [0, 0.25, 0.5, 0.75]}
-        onDidDismiss={() => setModal(null)}
+        onDidDismiss={onDidDismiss}
       >
         <div style={{ marginTop: "15px", height: "100%" }}>{children}</div>
       </IonModal>

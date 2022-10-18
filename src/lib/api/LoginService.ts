@@ -1,4 +1,4 @@
-import AxiosClient from "./config";
+import AxiosClient, {AuthClient} from "./config";
 
 class LoginService extends AxiosClient { 
   getAccessToken(code: string | null) {
@@ -6,7 +6,7 @@ class LoginService extends AxiosClient {
   }
 
   logout() {
-    return this.authClient.get("/oauth/logout");
+    return AuthClient().get("/oauth/logout");
   }
 }
 

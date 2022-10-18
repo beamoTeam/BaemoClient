@@ -1,9 +1,9 @@
 import { atom, useRecoilState } from 'recoil';
-import { AUTH_TOKEN } from '../../utils/contants';
+import AccessToken from "../../hooks/useToken";
 
 const loginState = atom({
   key: "loginState",
-  default: window.localStorage.getItem(AUTH_TOKEN) ? true : false,
+  default: AccessToken.get() ? true : false,
 });
 
 export const useLoginState = () => {

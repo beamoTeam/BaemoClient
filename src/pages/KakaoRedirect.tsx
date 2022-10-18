@@ -14,7 +14,7 @@ export default function KakaoRedirect() {
       const code = new URL(window.location.href).searchParams.get("code");
       (async () => {
         const res = await loginService.getAccessToken(code);
-        console.log(res);
+        console.log("****** : ", res);
         AccessToken.set(res);
         setIsLogin(true);
       })();

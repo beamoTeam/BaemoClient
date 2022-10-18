@@ -12,38 +12,49 @@ import {
 import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
-import { Link } from "react-router-dom";
-import css from "./Restaurant.module.css";
+import { Link, useParams, useLocation } from "react-router-dom";
 
-// 음식점 정보 api 필요 ( ex: 대표사진, 평점, 리뷰, 최소주문금액, 배달 요금, 배달 시간 )
 export default function Restaurant() {
-  const r_seq = String(window.location.pathname.split("/").at(-1));
+  const { r_seq } = useParams<{ r_seq: any }>();
+  const location = useLocation();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
+  const [restaurant, setRestaurant] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
-      const data = await restaurantService.fetchAllMenus(r_seq);
-
-      setMenus(data);
+      try {
+        const tmp_r_seq = location.pathname.split("/").at(-1);
+        const data = await restaurantService.fetchAllMenus(r_seq || tmp_r_seq);
+        console.log(data);
+        setMenus(data.menuList);
+        setRestaurant(data.restaurant);
+      } catch (err) {
+        console.error(err);
+      }
     })();
   }, [r_seq]);
 
   if (!menus) return <h4>Loading...</h4>;
+  if (!restaurant) return <h4>Loading...</h4>;
   if (menus.length === 0) return <h4>No Menus</h4>;
 
   return (
     <IonPage>
       <IonContent>
-        <IonImg style={ImgStyle} alt="메뉴 대표 사진" />
-        <div className={css.title}>
-          <IonTitle style={bold}>BBQ 청계 목대점</IonTitle>
-          <p className={css.score}>
-            <span>평점 4.1 </span> <span>리뷰 41</span>
-          </p>
-        </div>
-        <div className={css.list}>
+        <IonImg style={ImgStyle} alt="메뉴 대표 사진" src={restaurant.img} />
+        <IonListHeader>
+          <IonTitle style={bold}>{restaurant.name}</IonTitle>
+        </IonListHeader>
+        <IonItem>
+          <ul style={margin}>
+            <IonLabel>배달요금 {restaurant.deliveryPrice} </IonLabel>
+            <IonLabel style={score}>평점 {restaurant.rating}점</IonLabel>
+            <IonLabel>최소주문금액 {restaurant.minPrice} </IonLabel>
+          </ul>
+        </IonItem>
+        <div>
           <IonList style={{ marginTop: "50px" }}>
-            {menus.map((menu) => (
+            {menus?.map((menu) => (
               <Link to={`${r_seq}/menu/${menu.seq}`} key={menu.seq}>
                 <IonItem>
                   <IonAvatar slot="start">
@@ -73,4 +84,19 @@ const ImgStyle = {
 const bold = {
   fontWeight: "bold",
   fontSize: "1.3rem",
+  padding: 0,
+  textAlign: "left",
+};
+
+const score = {
+  fontSize: "0.96rem",
+  paddingRight: "10px",
+};
+
+const margin = {
+  margin: 0,
+  fontWeight: "bold",
+  display: "grid",
+  gridTemplateRow: "1fr 1fr 1fr",
+  gap: "10px",
 };

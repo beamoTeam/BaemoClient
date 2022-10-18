@@ -17,6 +17,7 @@ import { MenuModel } from "../types/menu";
 import "./MenuDetail.css";
 import { useNavigate } from "../hooks/useNavigate";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useCartState } from "../lib/recoil/cartState";
 
 type optionsType = {
   [index: string]: boolean;
@@ -26,17 +27,10 @@ type optionsType = {
   source: boolean;
 };
 
-type optionPriceType = {
-  [index: string]: number;
-  coke: number;
-  soda: number;
-  cokeLarge: number;
-  source: number;
-};
-
 export default function MenuDetail() {
   const navigate = useNavigate();
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
+  const [cart, setCart] = useCartState();
   const [quantity, setQuantity] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [options, setOptions] = useState<optionsType>({
@@ -45,12 +39,6 @@ export default function MenuDetail() {
     cokeLarge: false,
     source: false,
   });
-  const priceList: optionPriceType = {
-    coke: 2000,
-    soda: 2000,
-    cokeLarge: 3000,
-    source: 500,
-  };
 
   const m_seq = window.location.pathname.split("/").at(-1);
 
@@ -87,27 +75,15 @@ export default function MenuDetail() {
       seq: menuDetail.seq,
     };
     const c_seq = useLocalStorage.get("CHAT_SEQ");
-    // console.log({ cartData, c_seq });
-    const res = await groupOrderService.mutateToCart(c_seq, cartData);
-    if (res.status === 200) {
-      navigate(`/chat/${c_seq}`);
+    const { data } = await groupOrderService.mutateToCart(c_seq, cartData);
+    if (cart) {
+      window.localStorage.setItem("CART", JSON.stringify([...cart, data]));
+      setCart([...cart, data]);
+    } else {
+      window.localStorage.setItem("CART", JSON.stringify([data]));
+      setCart([data]);
     }
   };
-
-  const onCheck = (e: any) => {
-    const { name, value } = e.target;
-    setOptions({
-      ...options,
-      [name]: !value,
-    });
-  };
-
-  let test = 0;
-  for (let x in options) {
-    if (options[x]) {
-      test += priceList[x];
-    }
-  }
 
   return (
     <IonPage>
@@ -134,7 +110,6 @@ export default function MenuDetail() {
               slot="start"
               name="coke"
               checked={options.coke}
-              onChange={onCheck}
             ></IonCheckbox>
             <div className="detail_menu">
               <IonLabel>콜라 500ml</IonLabel>
@@ -146,7 +121,6 @@ export default function MenuDetail() {
               slot="start"
               name="soda"
               checked={options.soda}
-              onChange={onCheck}
             ></IonCheckbox>
             <div className="detail_menu">
               <IonLabel>스프라이트 500ml</IonLabel>
@@ -158,7 +132,6 @@ export default function MenuDetail() {
               slot="start"
               name="cokeLarge"
               checked={options.cokeLarge}
-              onChange={onCheck}
             ></IonCheckbox>
             <div className="detail_menu">
               <IonLabel>콜라 1.5L</IonLabel>
@@ -174,7 +147,6 @@ export default function MenuDetail() {
               slot="start"
               name="source"
               checked={options.source}
-              onChange={onCheck}
             ></IonCheckbox>
             <div className="detail_menu">
               <IonLabel>소스 추가</IonLabel>
@@ -191,7 +163,7 @@ export default function MenuDetail() {
         <div className="total_field">
           <div className="total_price">
             <div>총 주문금액</div>
-            <div>{(totalPrice * quantity + test).toLocaleString()}원</div>
+            <div>{(totalPrice * quantity).toLocaleString()}원</div>
           </div>
           <div className="min_price">배달 최소 주문금액 nn원</div>
           <div className="add_to_cart">

@@ -1,0 +1,12 @@
+.counter {
+  position: absolute;
+  top: 30%;
+  right: 5%;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  color: blue;
+
+  transform: translateY(-50%);
+}

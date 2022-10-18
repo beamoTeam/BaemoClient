@@ -1,11 +1,12 @@
 export interface MenuModel {
+  seq: number;
+  menu_seq?: number;
   category: string;
-  count: number;
-  img: string;
   name: string;
+  img: string;
   price: number;
   restaurant_seq: number;
-  seq: number;
+  count: number;
 }
 
 // *********************

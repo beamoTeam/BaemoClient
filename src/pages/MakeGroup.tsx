@@ -1,6 +1,6 @@
 import {
-  IonContent,
   IonPage,
+  IonContent,
   IonLabel,
   IonListHeader,
   IonItem,
@@ -42,7 +42,7 @@ const MakeGroup: React.FC = () => {
             </div>
           </IonItem>
 
-          <IonListHeader>
+          {/* <IonListHeader>
             <IonLabel>모집인원 수</IonLabel>
           </IonListHeader>
           <IonItem>
@@ -52,7 +52,7 @@ const MakeGroup: React.FC = () => {
               <IonSelectOption value="3">3명</IonSelectOption>
               <IonSelectOption value="4">4명</IonSelectOption>
             </IonSelect>
-          </IonItem>
+          </IonItem> */}
 
           <IonListHeader>
             <IonLabel>모집 마감시간</IonLabel>

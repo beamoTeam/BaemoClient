@@ -1,5 +1,6 @@
-import AxiosClient from "./config";
+import AxiosClient, { AuthClient } from "./config";
 import { MenuModel } from "../../types/menu";
+import { ChatMsgModel } from "../../types/chatMsg";
 
 class GroupOrderService extends AxiosClient { 
   fetchGroupList() {
@@ -11,11 +12,19 @@ class GroupOrderService extends AxiosClient {
   }
 
   mutateToCart(room_seq: any, data: MenuModel) {
-    return this.authClient.post(`/api/basket/${room_seq}`, data);
+    return AuthClient().post(`/api/basket/${room_seq}`, data);
   }
 
   enterGroup(room_seq: any) {
-    return this.authClient.post(`/api/room/${room_seq}`);
+    return AuthClient().post(`/api/room/${room_seq}`);
+  }
+
+  fetchCartItems(room_seq :any) {
+    return AuthClient().get(`/api/basket/${room_seq}`);
+  }
+
+  mutateOrder(room_seq: any) {
+    return AuthClient().get(`/api/order/${room_seq}`);
   }
 }
 

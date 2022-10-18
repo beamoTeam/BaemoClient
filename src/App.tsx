@@ -44,9 +44,11 @@ import MakeGroup from "./pages/MakeGroup";
 import KakaoRedirect from "./pages/KakaoRedirect";
 import MenuDetail from "./pages/MenuDetail";
 import Chat from "./pages/Chat";
+import Cart from "./pages/Cart";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import ModalContainer from "./components/modal/common/ModalPortal";
+import FloatCartButton from "./components/button/FloatCartButton";
 
 setupIonicReact();
 
@@ -68,6 +70,7 @@ export default function App() {
                 path="/restaurant/:r_seq/menu/:m_seq"
                 component={MenuDetail}
               />
+              <Route exact path="/cart" component={Cart} />
               <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
               <Redirect to="/home" />
             </IonRouterOutlet>
@@ -78,12 +81,12 @@ export default function App() {
                 <IonLabel>홈</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="chat" href="/make-group">
+              <IonTabButton tab="chat">
                 <IonIcon icon={chatboxOutline} />
                 <IonLabel>채팅</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="make-chat" href="/make-chat">
+              <IonTabButton tab="make-chat" href="/make-group">
                 <IonIcon icon={addCircleOutline} />
                 <IonLabel>방만들기</IonLabel>
               </IonTabButton>
@@ -99,8 +102,9 @@ export default function App() {
               </IonTabButton>
             </IonTabBar>
           </IonTabs>
+          <FloatCartButton />
         </IonReactRouter>
-        <ModalContainer />
+        {/* <ModalContainer /> */}
       </IonApp>
     </RecoilRoot>
   );

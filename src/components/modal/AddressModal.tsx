@@ -1,14 +1,18 @@
 import { useAddrState } from "../../lib/recoil/addrState";
-import { useModalState } from "../../lib/recoil/modalState";
+import { modalState } from "../../lib/recoil/modalState";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import SheetModal from "./common/SheetModal";
+import { useSetRecoilState } from "recoil";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function AddressModal() {
   const [, setAddr] = useAddrState();
-  const [, setModal] = useModalState();
+  const setModal = useSetRecoilState(modalState);
 
   const onComplete = (data: any) => {
-    setTimeout(() => setModal(null), 1);
+    if (true) {
+      setModal(null);
+    }
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -22,8 +26,8 @@ export default function AddressModal() {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-
     setAddr(fullAddress);
+    useLocalStorage.set("ADDR", fullAddress);
   };
 
   return (

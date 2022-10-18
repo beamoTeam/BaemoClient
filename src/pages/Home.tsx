@@ -5,7 +5,7 @@ import SortFilter from "../components/filter/SortFilter";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
-import FloatButton from "../components/button/FloatButton";
+// import FloatCartButton from "../components/button/FloatCartButton";
 
 const Home: React.FC = () => {
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         {/* <Banner /> */}
         <GroupList groupList={groupList} />
       </IonContent>
-      <FloatButton />
+      {/* <FloatCartButton /> */}
     </IonPage>
   );
 };
