@@ -82,6 +82,10 @@ a {
   text-decoration: none;
 }
 
+input:focus {
+  border: 1px solid silver;
+}
+
 /* @media (prefers-color-scheme: dark) {
   body {
     --ion-color-primary: #428cff;

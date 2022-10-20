@@ -1,16 +1,20 @@
-import AxiosClient, {ChatClient} from "./config";
+import { ChatClient } from "./config";
 
-interface chatDataType {
+interface chatBodyType {
   sender: String,
   roomNum: Number,
   msg: object[];
 }
 
-class ChatService extends AxiosClient { 
-  sendMessage(chatData: chatDataType) {
+class ChatService { 
+  sendMessage(chatData: chatBodyType) {
     return ChatClient().post(`/chat`, chatData);
+  }
+
+  test() {
+    return ChatClient().get(`/chat/roomNum/1`);
   }
 }
 
-const chatService = new ChatService();
-export default chatService;
+const chatClient = new ChatService();
+export default chatClient;

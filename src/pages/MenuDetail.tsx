@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   IonPage,
   IonContent,
@@ -18,7 +17,8 @@ import "./MenuDetail.css";
 import { useNavigate } from "../hooks/useNavigate";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useCartState } from "../lib/recoil/cartState";
-
+import QuantityButton from "../components/button/QuantityButton";
+// import history from "../
 type optionsType = {
   [index: string]: boolean;
   coke: boolean;
@@ -32,7 +32,6 @@ export default function MenuDetail() {
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
   const [cart, setCart] = useCartState();
   const [quantity, setQuantity] = useState<number>(1);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
   const [options, setOptions] = useState<optionsType>({
     coke: false,
     soda: false,
@@ -47,20 +46,11 @@ export default function MenuDetail() {
       try {
         const data = await restaurantService.fetchDetailMenus(String(m_seq));
         setMenuDetail(data);
-        setTotalPrice(data.price);
       } catch (err: any) {
         throw new Error(err);
       }
     })();
   }, [m_seq]);
-
-  const decrement = useCallback(() => {
-    setQuantity(Math.max(1, quantity - 1));
-  }, [quantity, setQuantity]);
-
-  const increment = useCallback(() => {
-    setQuantity(quantity + 1);
-  }, [quantity, setQuantity]);
 
   if (!menuDetail) return <h3>로딩중...</h3>;
 
@@ -83,6 +73,7 @@ export default function MenuDetail() {
       window.localStorage.setItem("CART", JSON.stringify([data]));
       setCart([data]);
     }
+    navigate("back");
   };
 
   return (
@@ -154,47 +145,23 @@ export default function MenuDetail() {
             </div>
           </IonItem>
         </IonList>
-        <MenuQuantity
-          quantity={quantity}
-          increment={increment}
-          decrement={decrement}
-        />
+        <div className="quantity_field">
+          <div>수량 선택</div>
+          <QuantityButton quantity={quantity} setQuantity={setQuantity} />
+        </div>
         {/* TOTAL */}
         <div className="total_field">
           <div className="total_price">
             <div>총 주문금액</div>
-            <div>{(totalPrice * quantity).toLocaleString()}원</div>
+            <div>{(menuDetail.price * quantity).toLocaleString()}원</div>
           </div>
-          <div className="min_price">배달 최소 주문금액 nn원</div>
+          <div className="min_price">배달 최소 주문금액 16,000원</div>
           <div className="add_to_cart">
             <IonButton onClick={addToCart}>장바구니에 추가</IonButton>
           </div>
         </div>
       </IonContent>
     </IonPage>
-  );
-}
-
-interface MenuQuantityInterface {
-  quantity: number;
-  increment: () => void;
-  decrement: () => void;
-}
-
-function MenuQuantity({
-  quantity,
-  increment,
-  decrement,
-}: MenuQuantityInterface) {
-  return (
-    <div className="quantity_field">
-      <div>수량 선택</div>
-      <div className="quantity_btns">
-        <IonButton onClick={decrement}>-</IonButton>
-        <div>{quantity}</div>
-        <IonButton onClick={increment}>+</IonButton>
-      </div>
-    </div>
   );
 }
 

@@ -11,14 +11,21 @@
   background-color: white;
 }
 
+.img {
+  width: 80px;
+  height: 80px;
+}
+
 .menu {
   font-weight: bold;
   padding: 20px 0;
 }
 
 .menuInfo {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .price {
@@ -31,6 +38,21 @@
   background-color: white;
 
   font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.price div {
+  margin: 4px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px;
+  min-width: 140px;
+  opacity: 0.6;
 }
 
 .quan {
@@ -46,4 +68,12 @@
 
 .orderButton ion-button {
   width: 100%;
+}
+
+.fee {
+  width: 100%;
+  padding: 0 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }

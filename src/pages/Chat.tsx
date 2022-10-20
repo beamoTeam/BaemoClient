@@ -9,49 +9,62 @@ import {
   IonLabel,
   IonButton,
 } from "@ionic/react";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import css from "./Chat.module.css";
-import { useParams, useLocation } from "react-router";
-import groupOrderService from "../lib/api/GroupOrderService";
+import { useParams } from "react-router";
+import chatService from "../lib/api/ChatService";
+import { MessageModel } from "../types/chatMsg";
 
 export default function Chat() {
   const { room_seq } = useParams<{ room_seq: any }>();
-  const location = useLocation();
-
-  const [msgList, setMsgList] = useState<string[]>([]);
-  const [cartItems, setCartItems] = useState(null);
+  const [msgList, setMsgList] = useState<any>([]);
   const [msg, setMsg] = useState<string>("");
+  const baseURL = `http://3.94.44.116:3999`;
+  const eventSource = useRef<any>(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const tmp_room_seq = location.pathname.split("/").at(-1);
-        const { data } = await groupOrderService.fetchCartItems(
-          room_seq || tmp_room_seq
-        );
-        console.log("** : ", data);
-        setCartItems(data);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, [location.pathname, room_seq]);
+  // // EventSource
+  if (!eventSource.current) {
+    eventSource.current = new EventSource(`${baseURL}/chat/roomNum/${1}`);
+  }
+  eventSource.current.onmessage = (e: any) => {
+    const receivedMessage: MessageModel = JSON.parse(e.data);
+    console.log(receivedMessage);
+    setMsgList((prev: any) => [
+      ...prev,
+      { src: "other", text: receivedMessage.msg },
+    ]);
+  };
 
-  const onSubmit = () => {
-    setMsgList([...msgList, msg]);
-    setMsg("");
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const chatBody = JSON.parse(window.localStorage.getItem("CHAT_BODY")!);
+      const { data } = await chatService.sendMessage({
+        ...chatBody,
+        roomNum: 1,
+        msg,
+      });
+      console.log(data);
+      setMsgList([...msgList, { sender: data.sender, text: data.msg }]);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setMsg("");
+    }
   };
 
   return (
     <IonPage>
       <IonContent>
         <div className={css.Chat}>
-          {cartItems && <Example cartItems={cartItems} />}
+          {/* {cartItems && <Example cartItems={cartItems} />} */}
           <ul className={css.textList}>
             <p className={css.alert}>User1님이 입장하셨습니다.</p>
-            {msgList.map((message, idx) => (
+            {msgList.map((message: any, idx: number) => (
               <p key={idx} className={css.textBoxL}>
-                {message}
+                {message.src === "other"
+                  ? "왼쪽배치" + message.text
+                  : "오른쪽" + message.text}
               </p>
             ))}
             {/* <p className={css.textBoxL}>Hell World</p>
@@ -76,6 +89,7 @@ export default function Chat() {
 interface CartItemsProps {
   cartItems: any;
 }
+
 function Example({ cartItems }: CartItemsProps) {
   return (
     <IonAccordionGroup expand="inset">

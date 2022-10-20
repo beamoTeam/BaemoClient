@@ -36,7 +36,6 @@ export default function Restaurant() {
 
   if (!menus) return <h4>Loading...</h4>;
   if (!restaurant) return <h4>Loading...</h4>;
-  if (menus.length === 0) return <h4>No Menus</h4>;
 
   return (
     <IonPage>

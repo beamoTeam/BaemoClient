@@ -11,7 +11,7 @@ export default function ModalContainer() {
 
   return (
     <Portal>
-      <div>{modal}</div>
+      <div onClick={() => console.log(33)}>{modal}</div>
     </Portal>
   );
 }

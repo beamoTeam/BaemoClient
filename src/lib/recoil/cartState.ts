@@ -15,3 +15,8 @@ export const useCartState = () => {
   const [cart, setCart] = useRecoilState<any>(cartState);
   return [cart, setCart];
 };
+
+export const emptyingCart = (setCart: any) => {
+  window.localStorage.removeItem("CART");
+  setCart(null);
+}

@@ -1,19 +1,14 @@
 export default function parseMenu(menuList) {
-  const result = [];
   let tmp = {};
   for (let menu of menuList) {
     if (tmp[menu.menu_seq]) {
-      // console.log(tmp[menu.menu_seq].count)
-      // console.log(menu.count)
-      tmp[menu.menu_seq].count++;
-      // tmp[menu.menu_seq].price += menu.price;
+      tmp[menu.menu_seq].count += menu.count;
+      tmp[menu.menu_seq].price += (menu.price * menu.count);
     } else {
-      tmp[menu.menu_seq] = menu;
+      tmp[menu.menu_seq] = { ...menu, price: menu.price * menu.count };
     }
-    console.log("*", tmp)
   }
-
-  return result;
+  return Object.values(tmp);
 }
 
 // [

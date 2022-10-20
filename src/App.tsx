@@ -47,7 +47,6 @@ import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
-import ModalContainer from "./components/modal/common/ModalPortal";
 import FloatCartButton from "./components/button/FloatCartButton";
 
 setupIonicReact();
@@ -64,7 +63,7 @@ export default function App() {
               <Route exact path="/home" component={Home} />
               <Route exact path="/make-group" component={MakeGroup} />
               <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route exact path="/chat/:room_seq" component={Chat} />
+              <Route exact path="/chating/:room_seq" component={Chat} />
               <Route
                 exact
                 path="/restaurant/:r_seq/menu/:m_seq"
@@ -104,7 +103,6 @@ export default function App() {
           </IonTabs>
           <FloatCartButton />
         </IonReactRouter>
-        {/* <ModalContainer /> */}
       </IonApp>
     </RecoilRoot>
   );

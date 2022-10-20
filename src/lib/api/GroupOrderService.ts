@@ -1,14 +1,13 @@
 import AxiosClient, { AuthClient } from "./config";
 import { MenuModel } from "../../types/menu";
-import { ChatMsgModel } from "../../types/chatMsg";
 
 class GroupOrderService extends AxiosClient { 
   fetchGroupList() {
     return super.get("/api/room");  
   }
 
-  getAllChattingRoomByAddress(data: string) {
-    return super.post(`/api/room`, data)
+  createGroup(data: object) {
+    return AuthClient().post(`/api/room`, data)
   }
 
   mutateToCart(room_seq: any, data: MenuModel) {

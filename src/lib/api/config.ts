@@ -53,7 +53,7 @@ export const ChatClient = () => {
   const authInstance = axios.create({
     headers: {
       baseUrl: `http://3.94.44.116:3999`,
-      Authorization: "Bearer " +  token,
+      Authorization: "Bearer " + token,
     },
   })
   return authInstance;

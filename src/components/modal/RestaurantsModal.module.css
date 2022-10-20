@@ -1,0 +1,22 @@
+.list {
+  color: black;
+  margin-right: 50px;
+  /* background-color: red; */
+  z-index: 99999;
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.tip {
+  color: black;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}

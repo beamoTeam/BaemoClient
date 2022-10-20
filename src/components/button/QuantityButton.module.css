@@ -1,0 +1,11 @@
+.quantity_btns {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+}
+
+.quantity_btns ion-button {
+  width: 24px;
+  height: 24px;
+}

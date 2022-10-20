@@ -11,13 +11,12 @@ import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
 import LogoutModal from "../modal/LogoutModal";
 import { useLoginState } from "../../lib/recoil/loginState";
-import { useNavigate } from "../../hooks/useNavigate";
 import ModalContainer from "../modal/common/ModalPortal";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 
 export default function GlobalHeader() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const history = useHistory();
   const [addr] = useAddrState();
   const [, setModal] = useModalState();
   const [isLogin] = useLoginState();
@@ -31,7 +30,7 @@ export default function GlobalHeader() {
     if (isHome) {
       setModal(<KakaoMapModal />);
     } else {
-      navigate("back");
+      history.goBack();
     }
   };
 

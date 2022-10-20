@@ -28,3 +28,24 @@
   padding-right: 45px;
   font-size: 1rem;
 }
+
+.addrDetailWrap {
+  width: 335px;
+}
+
+.addrDetail {
+  background-color: white;
+  border: 1px solid silver;
+  border-radius: 4px;
+  padding: 5px 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.addrDetail:focus {
+  border: 1px solid silver;
+}
+
+.time {
+  margin-right: 6px;
+}
