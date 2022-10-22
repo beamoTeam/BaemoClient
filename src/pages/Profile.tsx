@@ -1,0 +1,82 @@
+import css from "./Profile.module.css";
+import {
+  IonPage,
+  IonContent,
+  IonLabel,
+  IonToolbar,
+  IonList,
+  IonItem,
+  IonAvatar,
+  IonImg,
+} from "@ionic/react";
+import { useModalState } from "../lib/recoil/modalState";
+import LogoutModal from "../components/modal/LogoutModal";
+import userApis from "../lib/api/User/UserApi";
+import { useEffect, useState } from "react";
+import Spinner from "../components/spinner/Spinner";
+
+export default function Profile() {
+  const [, setModal] = useModalState();
+  const [userInfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await userApis.fetchUserProfile();
+        setUserInfo(data);
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
+  if (!userInfo) return <Spinner />;
+
+  return (
+    <IonPage style={{ marginTop: "50px" }}>
+      <IonContent className="ion-padding">
+        <IonItem>
+          <IonAvatar slot="start">
+            <IonImg src={userInfo.profile} />
+          </IonAvatar>
+          <IonLabel>
+            <h1 style={{ fontWeight: "600" }}>{userInfo.name}</h1>
+            <p>{userInfo.email}</p>
+          </IonLabel>
+        </IonItem>
+        <p></p>
+        <IonToolbar>
+          <div className={css.toolBar}>
+            <div className={css.title}>
+              <div>Point</div>
+              <div style={{ color: "#0066cc" }}>
+                {userInfo.point.toLocaleString()} P
+              </div>
+            </div>
+            <div className={css.charge}>+ 충전하기</div>
+          </div>
+        </IonToolbar>
+        <IonItem></IonItem>
+        <p className={css.list}>
+          <IonList lines="none">
+            <IonItem>
+              <IonLabel>문의하기</IonLabel>
+            </IonItem>
+            <IonItem>
+              <IonLabel
+                style={{ color: "red" }}
+                onClick={() => setModal(<LogoutModal />)}
+              >
+                로그아웃
+              </IonLabel>
+            </IonItem>
+            <IonItem>
+              <IonLabel style={{ color: "red" }}>회원 탈퇴</IonLabel>
+            </IonItem>
+          </IonList>
+        </p>
+      </IonContent>
+    </IonPage>
+  );
+}

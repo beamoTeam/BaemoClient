@@ -9,6 +9,7 @@ import { useCartState } from "../../lib/recoil/cartState";
 const unVisibleUrl: any = {
   cart: true,
   chatting: true,
+  profile: true,
 };
 
 export default function FloatCartButton() {

@@ -54,6 +54,9 @@ export default function GlobalHeader() {
     if (pathname.includes("chatting")) {
       return false;
     }
+    if (pathname.includes("profile")) {
+      return false;
+    }
     return true;
   };
 

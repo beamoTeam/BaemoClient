@@ -1,0 +1,20 @@
+.toolBar {
+  padding: 10px 15px;
+}
+.title {
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.charge {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list {
+  font-weight: 500;
+}

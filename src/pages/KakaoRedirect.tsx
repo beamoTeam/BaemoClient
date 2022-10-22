@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "../hooks/useNavigate";
-import { IonProgressBar } from "@ionic/react";
+import { IonSpinner } from "@ionic/react";
 import loginService from "../lib/api/LoginService";
 import AccessToken from "../hooks/useToken";
 import { useLoginState } from "../lib/recoil/loginState";
@@ -25,9 +25,8 @@ export default function KakaoRedirect() {
   return (
     <div style={bgStyle}>
       <div>
-        <IonProgressBar type="indeterminate"></IonProgressBar>
+        <IonSpinner></IonSpinner>
         <p style={para1Style}>로그인 처리중 입니다.</p>
-        <p style={para2Style}>현재 화면을 떠나지 말아주세요.</p>
       </div>
     </div>
   );
@@ -50,8 +49,4 @@ const para1Style = {
   marginBottom: "10px",
   display: "flex",
   justifyContent: "center",
-};
-
-const para2Style = {
-  margin: 0,
 };

@@ -45,6 +45,7 @@ import KakaoRedirect from "./pages/KakaoRedirect";
 import MenuDetail from "./pages/MenuDetail";
 import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import FloatCartButton from "./components/button/FloatCartButton";
@@ -70,6 +71,7 @@ export default function App() {
                 component={MenuDetail}
               />
               <Route exact path="/cart" component={Cart} />
+              <Route exact path="/profile" component={Profile} />
               <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
               <Redirect to="/home" />
             </IonRouterOutlet>
@@ -95,7 +97,7 @@ export default function App() {
                 <IonLabel>주문내역</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="profile">
+              <IonTabButton tab="profile" href="/profile">
                 <IonIcon icon={personCircleOutline} />
                 <IonLabel>프로필</IonLabel>
               </IonTabButton>
