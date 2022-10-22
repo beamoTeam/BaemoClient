@@ -7,7 +7,7 @@ interface chatBodyType {
 }
 
 class ChatService { 
-  sendMessage(chatData: chatBodyType) {
+  sendMessage(chatData: any) {
     return ChatClient().post(`/chat`, chatData);
   }
 

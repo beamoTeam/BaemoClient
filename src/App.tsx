@@ -57,13 +57,13 @@ export default function App() {
       <IonApp>
         <IonReactRouter>
           <GlobalHeader />
+          {/* Router */}
           <IonTabs>
-            {/* Router */}
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
               <Route exact path="/make-group" component={MakeGroup} />
               <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route exact path="/chating/:room_seq" component={Chat} />
+              <Route exact path="/chatting" component={Chat} />
               <Route
                 exact
                 path="/restaurant/:r_seq/menu/:m_seq"
@@ -80,7 +80,7 @@ export default function App() {
                 <IonLabel>홈</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="chat">
+              <IonTabButton tab="chatting" href="/chatting">
                 <IonIcon icon={chatboxOutline} />
                 <IonLabel>채팅</IonLabel>
               </IonTabButton>

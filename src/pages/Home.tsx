@@ -5,9 +5,15 @@ import SortFilter from "../components/filter/SortFilter";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
-// import FloatCartButton from "../components/button/FloatCartButton";
+import GroupOrderService from "../lib/api/GroupOrderService";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { useHistory } from "react-router";
+import { useModalState } from "../lib/recoil/modalState";
+import LogoutModal from "../components/modal/LogoutModal";
 
 const Home: React.FC = () => {
+  const history = useHistory();
+  const [modal, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
 
   useEffect(() => {
@@ -17,6 +23,29 @@ const Home: React.FC = () => {
     })();
   }, []);
 
+  const enterToGroup = async (c_seq: string, restaurant_seq: string) => {
+    const chat_seq = window.localStorage.getItem("CHAT_SEQ");
+    if (chat_seq) {
+      if (String(chat_seq) !== c_seq) {
+        alert("현재 진행중인 주문이 있습니다. 취소후 다시 이용해 주세요.");
+        return;
+      }
+    }
+    try {
+      const res = await GroupOrderService.enterGroup(c_seq);
+      if (res.status === 200 || res.status === 201) {
+        useLocalStorage.set("CHAT_SEQ", c_seq);
+        history.push(`restaurant/${restaurant_seq}`);
+      }
+    } catch (err: any) {
+      if (err.response.status === 400) {
+        alert(err.response.data);
+      } else if (err.response.status === 401) {
+        setModal(<LogoutModal />);
+      }
+    }
+  };
+
   if (!groupList) return <h4>Loading...</h4>;
   if (groupList.length === 0) return <h4>No group</h4>;
 
@@ -25,10 +54,8 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <FoodCategory />
         <SortFilter />
-        {/* <Banner /> */}
-        <GroupList groupList={groupList} />
+        <GroupList groupList={groupList} enterToGroup={enterToGroup} />
       </IonContent>
-      {/* <FloatCartButton /> */}
     </IonPage>
   );
 };

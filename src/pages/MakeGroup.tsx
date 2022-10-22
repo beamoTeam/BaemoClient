@@ -8,7 +8,7 @@ import {
   IonModal,
   IonTitle,
 } from "@ionic/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import css from "./MakeGroup.module.css";
 import { useAddrState } from "../lib/recoil/addrState";
 import restaurantService from "../lib/api/RestaurantService";
@@ -18,12 +18,16 @@ import TimePicker from "../components/picker/TimePicker";
 import groupOrderService from "../lib/api/GroupOrderService";
 import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
+import { useCartState } from "../lib/recoil/cartState";
+import { useChatMenuState } from "../lib/recoil/chatMenuState";
 
 const MakeGroup: React.FC = () => {
   const history = useHistory();
-  const [addr, setAddr] = useAddrState();
+  const [, setCart] = useCartState();
+  const [addr] = useAddrState();
+  const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
-  const [, setModal] = useModalState();
+
   const [info, setInfo] = useState<any>({
     address: addr,
     detail_address: "",
@@ -31,6 +35,25 @@ const MakeGroup: React.FC = () => {
     restaurant_seq: null,
     restaurant_name: null,
   });
+  const chat_seq = window.localStorage.getItem("CHAT_SEQ");
+
+  useEffect(() => {
+    if (chat_seq) {
+      if (
+        window.confirm(
+          "새로운 모임을 만들면 현재 모임에서 나가집니다. 새로 만드시겠습니까?"
+        )
+      ) {
+        window.localStorage.removeItem("CHAT_SEQ");
+        setCart(0);
+        setChatMenu([]);
+      } else {
+        setTimeout(() => {
+          history.goBack();
+        }, 0);
+      }
+    }
+  }, [history, chat_seq, setCart]);
 
   const onInput = (e: any) => {
     const { name, value } = e.target;

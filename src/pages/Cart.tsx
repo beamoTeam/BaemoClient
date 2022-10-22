@@ -14,12 +14,16 @@ import parseMenu from "../utils/parseMenu";
 import getUserCart from "../lib/api/Cart/getUserCart";
 import { MenuModel } from "../types/menu";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
+import { useCartState } from "../lib/recoil/cartState";
 
 export default function Cart() {
   const history = useHistory();
-  const [cartItems, setCartItems] = useState<any>(null);
+  const [cart, setCart] = useCartState();
+  const [cartItems, setCartItems] = useState<any>([]);
+  const chat_seq = window.localStorage.getItem("CHAT_SEQ");
 
   useEffect(() => {
     if (!isLogin()) {
@@ -28,33 +32,38 @@ export default function Cart() {
     }
     (async () => {
       try {
-        const room_seq = window.localStorage.getItem("CHAT_SEQ");
-        const data = await getUserCart(room_seq);
-        const parsedCart = parseMenu(data.basketMenuList);
-        setCartItems(parsedCart);
+        const data = await getUserCart(chat_seq);
+        setCartItems(parseMenu(data.basketMenuList));
       } catch (err) {
         console.error(err);
       }
     })();
-  }, []);
+  }, [history, setCartItems, chat_seq]);
 
   const handleOrder = async () => {
-    const chat_seq = window.localStorage.getItem("CHAT_SEQ");
-    const { data } = await groupOrderService.mutateOrder(chat_seq);
-    const parsedBasketMenuList = parseMenu(data.basketMenuList);
-    const chatBody = {
-      sender: data.sender,
-      roomNum: data.roomNum,
-      msg: parsedBasketMenuList,
-    };
-    console.log(chatBody);
-    const res2 = await chatService.sendMessage(chatBody);
-    console.log("res2 : ", res2);
-    history.push(`/chating/${chat_seq}`);
+    try {
+      const { data } = await groupOrderService.mutateOrder(chat_seq);
+      if (data === "이미 결제되었습니다. 다시 확인하세요.") {
+        alert(data);
+        history.push(`/chatting`);
+        return;
+      }
+
+      await chatService.sendMessage({
+        sender: "mainMenu",
+        roomNum: data.roomNum,
+        msg: JSON.stringify(parseMenu(data.basketMenuList)),
+      });
+
+      window.localStorage.setItem("CHAT_SENDER", data.sender);
+      history.push(`/chatting`);
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   if (!cartItems) return <h4>Loading..</h4>;
-
+  if (cartItems.length === 0) return <h4>장바구니에 상품이 없습니다.</h4>;
   const totalPrice = cartItems.reduce(
     (acc: any, item: any) => (acc += item.price),
     0
@@ -75,6 +84,12 @@ export default function Cart() {
               })}
             </div>
           </IonItem>
+
+          <p className={css.addMore}>
+            <Link to={`/restaurant/${cartItems[0].restaurant_seq}`}>
+              + 더 담으러 가기
+            </Link>
+          </p>
 
           <IonItem>
             <div className={css.price}>

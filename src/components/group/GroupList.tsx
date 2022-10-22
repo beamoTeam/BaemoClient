@@ -6,32 +6,14 @@ import {
   IonLabel,
 } from "@ionic/react";
 import { GroupModel } from "../../types/group";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import GroupOrderService from "../../lib/api/GroupOrderService";
 import css from "./GroupList.module.css";
-import { useHistory } from "react-router";
 
 interface GroupListProps {
   groupList: GroupModel[];
+  enterToGroup: (c_seq: string, restaurant_seq: string) => void;
 }
 
-export default function GroupList({ groupList }: GroupListProps) {
-  const history = useHistory();
-
-  const enterToGroup = async (c_seq: string, restaurant_seq: string) => {
-    try {
-      const res = await GroupOrderService.enterGroup(c_seq);
-      useLocalStorage.set("CHAT_SEQ", c_seq);
-      history.push(`restaurant/${restaurant_seq}`);
-    } catch (err: any) {
-      if (err.response.status === 400) {
-        alert(err.response.data);
-      } else if (err.response.status === 401) {
-        alert("로그인후 이용해 주세요.");
-      }
-    }
-  };
-
+export default function GroupList({ groupList, enterToGroup }: GroupListProps) {
   return (
     <IonList className={css.list}>
       <IonListHeader>

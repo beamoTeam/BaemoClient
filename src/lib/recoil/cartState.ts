@@ -1,14 +1,8 @@
 import { atom, useRecoilState } from 'recoil';
-// import useLocalStorage from '../../hooks/useLocalStorage';
-let defaultCartState = null;
-const cartItems = window.localStorage.getItem("CART");
-if (cartItems) {
-  defaultCartState = JSON.parse(cartItems);
-}
 
 const cartState = atom({
   key: "cartState",
-  default: defaultCartState,
+  default: JSON.parse(window.localStorage.getItem("CART")!) || 0,
 });
 
 export const useCartState = () => {
@@ -17,6 +11,6 @@ export const useCartState = () => {
 };
 
 export const emptyingCart = (setCart: any) => {
-  window.localStorage.removeItem("CART");
-  setCart(null);
+  window.localStorage.setItem("CART", JSON.stringify(0));
+  setCart(0);
 }

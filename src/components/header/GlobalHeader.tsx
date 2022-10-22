@@ -4,6 +4,7 @@ import {
   chevronDownOutline,
   locationOutline,
   chevronBackOutline,
+  menuOutline,
 } from "ionicons/icons";
 import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
@@ -13,14 +14,21 @@ import LogoutModal from "../modal/LogoutModal";
 import { useLoginState } from "../../lib/recoil/loginState";
 import ModalContainer from "../modal/common/ModalPortal";
 import { useLocation, useHistory } from "react-router";
+import { useState, useCallback } from "react";
+import { useChatMenuState } from "../../lib/recoil/chatMenuState";
+import SlideMenu from "../modal/SlideMenu";
 
 export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
   const [addr] = useAddrState();
-  const [, setModal] = useModalState();
+  const [modal, setModal] = useModalState();
+  const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
+  const [toggleSlide, setToggleSlide] = useState<boolean>(false);
+
   let isHome = location.pathname === "/home";
+  let isChat = location.pathname === "/chatting";
 
   const setAddressModal = () => {
     setModal(<AddressModal />);
@@ -43,11 +51,17 @@ export default function GlobalHeader() {
   };
 
   const visible = (pathname: string) => {
-    if (pathname.includes("chat")) {
+    if (pathname.includes("chatting")) {
       return false;
     }
     return true;
   };
+
+  const toggleSlideMenu = useCallback(() => {
+    setToggleSlide((prev) => !prev);
+  }, []);
+
+  console.log(modal);
 
   return (
     <>
@@ -81,6 +95,18 @@ export default function GlobalHeader() {
                 />
               )}
             </span>
+          </>
+        )}
+        {isChat && (
+          <>
+            <IonIcon
+              icon={menuOutline}
+              className={css.mapButton}
+              onClick={toggleSlideMenu}
+            />
+            {toggleSlide && (
+              <SlideMenu chatMenu={chatMenu} close={toggleSlideMenu} />
+            )}
           </>
         )}
       </IonHeader>

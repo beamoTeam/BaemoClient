@@ -14,11 +14,11 @@ import restaurantService from "../lib/api/RestaurantService";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { MenuModel } from "../types/menu";
 import "./MenuDetail.css";
-import { useNavigate } from "../hooks/useNavigate";
+import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useCartState } from "../lib/recoil/cartState";
 import QuantityButton from "../components/button/QuantityButton";
-// import history from "../
+
 type optionsType = {
   [index: string]: boolean;
   coke: boolean;
@@ -28,7 +28,8 @@ type optionsType = {
 };
 
 export default function MenuDetail() {
-  const navigate = useNavigate();
+  const history = useHistory();
+  const location = useLocation();
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
   const [cart, setCart] = useCartState();
   const [quantity, setQuantity] = useState<number>(1);
@@ -39,7 +40,7 @@ export default function MenuDetail() {
     source: false,
   });
 
-  const m_seq = window.location.pathname.split("/").at(-1);
+  const m_seq = location.pathname.split("/").at(-1);
 
   useEffect(() => {
     (async () => {
@@ -55,6 +56,7 @@ export default function MenuDetail() {
   if (!menuDetail) return <h3>로딩중...</h3>;
 
   const addToCart = async () => {
+    // http Body data
     const cartData: MenuModel = {
       category: menuDetail.category,
       count: quantity,
@@ -64,16 +66,14 @@ export default function MenuDetail() {
       restaurant_seq: menuDetail.restaurant_seq,
       seq: menuDetail.seq,
     };
+    // api request add To cart
     const c_seq = useLocalStorage.get("CHAT_SEQ");
     const { data } = await groupOrderService.mutateToCart(c_seq, cartData);
-    if (cart) {
-      window.localStorage.setItem("CART", JSON.stringify([...cart, data]));
-      setCart([...cart, data]);
-    } else {
-      window.localStorage.setItem("CART", JSON.stringify([data]));
-      setCart([data]);
-    }
-    navigate("back");
+
+    // recoil & localStorage update (:number)
+    window.localStorage.setItem("CART", String(cart + data.count));
+    setCart(cart + data.count);
+    history.goBack();
   };
 
   return (
@@ -87,7 +87,7 @@ export default function MenuDetail() {
           <div className="menu_price">
             <div>가격</div>
             <div className="menu_price_number">
-              {menuDetail.price.toLocaleString()}원
+              {menuDetail?.price?.toLocaleString()}원
             </div>
           </div>
         </div>

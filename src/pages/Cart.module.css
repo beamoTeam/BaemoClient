@@ -77,3 +77,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.addMore {
+  padding: 0 10px 0 20px;
+  width: 150px;
+  margin: 10px auto;
+  color: black;
+}

@@ -1,143 +1,111 @@
-import {
-  IonPage,
-  IonContent,
-  IonTextarea,
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonImg,
-  IonLabel,
-  IonButton,
-} from "@ionic/react";
-import { useState, useRef } from "react";
+import { IonPage, IonContent, IonButton } from "@ionic/react";
+import { useState, useRef, useEffect } from "react";
 import css from "./Chat.module.css";
-import { useParams } from "react-router";
 import chatService from "../lib/api/ChatService";
 import { MessageModel } from "../types/chatMsg";
+import { useChatMenuState } from "../lib/recoil/chatMenuState";
+import { useHistory } from "react-router";
+const baseURL = `http://3.94.44.116:3999`;
 
 export default function Chat() {
-  const { room_seq } = useParams<{ room_seq: any }>();
+  const [, setChatMenu] = useChatMenuState();
+  const history = useHistory();
   const [msgList, setMsgList] = useState<any>([]);
   const [msg, setMsg] = useState<string>("");
-  const baseURL = `http://3.94.44.116:3999`;
   const eventSource = useRef<any>(null);
+  const scrollRef = useRef<any>(null);
+  const roomNum = window.localStorage.getItem("CHAT_SEQ");
+  const sender = window.localStorage.getItem("CHAT_SENDER");
 
-  // // EventSource
+  useEffect(() => {
+    if (!roomNum) {
+      history.goBack();
+    }
+  }, [roomNum, history]);
+
+  // EventSource
   if (!eventSource.current) {
-    eventSource.current = new EventSource(`${baseURL}/chat/roomNum/${1}`);
+    eventSource.current = new EventSource(`${baseURL}/chat/roomNum/${roomNum}`);
   }
+
   eventSource.current.onmessage = (e: any) => {
-    const receivedMessage: MessageModel = JSON.parse(e.data);
-    console.log(receivedMessage);
-    setMsgList((prev: any) => [
-      ...prev,
-      { src: "other", text: receivedMessage.msg },
-    ]);
+    const serverMsg: MessageModel = JSON.parse(e.data);
+    if (serverMsg.sender === "mainMenu") {
+      setChatMenu((prev: any) => [...prev, ...JSON.parse(serverMsg.msg)]);
+    } else {
+      setMsgList((prev: any) => [
+        ...prev,
+        {
+          id: serverMsg.id,
+          sender: serverMsg.sender,
+          text: serverMsg.msg,
+          time: serverMsg.createdAt.substring(11, 16),
+        },
+      ]);
+    }
   };
+
+  // hack
+  useEffect(() => {
+    scrollRef.current.scrollIntoView(false);
+  }, [msgList]);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const chatBody = JSON.parse(window.localStorage.getItem("CHAT_BODY")!);
-      const { data } = await chatService.sendMessage({
-        ...chatBody,
-        roomNum: 1,
+      // api call (send message)
+      await chatService.sendMessage({
+        sender,
+        roomNum,
         msg,
       });
-      console.log(data);
-      setMsgList([...msgList, { sender: data.sender, text: data.msg }]);
     } catch (err) {
       console.error(err);
     } finally {
       setMsg("");
+      scrollRef.current.scrollIntoView(false);
     }
   };
 
   return (
-    <IonPage>
-      <IonContent>
-        <div className={css.Chat}>
-          {/* {cartItems && <Example cartItems={cartItems} />} */}
-          <ul className={css.textList}>
-            <p className={css.alert}>User1님이 입장하셨습니다.</p>
-            {msgList.map((message: any, idx: number) => (
-              <p key={idx} className={css.textBoxL}>
-                {message.src === "other"
-                  ? "왼쪽배치" + message.text
-                  : "오른쪽" + message.text}
-              </p>
-            ))}
-            {/* <p className={css.textBoxL}>Hell World</p>
-            <p className={css.textBoxL}>I'm Fine Thank you and you?</p> */}
-          </ul>
-          <IonTextarea
-            className={css.textField}
-            placeholder="채팅을 입력하세요"
-            value={msg}
-            onIonChange={(e) => setMsg(e.detail.value!)}
-          >
-            <IonButton style={sendBtn} onClick={onSubmit}>
-              전송
-            </IonButton>
-          </IonTextarea>
-        </div>
-      </IonContent>
-    </IonPage>
+    <>
+      <IonPage>
+        <IonContent>
+          <div className={css.Chat}>
+            <ul className={css.textList}>
+              {msgList.map((message: any) => (
+                <div className={css.textBox} key={message.id}>
+                  {message.sender === sender && (
+                    <p className={css.msgTimeR}>{message.time}</p>
+                  )}
+                  <p
+                    className={
+                      message.sender === sender
+                        ? css["textBoxR"]
+                        : css["textBoxL"]
+                    }
+                  >
+                    {message.text}
+                  </p>
+                  {message.sender !== sender && (
+                    <p className={css.msgTimeL}>{message.time}</p>
+                  )}
+                </div>
+              ))}
+              <div ref={scrollRef}></div>
+            </ul>
+            <textarea
+              className={css.textField}
+              placeholder="채팅을 입력하세요"
+              value={msg}
+              onChange={(e) => setMsg(e.target.value!)}
+            ></textarea>
+            <div className={css.send}>
+              <IonButton onClick={onSubmit}>전송</IonButton>
+            </div>
+          </div>
+        </IonContent>
+      </IonPage>
+    </>
   );
 }
-
-interface CartItemsProps {
-  cartItems: any;
-}
-
-function Example({ cartItems }: CartItemsProps) {
-  return (
-    <IonAccordionGroup expand="inset">
-      <IonAccordion value="first">
-        <IonItem slot="header" color="light">
-          <IonLabel>User 1</IonLabel>
-        </IonItem>
-
-        <div className="ion-padding" slot="content">
-          {cartItems.basketMenuList.map((menu: any, idx: number) => {
-            return (
-              <div key={idx} style={acorItem}>
-                <IonImg src={menu.img} style={imgSize} />
-                <span style={fontSize}>
-                  {menu.name} x {menu.count} :{" "}
-                </span>
-                <span style={fontSize}>
-                  {(menu.count * menu.price).toLocaleString()}원
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </IonAccordion>
-    </IonAccordionGroup>
-  );
-}
-
-const acorItem = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  borderBottom: "1px solid silver",
-  padding: "12px 0",
-};
-
-const imgSize = {
-  width: "50px",
-  height: "30px",
-};
-
-const fontSize = {
-  fontSize: "14px",
-};
-
-const sendBtn = {
-  position: "fixed",
-
-  bottom: "3px",
-  right: "10px",
-};

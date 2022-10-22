@@ -41,6 +41,7 @@ ion-modal#example-modal ion-toolbar {
 
 .card-modal {
   width: 80vw;
+  max-width: 500px;
   height: 10rem;
   background-color: white;
 

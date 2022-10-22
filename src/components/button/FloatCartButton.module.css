@@ -10,3 +10,9 @@
 
   transform: translateY(-50%);
 }
+
+.cartPosition {
+  position: fixed;
+  right: 0;
+  bottom: 50px;
+}
