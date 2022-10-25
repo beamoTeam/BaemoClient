@@ -1,0 +1,23 @@
+.item {
+}
+
+.info {
+  margin: 10px 0;
+}
+
+.img {
+  width: 52px;
+  height: 34px;
+  margin-right: 10px;
+}
+
+.name {
+  font-size: 14px;
+  margin: 2px 0;
+  font-weight: 600;
+}
+.preview {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 400;
+}

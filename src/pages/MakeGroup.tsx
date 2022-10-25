@@ -5,10 +5,8 @@ import {
   IonListHeader,
   IonItem,
   IonButton,
-  IonModal,
-  IonTitle,
 } from "@ionic/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import css from "./MakeGroup.module.css";
 import { useAddrState } from "../lib/recoil/addrState";
 import restaurantService from "../lib/api/RestaurantService";
@@ -20,11 +18,13 @@ import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
 import { useCartState } from "../lib/recoil/cartState";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
+import ConfirmModal from "../components/modal/ConfirmModal";
 
 const MakeGroup: React.FC = () => {
   const history = useHistory();
-  const [, setCart] = useCartState();
   const [addr] = useAddrState();
+  const [, setCart] = useCartState();
+  const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
 
@@ -36,24 +36,6 @@ const MakeGroup: React.FC = () => {
     restaurant_name: null,
   });
   const chat_seq = window.localStorage.getItem("CHAT_SEQ");
-
-  useEffect(() => {
-    if (chat_seq) {
-      if (
-        window.confirm(
-          "새로운 모임을 만들면 현재 모임에서 나가집니다. 새로 만드시겠습니까?"
-        )
-      ) {
-        window.localStorage.removeItem("CHAT_SEQ");
-        setCart(0);
-        setChatMenu([]);
-      } else {
-        setTimeout(() => {
-          history.goBack();
-        }, 0);
-      }
-    }
-  }, [history, chat_seq, setCart]);
 
   const onInput = (e: any) => {
     const { name, value } = e.target;
@@ -115,10 +97,31 @@ const MakeGroup: React.FC = () => {
       const { data } = await groupOrderService.createGroup(newGroupInfo);
       const c_seq = data.seq;
       const r_seq = data.restaurant.seq;
+      setCart(0);
+      setChatMenu([]);
+      setModal(null);
       enterToGroup(c_seq, r_seq);
       history.push(`restaurant/${r_seq}`);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const clickCreateButton = () => {
+    if (chat_seq) {
+      setModal(
+        <ConfirmModal
+          onCancel={() => {
+            setTimeout(() => {
+              history.goBack();
+            }, 0);
+          }}
+          onConfirm={createGroup}
+          message="새로운 모임을 만들면 현재 모임에서 나가집니다. 새로 만드시겠습니까?"
+        />
+      );
+    } else {
+      createGroup();
     }
   };
 
@@ -175,7 +178,7 @@ const MakeGroup: React.FC = () => {
         </div>
         <IonItem>
           <div className={css.makeBtn}>
-            <IonButton onClick={createGroup}>방만들기</IonButton>
+            <IonButton onClick={clickCreateButton}>방만들기</IonButton>
           </div>
         </IonItem>
       </IonContent>
@@ -184,22 +187,3 @@ const MakeGroup: React.FC = () => {
 };
 
 export default MakeGroup;
-
-function Test() {
-  const modal = useRef<HTMLIonModalElement>(null);
-
-  function dismiss() {
-    modal.current?.dismiss();
-  }
-
-  return (
-    <IonModal id="example-modal" ref={modal} trigger="open-modal">
-      <IonContent>
-        <IonTitle>Modal</IonTitle>
-        <IonButton color="light" onClick={() => dismiss()}>
-          Close
-        </IonButton>
-      </IonContent>
-    </IonModal>
-  );
-}

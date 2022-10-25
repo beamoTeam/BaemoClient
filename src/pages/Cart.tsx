@@ -6,7 +6,7 @@ import {
   IonButton,
   IonLabel,
 } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import css from "./Cart.module.css";
 import isLogin from "../utils/isLogin";
 import groupOrderService from "../lib/api/GroupOrderService";
@@ -17,11 +17,9 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
-import { useCartState } from "../lib/recoil/cartState";
 
 export default function Cart() {
   const history = useHistory();
-  const [cart, setCart] = useCartState();
   const [cartItems, setCartItems] = useState<any>([]);
   const chat_seq = window.localStorage.getItem("CHAT_SEQ");
 
@@ -33,12 +31,13 @@ export default function Cart() {
     (async () => {
       try {
         const data = await getUserCart(chat_seq);
+        console.log("****");
         setCartItems(parseMenu(data.basketMenuList));
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [history, setCartItems, chat_seq]);
+  }, []);
 
   const handleOrder = async () => {
     try {
@@ -48,9 +47,10 @@ export default function Cart() {
         history.push(`/chatting`);
         return;
       }
-
+      console.log("주문 직후 basket list", data.basketMenuList);
+      console.log("주문 직후 basket list", parseMenu(data.basketMenuList));
       await chatService.sendMessage({
-        sender: "mainMenu",
+        sender: `mainMenu_${data.sender}`,
         roomNum: data.roomNum,
         msg: JSON.stringify(parseMenu(data.basketMenuList)),
       });

@@ -10,6 +10,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { useHistory } from "react-router";
 import { useModalState } from "../lib/recoil/modalState";
 import LogoutModal from "../components/modal/LogoutModal";
+import AlertModal from "../components/modal/AlertModal";
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -27,7 +28,12 @@ const Home: React.FC = () => {
     const chat_seq = window.localStorage.getItem("CHAT_SEQ");
     if (chat_seq) {
       if (String(chat_seq) !== c_seq) {
-        alert("현재 진행중인 주문이 있습니다. 취소후 다시 이용해 주세요.");
+        setModal(
+          <AlertModal
+            message="현재 진행중인 주문이 있습니다.
+          취소후 다시 이용해 주세요."
+          />
+        );
         return;
       }
     }
@@ -39,7 +45,7 @@ const Home: React.FC = () => {
       }
     } catch (err: any) {
       if (err.response.status === 400) {
-        alert(err.response.data);
+        setModal(<AlertModal message={err.response.data} />);
       } else if (err.response.status === 401) {
         setModal(<LogoutModal />);
       }

@@ -1,16 +1,11 @@
-.logoutText {
-  color: black;
-  font-weight: bold;
-}
-
-.alertText {
+.confirmText {
   max-width: 200px;
   color: black;
   font-weight: bold;
   text-align: center;
 }
 
-.cardModalBtns {
+.confirmModalBtns {
   /* border: 1px solid black; */
   width: 60%;
   display: flex;
@@ -18,19 +13,13 @@
   font-weight: bold;
 }
 
-.cardModalBtns button,
-.alertModalBtns button {
+.confirmModalBtns button {
   width: 4.5rem;
   height: 2rem;
   border-radius: 5px;
   color: white;
   font-size: 0.9rem;
   font-weight: bold;
-}
-
-.alertModalBtns {
-  display: flex;
-  justify-content: center;
 }
 
 .no {

@@ -46,6 +46,7 @@ import MenuDetail from "./pages/MenuDetail";
 import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
+import OrderHistory from "./pages/OrderHistory";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import FloatCartButton from "./components/button/FloatCartButton";
@@ -71,7 +72,9 @@ export default function App() {
                 component={MenuDetail}
               />
               <Route exact path="/cart" component={Cart} />
+              <Route exact path="/order-hisotry" component={OrderHistory} />
               <Route exact path="/profile" component={Profile} />
+
               <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
               <Redirect to="/home" />
             </IonRouterOutlet>
@@ -92,7 +95,7 @@ export default function App() {
                 <IonLabel>방만들기</IonLabel>
               </IonTabButton>
 
-              <IonTabButton tab="order-history">
+              <IonTabButton tab="order-history" href="/order-hisotry">
                 <IonIcon icon={newspaperOutline} />
                 <IonLabel>주문내역</IonLabel>
               </IonTabButton>

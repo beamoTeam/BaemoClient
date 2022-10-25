@@ -8,7 +8,6 @@ interface SlideMenuProps {
 }
 
 export default function SlideMenu({ chatMenu, close }: SlideMenuProps) {
-  console.log(chatMenu);
   return (
     <>
       <IonContent>
@@ -19,23 +18,25 @@ export default function SlideMenu({ chatMenu, close }: SlideMenuProps) {
           </div>
 
           {chatMenu.length > 0 &&
-            chatMenu.map((menu: any) => {
+            chatMenu.map((menu: { sender: string; data: [] }) => {
               return (
-                <div key={menu.seq}>
+                <div key={menu.sender}>
                   <IonItem slot="header" color="light">
-                    <IonLabel>User 1</IonLabel>
+                    <IonLabel>{menu.sender}</IonLabel>
                   </IonItem>
-                  <div className={css.info}>
-                    <IonImg src={menu.img} className={css.img} />
-                    <IonLabel>
-                      <h4 className={css.name}>
-                        {menu.name} x {menu.count}
-                      </h4>
-                      <h4 className={css.price}>
-                        {(menu.price * menu.count).toLocaleString()}원
-                      </h4>
-                    </IonLabel>
-                  </div>
+                  {menu.data.map((info: any) => (
+                    <div className={css.info} key={info.seq}>
+                      <IonImg src={info.img} className={css.img} />
+                      <IonLabel>
+                        <h4 className={css.name}>
+                          {info.name} x {info.count}
+                        </h4>
+                        <h4 className={css.price}>
+                          {info.price.toLocaleString()}원
+                        </h4>
+                      </IonLabel>
+                    </div>
+                  ))}
                 </div>
               );
             })}

@@ -39,7 +39,8 @@ export const AuthClient = () => {
   const token = AccessToken.get();
   // console.log({ token });
   const authInstance = axios.create({
-    headers : {
+    headers: {
+      baseUrl: `http://3.94.44.116:3000`,
       Authorization: "Bearer " + token,
     },
   })
@@ -52,7 +53,7 @@ export const ChatClient = () => {
 
   const authInstance = axios.create({
     headers: {
-      baseUrl: `http://3.94.44.116:3999`,
+      // baseUrl: `http://3.94.44.116:3999`,
       Authorization: "Bearer " + token,
     },
   })

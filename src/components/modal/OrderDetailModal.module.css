@@ -1,0 +1,59 @@
+.heading {
+  font-size: 1.5rem;
+}
+.name {
+  font-size: 1.1rem;
+  padding: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(146, 146, 146, 1);
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(146, 146, 146, 1);
+  font-weight: 500;
+  padding: 0 20px;
+  color: rgba(146, 146, 146, 1);
+  font-size: 0.9rem;
+}
+
+.history {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.menuList {
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid black;
+}
+
+.menuList li {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 4px 0;
+}
+
+.price {
+  padding: 20px;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.addr {
+  padding: 20px;
+}
+
+.addr p {
+  color: rgba(146, 146, 146, 1);
+}

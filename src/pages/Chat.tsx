@@ -30,8 +30,14 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-    if (serverMsg.sender === "mainMenu") {
-      setChatMenu((prev: any) => [...prev, ...JSON.parse(serverMsg.msg)]);
+    if ("mainMenu" === serverMsg.sender.split("_")[0]) {
+      setChatMenu((prev: any) => [
+        ...prev,
+        {
+          sender: serverMsg.sender.split("_")[1],
+          data: JSON.parse(serverMsg.msg),
+        },
+      ]);
     } else {
       setMsgList((prev: any) => [
         ...prev,
