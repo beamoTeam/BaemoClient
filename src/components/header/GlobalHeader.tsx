@@ -64,8 +64,6 @@ export default function GlobalHeader() {
     setToggleSlide((prev) => !prev);
   }, []);
 
-  console.log(modal);
-
   return (
     <>
       <IonHeader className={css.globalHeader}>
