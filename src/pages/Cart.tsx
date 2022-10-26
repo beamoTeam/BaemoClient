@@ -6,7 +6,7 @@ import {
   IonButton,
   IonLabel,
 } from "@ionic/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import css from "./Cart.module.css";
 import isLogin from "../utils/isLogin";
 import groupOrderService from "../lib/api/GroupOrderService";
@@ -37,7 +37,7 @@ export default function Cart() {
         console.error(err);
       }
     })();
-  }, []);
+  }, [chat_seq, history]);
 
   const handleOrder = async () => {
     try {

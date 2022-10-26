@@ -1,11 +1,5 @@
 import { ChatClient } from "./config";
 
-interface chatBodyType {
-  sender: String,
-  roomNum: Number,
-  msg: object[];
-}
-
 class ChatService { 
   sendMessage(chatData: any) {
     return ChatClient().post(`/chat`, chatData);

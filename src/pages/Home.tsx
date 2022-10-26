@@ -14,7 +14,7 @@ import AlertModal from "../components/modal/AlertModal";
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const [modal, setModal] = useModalState();
+  const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
 
   useEffect(() => {

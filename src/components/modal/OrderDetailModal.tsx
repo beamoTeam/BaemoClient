@@ -1,15 +1,5 @@
-import { modalState } from "../../lib/recoil/modalState";
 import SheetModal from "./common/SheetModal";
-import {
-  IonPage,
-  IonContent,
-  IonLabel,
-  IonListHeader,
-  IonList,
-  IonItem,
-  IonAvatar,
-  IonImg,
-} from "@ionic/react";
+import { IonContent, IonListHeader } from "@ionic/react";
 import css from "./OrderDetailModal.module.css";
 
 interface OrderDetailModalProps {

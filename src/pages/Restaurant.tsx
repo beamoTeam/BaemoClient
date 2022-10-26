@@ -32,7 +32,7 @@ export default function Restaurant() {
         console.error(err);
       }
     })();
-  }, [r_seq]);
+  }, [r_seq, location.pathname]);
 
   if (!menus) return <h4>Loading...</h4>;
   if (!restaurant) return <h4>Loading...</h4>;

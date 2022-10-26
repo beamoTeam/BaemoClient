@@ -12,7 +12,7 @@ export default function CardModal({ children, type }: CardModalProps) {
 
   const close = useCallback(() => {
     setModal(null);
-  }, []);
+  }, [setModal]);
 
   return (
     <div>

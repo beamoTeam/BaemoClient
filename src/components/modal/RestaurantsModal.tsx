@@ -9,7 +9,6 @@ import {
   IonSearchbar,
 } from "@ionic/react";
 import css from "./RestaurantsModal.module.css";
-import RestaurantModel from "../../types/restaurant";
 
 interface RestaurantsModalProps {
   restaurants: any[];

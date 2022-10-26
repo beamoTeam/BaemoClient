@@ -22,7 +22,7 @@ export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
   const [addr] = useAddrState();
-  const [modal, setModal] = useModalState();
+  const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);

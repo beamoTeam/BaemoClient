@@ -33,7 +33,7 @@ export default function MenuDetail() {
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
   const [cart, setCart] = useCartState();
   const [quantity, setQuantity] = useState<number>(1);
-  const [options, setOptions] = useState<optionsType>({
+  const [options] = useState<optionsType>({
     coke: false,
     soda: false,
     cokeLarge: false,

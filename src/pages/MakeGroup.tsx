@@ -6,7 +6,7 @@ import {
   IonItem,
   IonButton,
 } from "@ionic/react";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import css from "./MakeGroup.module.css";
 import { useAddrState } from "../lib/recoil/addrState";
 import restaurantService from "../lib/api/RestaurantService";

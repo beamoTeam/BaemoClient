@@ -20,7 +20,7 @@ export default function KakaoRedirect() {
       })();
     }
     navigate("/");
-  }, [navigate]);
+  }, [navigate, isLogin, setIsLogin]);
 
   return (
     <div style={bgStyle}>
