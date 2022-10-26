@@ -11,11 +11,13 @@ import { useHistory } from "react-router";
 import { useModalState } from "../lib/recoil/modalState";
 import LogoutModal from "../components/modal/LogoutModal";
 import AlertModal from "../components/modal/AlertModal";
+import Spinner from "../components/spinner/Spinner";
 
 const Home: React.FC = () => {
   const history = useHistory();
   const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
+  console.log({ groupList });
 
   useEffect(() => {
     (async () => {
@@ -52,7 +54,7 @@ const Home: React.FC = () => {
     }
   };
 
-  if (!groupList) return <h4>Loading...</h4>;
+  if (!groupList) return <Spinner />;
   if (groupList.length === 0) return <h4>No group</h4>;
 
   return (
