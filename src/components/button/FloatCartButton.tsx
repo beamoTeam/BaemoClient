@@ -1,7 +1,7 @@
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { cartOutline } from "ionicons/icons";
 import css from "./FloatCartButton.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useLoginState } from "../../lib/recoil/loginState";
 import { useCartState } from "../../lib/recoil/cartState";
 
@@ -12,6 +12,7 @@ const unVisibleUrl: any = {
 };
 
 export default function FloatCartButton() {
+  const history = useHistory();
   const location = useLocation();
   const [cart] = useCartState();
   const [isLogin] = useLoginState();
@@ -22,7 +23,7 @@ export default function FloatCartButton() {
   }
 
   const goToCart = () => {
-    window.location.href = "/cart";
+    history.push("/cart");
   };
 
   return cart > 0 ? (
