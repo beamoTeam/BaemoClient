@@ -6,7 +6,6 @@ import {
   IonLabel,
 } from "@ionic/react";
 import { GroupModel } from "../../types/group";
-import Spinner from "../spinner/Spinner";
 import css from "./GroupList.module.css";
 
 interface GroupListProps {
@@ -15,11 +14,6 @@ interface GroupListProps {
 }
 
 export default function GroupList({ groupList, enterToGroup }: GroupListProps) {
-  console.log(typeof groupList);
-  console.log("GROUP : ", groupList);
-  return <h1>그룹리스트 출력</h1>;
-  if (!groupList) return <Spinner />;
-
   return (
     <IonList className={css.list}>
       <IonListHeader>

@@ -2,7 +2,7 @@ import AxiosClient, {AuthClient} from "./config";
 
 class LoginService extends AxiosClient { 
   getAccessToken(code: string | null) {
-    return super.get(`/oauth/kakao?code=${code}`);
+    return super.get(`/api/oauth/kakao?code=${code}`);
   }
 
   logout() {

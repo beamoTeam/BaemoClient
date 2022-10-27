@@ -3,7 +3,6 @@ import AccessToken from '../../hooks/useToken';
 
 export default class AxiosClient {
   public client = axios.create({
-    // baseURL: process.env.REACT_APP_BASE_URL,
     timeout: 10000
   });
   
@@ -40,7 +39,6 @@ export const AuthClient = () => {
   // console.log({ token });
   const authInstance = axios.create({
     headers: {
-      baseUrl: `http://3.94.44.116:3000`,
       Authorization: "Bearer " + token,
     },
   })
@@ -53,7 +51,6 @@ export const ChatClient = () => {
 
   const authInstance = axios.create({
     headers: {
-      // baseUrl: `http://3.94.44.116:3999`,
       Authorization: "Bearer " + token,
     },
   })

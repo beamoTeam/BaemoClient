@@ -9,15 +9,15 @@ import GroupOrderService from "../lib/api/GroupOrderService";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useHistory } from "react-router";
 import { useModalState } from "../lib/recoil/modalState";
-import LogoutModal from "../components/modal/LogoutModal";
 import AlertModal from "../components/modal/AlertModal";
 import Spinner from "../components/spinner/Spinner";
+import ConfirmModal from "../components/modal/ConfirmModal";
+import { KAKAO_LOGIN_LINK } from "../utils/contants";
 
 const Home: React.FC = () => {
   const history = useHistory();
   const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
-  console.log({ groupList });
 
   useEffect(() => {
     (async () => {
@@ -49,7 +49,13 @@ const Home: React.FC = () => {
       if (err.response.status === 400) {
         setModal(<AlertModal message={err.response.data} />);
       } else if (err.response.status === 401) {
-        setModal(<LogoutModal />);
+        setModal(
+          <ConfirmModal
+            message={"로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"}
+            onCancel={() => setModal(null)}
+            onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+          />
+        );
       }
     }
   };

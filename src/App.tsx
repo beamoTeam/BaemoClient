@@ -50,6 +50,8 @@ import OrderHistory from "./pages/OrderHistory";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import FloatCartButton from "./components/button/FloatCartButton";
+import ConfirmModal from "./components/modal/ConfirmModal";
+import { KAKAO_LOGIN_LINK } from "./utils/contants";
 
 setupIonicReact();
 
@@ -63,17 +65,103 @@ export default function App() {
           <IonTabs>
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
-              <Route exact path="/make-group" component={MakeGroup} />
+              <Route
+                exact
+                path="/make-group"
+                render={() => {
+                  return Boolean(
+                    window.localStorage.getItem("access_token")
+                  ) ? (
+                    <MakeGroup />
+                  ) : (
+                    <ConfirmModal
+                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                      onConfirm={() =>
+                        (window.location.href = KAKAO_LOGIN_LINK)
+                      }
+                    />
+                  );
+                }}
+              />
               <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route exact path="/chatting" component={Chat} />
+              <Route
+                exact
+                path="/chatting"
+                render={() => {
+                  return Boolean(
+                    window.localStorage.getItem("access_token")
+                  ) ? (
+                    <Chat />
+                  ) : (
+                    <ConfirmModal
+                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                      onConfirm={() =>
+                        (window.location.href = KAKAO_LOGIN_LINK)
+                      }
+                    />
+                  );
+                }}
+              />
               <Route
                 exact
                 path="/restaurant/:r_seq/menu/:m_seq"
                 component={MenuDetail}
               />
-              <Route exact path="/cart" component={Cart} />
-              <Route exact path="/order-hisotry" component={OrderHistory} />
-              <Route exact path="/profile" component={Profile} />
+              <Route
+                exact
+                path="/cart"
+                render={() => {
+                  return Boolean(
+                    window.localStorage.getItem("access_token")
+                  ) ? (
+                    <Cart />
+                  ) : (
+                    <ConfirmModal
+                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                      onConfirm={() =>
+                        (window.location.href = KAKAO_LOGIN_LINK)
+                      }
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/order-hisotry"
+                render={() => {
+                  return Boolean(
+                    window.localStorage.getItem("access_token")
+                  ) ? (
+                    <OrderHistory />
+                  ) : (
+                    <ConfirmModal
+                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                      onConfirm={() =>
+                        (window.location.href = KAKAO_LOGIN_LINK)
+                      }
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/profile"
+                component={Profile}
+                // render={() => {
+                //   return Boolean(
+                //     window.localStorage.getItem("access_token")
+                //   ) ? (
+                //     <Profile />
+                //   ) : (
+                //     <ConfirmModal
+                //       message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                //       onConfirm={() =>
+                //         (window.location.href = KAKAO_LOGIN_LINK)
+                //       }
+                //     />
+                //   );
+                // }}
+              />
 
               <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
               <Redirect to="/home" />

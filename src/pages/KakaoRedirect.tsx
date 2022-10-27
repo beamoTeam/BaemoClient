@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "../hooks/useNavigate";
-import { IonSpinner } from "@ionic/react";
 import loginService from "../lib/api/LoginService";
 import AccessToken from "../hooks/useToken";
 import { useLoginState } from "../lib/recoil/loginState";
+import Spinner from "../components/spinner/Spinner";
 
 export default function KakaoRedirect() {
   const navigate = useNavigate();
@@ -14,19 +14,19 @@ export default function KakaoRedirect() {
       const code = new URL(window.location.href).searchParams.get("code");
       (async () => {
         const res = await loginService.getAccessToken(code);
-        console.log("****** : ", res);
-        AccessToken.set(res);
-        setIsLogin(true);
+        if (typeof res === "string") {
+          AccessToken.set(res);
+          setIsLogin(true);
+        }
       })();
     }
     navigate("/");
-  }, [navigate, isLogin, setIsLogin]);
+  }, [isLogin, navigate, setIsLogin]);
 
   return (
     <div style={bgStyle}>
       <div>
-        <IonSpinner></IonSpinner>
-        <p style={para1Style}>로그인 처리중 입니다.</p>
+        <Spinner message={"로그인 처리중 입니다."} />
       </div>
     </div>
   );
@@ -42,11 +42,4 @@ const bgStyle = {
 
   color: "black",
   fontWeight: "bold",
-};
-
-const para1Style = {
-  marginTop: "10px",
-  marginBottom: "10px",
-  display: "flex",
-  justifyContent: "center",
 };

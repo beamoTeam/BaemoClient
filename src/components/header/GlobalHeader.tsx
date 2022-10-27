@@ -25,6 +25,7 @@ export default function GlobalHeader() {
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
+  console.log({ isLogin });
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   let isHome = location.pathname === "/home";
@@ -83,11 +84,7 @@ export default function GlobalHeader() {
               </IonTitle>
             </div>
             <span>
-              {isLogin ? (
-                <IonButton onClick={setLogoutModal} style={logoutStyle}>
-                  로그아웃
-                </IonButton>
-              ) : (
+              {!isLogin && (
                 <IonImg
                   src="assets/images/kakao_login_medium.png"
                   alt="kakao-login"

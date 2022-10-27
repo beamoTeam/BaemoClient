@@ -13,10 +13,20 @@ import Spinner from "../components/spinner/Spinner";
 import { useModalState } from "../lib/recoil/modalState";
 import OrderDetailModal from "../components/modal/OrderDetailModal";
 import css from "./OrderHistory.module.css";
+import { useHistory } from "react-router";
+import { useLoginState } from "../lib/recoil/loginState";
 
 export default function OrderHistory() {
   const [, setModal] = useModalState();
   const [orderHistory, setOrderHistory] = useState<any[] | null>(null);
+  const history = useHistory();
+  const [isLogin] = useLoginState();
+
+  useEffect(() => {
+    if (!isLogin) {
+      history.goBack();
+    }
+  }, [isLogin, history]);
 
   useEffect(() => {
     (async () => {

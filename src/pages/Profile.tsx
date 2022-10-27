@@ -14,10 +14,20 @@ import LogoutModal from "../components/modal/LogoutModal";
 import userApis from "../lib/api/User/UserApi";
 import { useEffect, useState } from "react";
 import Spinner from "../components/spinner/Spinner";
+import { useLoginState } from "../lib/recoil/loginState";
+import { useHistory } from "react-router";
 
 export default function Profile() {
+  const history = useHistory();
+  const [isLogin] = useLoginState();
   const [, setModal] = useModalState();
   const [userInfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    if (!isLogin) {
+      history.goBack();
+    }
+  }, [isLogin, history]);
 
   useEffect(() => {
     (async () => {

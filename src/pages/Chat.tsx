@@ -5,17 +5,25 @@ import chatService from "../lib/api/ChatService";
 import { MessageModel } from "../types/chatMsg";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useHistory } from "react-router";
+import { useLoginState } from "../lib/recoil/loginState";
 const baseURL = `http://3.94.44.116:3999`;
 
 export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
   const history = useHistory();
+  const [isLogin] = useLoginState();
   const [msgList, setMsgList] = useState<any>([]);
   const [msg, setMsg] = useState<string>("");
   const eventSource = useRef<any>(null);
   const scrollRef = useRef<any>(null);
   const roomNum = window.localStorage.getItem("CHAT_SEQ");
   const sender = window.localStorage.getItem("CHAT_SENDER");
+
+  useEffect(() => {
+    if (!isLogin) {
+      history.goBack();
+    }
+  }, [isLogin, history]);
 
   useEffect(() => {
     if (!roomNum) {

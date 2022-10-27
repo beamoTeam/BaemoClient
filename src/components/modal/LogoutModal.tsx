@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import loginService from "../../lib/api/LoginService";
 import AccessToken from "../../hooks/useToken";
 import { useNavigate } from "../../hooks/useNavigate";
 import CardModal from "./common/CardModal";
@@ -25,24 +24,22 @@ export default function LogoutModal() {
 
   const logout = async () => {
     if (isLogin) {
-      const res = await loginService.logout();
-      if (res.status === 200) {
-        // reset localStorage
-        AccessToken.remove();
-        useLocalStorage.remove("ADDR");
-        useLocalStorage.remove("CART");
-        useLocalStorage.remove("CHAT_SEQ");
+      // reset localStorage
+      AccessToken.remove();
+      useLocalStorage.remove("ADDR");
+      useLocalStorage.remove("CART");
+      useLocalStorage.remove("CHAT_SEQ");
+      useLocalStorage.remove("CHAT_SENDER");
 
-        // reset global State
-        setAddr(null);
-        setCart(null);
-        setIsLogin(false);
-        setChatMenu([]);
+      // reset global State
+      setAddr(null);
+      setCart(null);
+      setIsLogin(false);
+      setChatMenu([]);
 
-        //
-        close();
-        navigate("/home");
-      }
+      //
+      close();
+      navigate("/home");
     }
   };
 

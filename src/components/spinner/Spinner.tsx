@@ -1,6 +1,10 @@
 import { IonSpinner } from "@ionic/react";
 
-export default function Spinner() {
+interface SpinnerProps {
+  message?: string;
+}
+
+export default function Spinner({ message }: SpinnerProps) {
   return (
     <div
       style={{
@@ -8,12 +12,14 @@ export default function Spinner() {
         width: "100vw",
         height: "84vh",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
       }}
       className="ion-padding"
     >
       <IonSpinner></IonSpinner>
+      <p>{message}</p>
     </div>
   );
 }

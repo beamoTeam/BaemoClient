@@ -2,11 +2,12 @@ import CardModal from "./common/CardModal";
 import css from "./ConfirmModal.module.css";
 import { useCallback } from "react";
 import { useModalState } from "../../lib/recoil/modalState";
+import { useHistory } from "react-router";
 
 interface ConfirmModalProps {
   message: string;
   onConfirm: () => void;
-  onCancel: () => void;
+  onCancel?: () => void;
 }
 
 export default function ConfirmModal({
@@ -14,12 +15,18 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
+  const history = useHistory();
   const [, setModal] = useModalState();
 
   const close = useCallback(() => {
-    onCancel();
+    if (onCancel) {
+      onCancel?.();
+    } else {
+      console.log("요기");
+      history.goBack();
+    }
     setModal(null);
-  }, [setModal, onCancel]);
+  }, [setModal, onCancel, history]);
 
   return (
     <CardModal>
