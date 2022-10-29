@@ -1,5 +1,5 @@
 import { useAddrState } from "../../lib/recoil/addrState";
-import { IonHeader, IonIcon, IonTitle, IonImg, IonButton } from "@ionic/react";
+import { IonHeader, IonIcon, IonTitle, IonImg } from "@ionic/react";
 import {
   chevronDownOutline,
   locationOutline,
@@ -10,7 +10,6 @@ import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
 import AddressModal from "../modal/AddressModal";
 import KakaoMapModal from "../modal/KakaoMapModal";
-import LogoutModal from "../modal/LogoutModal";
 import { useLoginState } from "../../lib/recoil/loginState";
 import ModalContainer from "../modal/common/ModalPortal";
 import { useLocation, useHistory } from "react-router";
@@ -25,7 +24,7 @@ export default function GlobalHeader() {
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
-  console.log(isLogin);
+  console.log({ isLogin });
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   let isHome = location.pathname === "/home";
@@ -43,12 +42,12 @@ export default function GlobalHeader() {
     }
   };
 
-  const setLogoutModal = () => {
-    setModal(<LogoutModal />);
-  };
-
   const kakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code&prompt=login`;
+    const kakak_redirect_url = window.location.origin.includes("local")
+      ? process.env.REACT_APP_KAKAO_REDIRECT_URI
+      : process.env.REACT_APP_KAKAO_REDIRECT_URI_SERVER;
+
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${kakak_redirect_url}&response_type=code&prompt=login`;
   };
 
   const visible = (pathname: string) => {
@@ -112,10 +111,3 @@ export default function GlobalHeader() {
     </>
   );
 }
-
-const logoutStyle = {
-  width: "60px",
-  height: "30px",
-  fontSize: "0.8rem",
-  fontWeight: "bold",
-};

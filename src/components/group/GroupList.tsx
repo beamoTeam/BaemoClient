@@ -27,7 +27,7 @@ export default function GroupList({ groupList, enterToGroup }: GroupListProps) {
             enterToGroup(String(group.seq), String(group.restaurant.seq))
           }
         >
-          <IonImg src="./avatar-finn.png" />
+          <IonImg src={group.restaurant.img} className={css.img} />
           <IonLabel>
             <h2>{group.name}</h2>
             <h3>모집 마감 {group.orderTime.split(" ")[1]}</h3>

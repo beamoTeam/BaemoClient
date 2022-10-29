@@ -6,3 +6,9 @@
 .list::-webkit-scrollbar {
   display: none;
 }
+
+.img {
+  width: 52px;
+  height: 32px;
+  margin-right: 10px;
+}
