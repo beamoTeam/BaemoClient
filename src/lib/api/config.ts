@@ -3,7 +3,7 @@ import AccessToken from '../../hooks/useToken';
 
 export default class AxiosClient {
   public client = axios.create({
-    timeout: 10000
+    timeout: 20000
   });
   
   

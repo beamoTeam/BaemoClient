@@ -3,13 +3,13 @@ module.exports = (app) => {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: "http://3.94.44.116:2999",
+      target: "http://34.195.94.5:2999",
       changeOrigin: true,
     }))
   app.use(
     '/chat',
     createProxyMiddleware({
-      target: "http://3.94.44.116:3999",
+      target: "http://34.195.94.5:3999",
       changeOrigin: true,
     })
   )

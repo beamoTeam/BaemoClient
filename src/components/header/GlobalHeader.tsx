@@ -25,7 +25,7 @@ export default function GlobalHeader() {
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
-  console.log({ isLogin });
+  console.log(isLogin);
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   let isHome = location.pathname === "/home";

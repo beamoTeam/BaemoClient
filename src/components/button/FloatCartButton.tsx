@@ -23,17 +23,17 @@ export default function FloatCartButton() {
 
   useEffect(() => {
     (async () => {
+      if (!chat_seq) {
+        return;
+      }
       try {
         const { data } = await cartService.fetchCartItems(chat_seq);
-        if (cart !== data.basketMenuList) {
-          setCart(data.basketMenuList);
-          console.log("머누");
-        }
+        setCart(data.basketMenuList);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [location, chat_seq, cart]);
+  }, [location, chat_seq]);
 
   if (!isLogin) return null;
   if (!!unVisibleUrl[location.pathname.split("/")[1]]) {
