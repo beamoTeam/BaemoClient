@@ -38,6 +38,7 @@ export default function Restaurant() {
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
 
+  console.log("이미지 URL : ", menus[0].img);
   return (
     <IonPage>
       <IonContent>
