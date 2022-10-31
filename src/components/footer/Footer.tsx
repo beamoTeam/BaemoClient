@@ -30,6 +30,17 @@ export default function Footer() {
     };
   }, []);
 
+  const unVisibleURL: any = useMemo(() => {
+    return {
+      "/home": false,
+      "/make-group": false,
+      "/order-hisotry": false,
+      "/profile": false,
+      "/chatting": true,
+      "/oauth/kakao": true,
+    };
+  }, []);
+
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location, history, setCurrentPath]);
@@ -55,7 +66,9 @@ export default function Footer() {
     history.push(href);
   };
 
-  if (location.pathname === "/chatting") return null;
+  if (unVisibleURL[location.pathname]) {
+    return null;
+  }
 
   return (
     <nav className={css.footer}>

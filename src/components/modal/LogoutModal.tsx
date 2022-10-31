@@ -39,7 +39,8 @@ export default function LogoutModal() {
 
       //
       close();
-      navigate("/home");
+      // navigate("/home");
+      window.location.href = "/home";
     }
   };
 

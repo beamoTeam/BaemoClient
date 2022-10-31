@@ -129,7 +129,7 @@ export default function App() {
               }}
             />
 
-            <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
+            <Route exact path="/oauth/kakao" component={KakaoRedirect} />
             <Redirect to="/home" />
           </IonRouterOutlet>
           {/* Tab Menu */}

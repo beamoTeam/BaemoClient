@@ -21,11 +21,10 @@ export default function KakaoRedirect() {
         }
 
         const { data } = await useApis.fetchUserProfile();
-        console.log("LOGIN : ", { data });
         window.localStorage.setItem("CHAT_SENDER", data.name);
       })();
     }
-    // navigate("/");
+    navigate("/");
   }, [isLogin, navigate, setIsLogin]);
 
   return (

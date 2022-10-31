@@ -75,7 +75,7 @@ export default function Chat() {
     try {
       // api call (send message)
       await chatService.sendMessage({
-        sender,
+        sender: sender,
         roomNum,
         msg,
       });
