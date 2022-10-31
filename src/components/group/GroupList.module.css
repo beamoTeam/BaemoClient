@@ -6,12 +6,7 @@
 .list::-webkit-scrollbar {
   display: none;
 }
-
-.list svg {
-  color: #0070f3 !important;
-}
-
-.list path {
+.list ion-icon {
   color: #0070f3 !important;
 }
 
