@@ -7,6 +7,14 @@
   display: none;
 }
 
+.list svg {
+  color: #0070f3 !important;
+}
+
+.list path {
+  color: #0070f3 !important;
+}
+
 .img {
   width: 52px;
   height: 32px;
