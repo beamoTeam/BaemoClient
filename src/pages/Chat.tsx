@@ -95,13 +95,11 @@ export default function Chat() {
           <div className={css.Chat}>
             <ul className={css.textList}>
               {msgList.map((message: any) => (
-                <>
+                <div key={message.id}>
                   {message.date && (
-                    <div key={message.date} className={css.dateLine}>
-                      {message.date}
-                    </div>
+                    <div className={css.dateLine}>{message.date}</div>
                   )}
-                  <div className={css.textBox} key={message.id}>
+                  <div className={css.textBox}>
                     {message.sender === sender && (
                       <p className={css.msgTimeR}>{message.time}</p>
                     )}
@@ -118,7 +116,7 @@ export default function Chat() {
                       <p className={css.msgTimeL}>{message.time}</p>
                     )}
                   </div>
-                </>
+                </div>
               ))}
               <div ref={scrollRef}></div>
             </ul>
