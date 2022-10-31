@@ -1,4 +1,4 @@
-import { IonPage, IonContent, IonButton } from "@ionic/react";
+import { IonPage, IonContent, IonButton, IonSpinner } from "@ionic/react";
 import { useState, useRef, useEffect } from "react";
 import css from "./Chat.module.css";
 import chatService from "../lib/api/ChatService";
@@ -11,6 +11,7 @@ export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
   const history = useHistory();
   const [isLogin] = useLoginState();
+  const [sendLoading, setSendLoading] = useState<boolean>(false);
   const [msgList, setMsgList] = useState<any>([]);
   const [msg, setMsg] = useState<string>("");
   const eventSource = useRef<any>(null);
@@ -55,7 +56,7 @@ export default function Chat() {
           id: serverMsg.id,
           sender: serverMsg.sender,
           text: serverMsg.msg,
-          date: dateHash[create_date] ? `${yyyy}년 ${mm}월 ${dd}일` : null,
+          date: dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`,
           time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
         },
       ]);
@@ -70,6 +71,7 @@ export default function Chat() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    setSendLoading(true);
     try {
       // api call (send message)
       await chatService.sendMessage({
@@ -81,6 +83,7 @@ export default function Chat() {
       console.error(err);
     } finally {
       setMsg("");
+      setSendLoading(false);
       scrollRef.current.scrollIntoView(false);
     }
   };
@@ -94,7 +97,9 @@ export default function Chat() {
               {msgList.map((message: any) => (
                 <>
                   {message.date && (
-                    <div className={css.dateLine}>{message.date}</div>
+                    <div key={message.date} className={css.dateLine}>
+                      {message.date}
+                    </div>
                   )}
                   <div className={css.textBox} key={message.id}>
                     {message.sender === sender && (
@@ -124,7 +129,13 @@ export default function Chat() {
               onChange={(e) => setMsg(e.target.value!)}
             ></textarea>
             <div className={css.send}>
-              <IonButton onClick={onSubmit}>전송</IonButton>
+              {sendLoading ? (
+                <IonButton>
+                  <IonSpinner />
+                </IonButton>
+              ) : (
+                <IonButton onClick={onSubmit}>전송</IonButton>
+              )}
             </div>
           </div>
         </IonContent>
