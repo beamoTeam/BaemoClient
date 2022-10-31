@@ -32,14 +32,14 @@ export default function Footer() {
 
   const unVisibleURL: any = useMemo(() => {
     return {
-      "/home": false,
-      "/make-group": false,
-      "/order-hisotry": false,
-      "/profile": false,
-      "/chatting": true,
-      "/oauth/kakao": true,
-      "/restaurant": true,
-      "/cart": true,
+      home: false,
+      "make-group": false,
+      "order-hisotry": false,
+      profile: false,
+      chatting: true,
+      oauth: true,
+      restaurant: true,
+      cart: true,
     };
   }, []);
 
@@ -70,7 +70,7 @@ export default function Footer() {
 
   console.log(location.pathname);
   console.log(unVisibleURL[location.pathname]);
-  if (unVisibleURL[location.pathname]) {
+  if (unVisibleURL[location.pathname.split("/")[1]]) {
     return null;
   }
 
