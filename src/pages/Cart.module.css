@@ -67,8 +67,11 @@
 }
 
 .orderButton ion-button {
-  height: 40px;
+  height: 34px;
   width: 100%;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1.5px;
 }
 
 .fee {
