@@ -12,3 +12,7 @@
   height: 32px;
   margin-right: 10px;
 }
+
+.current {
+  background-color: #d7d8da;
+}

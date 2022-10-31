@@ -11,9 +11,14 @@ import css from "./GroupList.module.css";
 interface GroupListProps {
   groupList: GroupModel[];
   enterToGroup: (c_seq: string, restaurant_seq: string) => void;
+  currentGroup: any;
 }
 
-export default function GroupList({ groupList, enterToGroup }: GroupListProps) {
+export default function GroupList({
+  groupList,
+  enterToGroup,
+  currentGroup,
+}: GroupListProps) {
   return (
     <IonList className={css.list}>
       <IonListHeader>
@@ -23,6 +28,7 @@ export default function GroupList({ groupList, enterToGroup }: GroupListProps) {
       {groupList?.map((group) => (
         <IonItem
           key={group.seq}
+          className={group.seq === Number(currentGroup) ? css["current"] : ""}
           onClick={() =>
             enterToGroup(String(group.seq), String(group.restaurant.seq))
           }
