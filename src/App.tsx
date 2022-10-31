@@ -1,23 +1,8 @@
 import { Redirect, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { IonReactRouter } from "@ionic/react-router";
-import {
-  IonApp,
-  IonRouterOutlet,
-  setupIonicReact,
-  IonTabs,
-  IonTabBar,
-  IonTabButton,
-  IonIcon,
-  IonLabel,
-} from "@ionic/react";
-import {
-  newspaperOutline,
-  personCircleOutline,
-  chatboxOutline,
-  addCircleOutline,
-  homeOutline,
-} from "ionicons/icons";
+import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -49,6 +34,7 @@ import Profile from "./pages/Profile";
 import OrderHistory from "./pages/OrderHistory";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
+import Footer from "./components/footer/Footer";
 import FloatCartButton from "./components/button/FloatCartButton";
 import ConfirmModal from "./components/modal/ConfirmModal";
 import { KAKAO_LOGIN_LINK } from "./utils/contants";
@@ -62,112 +48,92 @@ export default function App() {
         <IonReactRouter>
           <GlobalHeader />
           {/* Router */}
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/home" component={Home} />
-              <Route
-                exact
-                path="/make-group"
-                render={() => {
-                  return Boolean(
-                    window.localStorage.getItem("access_token")
-                  ) ? (
-                    <MakeGroup />
-                  ) : (
-                    <ConfirmModal
-                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
-                      onConfirm={() =>
-                        (window.location.href = KAKAO_LOGIN_LINK)
-                      }
-                    />
-                  );
-                }}
-              />
-              <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route
-                exact
-                path="/chatting"
-                render={() => {
-                  return Boolean(
-                    window.localStorage.getItem("access_token")
-                  ) ? (
-                    <Chat />
-                  ) : (
-                    <ConfirmModal
-                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
-                      onConfirm={() =>
-                        (window.location.href = KAKAO_LOGIN_LINK)
-                      }
-                    />
-                  );
-                }}
-              />
-              <Route
-                exact
-                path="/restaurant/:r_seq/menu/:m_seq"
-                component={MenuDetail}
-              />
-              <Route
-                exact
-                path="/cart"
-                render={() => {
-                  return Boolean(
-                    window.localStorage.getItem("access_token")
-                  ) ? (
-                    <Cart />
-                  ) : (
-                    <ConfirmModal
-                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
-                      onConfirm={() =>
-                        (window.location.href = KAKAO_LOGIN_LINK)
-                      }
-                    />
-                  );
-                }}
-              />
-              <Route
-                exact
-                path="/order-hisotry"
-                render={() => {
-                  return Boolean(
-                    window.localStorage.getItem("access_token")
-                  ) ? (
-                    <OrderHistory />
-                  ) : (
-                    <ConfirmModal
-                      message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
-                      onConfirm={() =>
-                        (window.location.href = KAKAO_LOGIN_LINK)
-                      }
-                    />
-                  );
-                }}
-              />
-              <Route
-                exact
-                path="/profile"
-                component={Profile}
-                // render={() => {
-                //   return Boolean(
-                //     window.localStorage.getItem("access_token")
-                //   ) ? (
-                //     <Profile />
-                //   ) : (
-                //     <ConfirmModal
-                //       message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
-                //       onConfirm={() =>
-                //         (window.location.href = KAKAO_LOGIN_LINK)
-                //       }
-                //     />
-                //   );
-                // }}
-              />
+          {/* <IonTabs> */}
+          <IonRouterOutlet>
+            <Route exact path="/home" component={Home} />
+            <Route
+              exact
+              path="/make-group"
+              render={() => {
+                return Boolean(window.localStorage.getItem("access_token")) ? (
+                  <MakeGroup />
+                ) : (
+                  <ConfirmModal
+                    message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                    onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+                  />
+                );
+              }}
+            />
+            <Route exact path="/restaurant/:r_seq" component={Restaurant} />
+            <Route
+              exact
+              path="/chatting"
+              render={() => {
+                return Boolean(window.localStorage.getItem("access_token")) ? (
+                  <Chat />
+                ) : (
+                  <ConfirmModal
+                    message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                    onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/restaurant/:r_seq/menu/:m_seq"
+              component={MenuDetail}
+            />
+            <Route
+              exact
+              path="/cart"
+              render={() => {
+                return Boolean(window.localStorage.getItem("access_token")) ? (
+                  <Cart />
+                ) : (
+                  <ConfirmModal
+                    message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                    onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/order-hisotry"
+              render={() => {
+                return Boolean(window.localStorage.getItem("access_token")) ? (
+                  <OrderHistory />
+                ) : (
+                  <ConfirmModal
+                    message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                    onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+                  />
+                );
+              }}
+            />
+            <Route
+              exact
+              path="/profile"
+              component={Profile}
+              render={() => {
+                return Boolean(window.localStorage.getItem("access_token")) ? (
+                  <Profile />
+                ) : (
+                  <ConfirmModal
+                    message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+                    onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+                  />
+                );
+              }}
+            />
 
-              <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
-              <Redirect to="/home" />
-            </IonRouterOutlet>
-            {/* Tab Menu */}
-            <IonTabBar slot="bottom">
+            <Route exact path={"/oauth/kakao"} component={KakaoRedirect} />
+            <Redirect to="/home" />
+          </IonRouterOutlet>
+          {/* Tab Menu */}
+          {/* <IonTabBar slot="bottom">
               <IonTabButton tab="schedule" href="/home">
                 <IonIcon icon={homeOutline} />
                 <IonLabel>홈</IonLabel>
@@ -192,9 +158,10 @@ export default function App() {
                 <IonIcon icon={personCircleOutline} />
                 <IonLabel>프로필</IonLabel>
               </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
+            </IonTabBar> */}
+          {/* </IonTabs> */}
           <FloatCartButton />
+          <Footer />
         </IonReactRouter>
       </IonApp>
     </RecoilRoot>

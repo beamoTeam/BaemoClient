@@ -3,6 +3,7 @@ import { useNavigate } from "../hooks/useNavigate";
 import loginService from "../lib/api/LoginService";
 import AccessToken from "../hooks/useToken";
 import { useLoginState } from "../lib/recoil/loginState";
+import useApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
 
 export default function KakaoRedirect() {
@@ -18,6 +19,9 @@ export default function KakaoRedirect() {
           AccessToken.set(res);
           setIsLogin(true);
         }
+
+        const { data } = await useApis.fetchUserProfile();
+        window.localStorage.setItem("CHAT_SENDER", data.name);
       })();
     }
     navigate("/");

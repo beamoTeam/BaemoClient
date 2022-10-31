@@ -112,3 +112,19 @@
 .textField:focus {
   outline: none;
 }
+
+.dateLine {
+  margin: 0 auto;
+  height: 25px;
+  width: 120px;
+  border-radius: 24px;
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(0, 0, 0, 0.4);
+  padding: 2px 4px;
+}

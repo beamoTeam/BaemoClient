@@ -34,7 +34,6 @@ export default function Profile() {
       try {
         const { data } = await userApis.fetchUserProfile();
         setUserInfo(data);
-        console.log(data);
       } catch (err) {
         console.error(err);
       }

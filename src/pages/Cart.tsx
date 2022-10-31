@@ -47,8 +47,7 @@ export default function Cart() {
         history.push(`/chatting`);
         return;
       }
-      console.log("주문 직후 basket list", data.basketMenuList);
-      console.log("주문 직후 basket list", parseMenu(data.basketMenuList));
+
       await chatService.sendMessage({
         sender: `mainMenu_${data.sender}`,
         roomNum: data.roomNum,

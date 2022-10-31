@@ -24,7 +24,6 @@ export default function GlobalHeader() {
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
-  console.log({ isLogin });
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   let isHome = location.pathname === "/home";
@@ -43,11 +42,11 @@ export default function GlobalHeader() {
   };
 
   const kakaoLogin = () => {
-    const kakak_redirect_url = window.location.origin.includes("local")
+    const kakao_redirect_url = window.location.origin.includes("local")
       ? process.env.REACT_APP_KAKAO_REDIRECT_URI
       : process.env.REACT_APP_KAKAO_REDIRECT_URI_SERVER;
 
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${kakak_redirect_url}&response_type=code&prompt=login`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${kakao_redirect_url}&response_type=code&prompt=login`;
   };
 
   const visible = (pathname: string) => {

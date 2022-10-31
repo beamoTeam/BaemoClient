@@ -6,7 +6,6 @@ import { MessageModel } from "../types/chatMsg";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
-const baseURL = `http://3.94.44.116:3999`;
 
 export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
@@ -18,27 +17,29 @@ export default function Chat() {
   const scrollRef = useRef<any>(null);
   const roomNum = window.localStorage.getItem("CHAT_SEQ");
   const sender = window.localStorage.getItem("CHAT_SENDER");
+  const dateHash: any = {};
+  const nameHash: any = {};
 
   useEffect(() => {
-    if (!isLogin) {
+    if (!isLogin || !roomNum) {
       history.goBack();
     }
-  }, [isLogin, history]);
-
-  useEffect(() => {
-    if (!roomNum) {
-      history.goBack();
-    }
-  }, [roomNum, history]);
+  }, [isLogin, roomNum, history]);
 
   // EventSource
   if (!eventSource.current) {
-    eventSource.current = new EventSource(`${baseURL}/chat/roomNum/${roomNum}`);
+    eventSource.current = new EventSource(
+      `${process.env.REACT_APP_CHAT_URL}/chat/roomNum/${roomNum}`
+    );
   }
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-    if ("mainMenu" === serverMsg.sender.split("_")[0]) {
+    const [yyyy, mm, dd]: any = serverMsg.createdAt;
+    const create_date = `${yyyy}-${mm}-${dd}`;
+
+    console.log(serverMsg);
+    if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
       setChatMenu((prev: any) => [
         ...prev,
         {
@@ -53,10 +54,12 @@ export default function Chat() {
           id: serverMsg.id,
           sender: serverMsg.sender,
           text: serverMsg.msg,
-          time: serverMsg.createdAt.substring(11, 16),
+          date: dateHash[create_date] ? `${yyyy}년 ${mm}월 ${dd}일` : null,
+          time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
         },
       ]);
     }
+    dateHash[create_date] = true;
   };
 
   // hack
@@ -88,23 +91,28 @@ export default function Chat() {
           <div className={css.Chat}>
             <ul className={css.textList}>
               {msgList.map((message: any) => (
-                <div className={css.textBox} key={message.id}>
-                  {message.sender === sender && (
-                    <p className={css.msgTimeR}>{message.time}</p>
+                <>
+                  {message.date && (
+                    <div className={css.dateLine}>{message.date}</div>
                   )}
-                  <p
-                    className={
-                      message.sender === sender
-                        ? css["textBoxR"]
-                        : css["textBoxL"]
-                    }
-                  >
-                    {message.text}
-                  </p>
-                  {message.sender !== sender && (
-                    <p className={css.msgTimeL}>{message.time}</p>
-                  )}
-                </div>
+                  <div className={css.textBox} key={message.id}>
+                    {message.sender === sender && (
+                      <p className={css.msgTimeR}>{message.time}</p>
+                    )}
+                    <p
+                      className={
+                        message.sender === sender
+                          ? css["textBoxR"]
+                          : css["textBoxL"]
+                      }
+                    >
+                      {message.text}
+                    </p>
+                    {message.sender !== sender && (
+                      <p className={css.msgTimeL}>{message.time}</p>
+                    )}
+                  </div>
+                </>
               ))}
               <div ref={scrollRef}></div>
             </ul>

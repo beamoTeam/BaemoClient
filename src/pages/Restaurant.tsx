@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
 import { Link, useParams, useLocation } from "react-router-dom";
+import Spinner from "../components/spinner/Spinner";
 
 export default function Restaurant() {
   const { r_seq } = useParams<{ r_seq: any }>();
@@ -34,8 +35,8 @@ export default function Restaurant() {
     })();
   }, [r_seq, location.pathname]);
 
-  if (!menus) return <h4>Loading...</h4>;
-  if (!restaurant) return <h4>Loading...</h4>;
+  if (!menus) return <Spinner />;
+  if (!restaurant) return <Spinner />;
 
   return (
     <IonPage>
