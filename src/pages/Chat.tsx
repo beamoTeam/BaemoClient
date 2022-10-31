@@ -29,7 +29,7 @@ export default function Chat() {
   // EventSource
   if (!eventSource.current) {
     eventSource.current = new EventSource(
-      `${process.env.REACT_APP_CHAT_URL}/chat/roomNum/${roomNum}`
+      `${process.env.REACT_APP_CHAT_URL}chat/roomNum/${roomNum}`
     );
   }
 
