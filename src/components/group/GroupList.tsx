@@ -28,13 +28,14 @@ export default function GroupList({
       {groupList?.map((group) => (
         <IonItem
           key={group.seq}
-          className={group.seq === Number(currentGroup) ? css["current"] : ""}
           onClick={() =>
             enterToGroup(String(group.seq), String(group.restaurant.seq))
           }
         >
           <IonImg src={group.restaurant.img} className={css.img} />
-          <IonLabel>
+          <IonLabel
+            className={group.seq === Number(currentGroup) ? css["current"] : ""}
+          >
             <h2>{group.name}</h2>
             <h3>모집 마감 {group.orderTime.split(" ")[1]}</h3>
           </IonLabel>
