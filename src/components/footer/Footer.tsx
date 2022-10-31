@@ -55,6 +55,8 @@ export default function Footer() {
     history.push(href);
   };
 
+  if (location.pathname === "/chatting") return null;
+
   return (
     <nav className={css.footer}>
       <ul className={css.list} onClick={goTo}>

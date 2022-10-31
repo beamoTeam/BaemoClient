@@ -35,6 +35,7 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
+    console.log(serverMsg);
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}-${mm}-${dd}`;
 
