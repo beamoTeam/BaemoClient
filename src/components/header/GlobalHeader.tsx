@@ -38,10 +38,10 @@ export default function GlobalHeader() {
 
   const unVisibleURL: any = useMemo(() => {
     return {
-      "/chatting": true,
-      "/profile": true,
-      "/cart": true,
-      "/restaurant": true,
+      chatting: true,
+      profile: true,
+      cart: true,
+      restaurant: true,
     };
   }, []);
 
@@ -79,7 +79,7 @@ export default function GlobalHeader() {
             <IonIcon icon={chevronBackOutline} className={css.mapButton} />
           )}
         </div>
-        {!unVisibleURL[location.pathname] && (
+        {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
             <div onClick={setAddressModal} className={css.headerMain}>
               <IonTitle className={css.addr}>
