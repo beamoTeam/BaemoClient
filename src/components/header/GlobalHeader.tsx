@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useAddrState } from "../../lib/recoil/addrState";
 import { IonHeader, IonIcon, IonTitle, IonImg } from "@ionic/react";
 import {
@@ -26,8 +27,22 @@ export default function GlobalHeader() {
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
-  let isHome = location.pathname === "/home";
-  let isChat = location.pathname === "/chatting";
+  let isHome = useMemo(
+    () => location.pathname === "/home",
+    [location.pathname]
+  );
+  let isChat = useMemo(
+    () => location.pathname === "/chatting",
+    [location.pathname]
+  );
+
+  const unVisibleURL: any = useMemo(() => {
+    return {
+      "/chatting": true,
+      "/profile": true,
+      "/cart": true,
+    };
+  }, []);
 
   const setAddressModal = () => {
     setModal(<AddressModal />);
@@ -73,7 +88,7 @@ export default function GlobalHeader() {
             <IonIcon icon={chevronBackOutline} className={css.mapButton} />
           )}
         </div>
-        {visible(location.pathname) && (
+        {!unVisibleURL[location.pathname] && (
           <>
             <div onClick={setAddressModal} className={css.headerMain}>
               <IonTitle className={css.addr}>
