@@ -20,11 +20,11 @@ export default function Restaurant() {
   const location = useLocation();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
+  const tmp_r_seq = location.pathname.split("/").at(-1);
 
   useEffect(() => {
     (async () => {
       try {
-        const tmp_r_seq = location.pathname.split("/").at(-1);
         const data = await restaurantService.fetchAllMenus(r_seq || tmp_r_seq);
         console.log(data);
         setMenus(data.menuList);
@@ -55,7 +55,10 @@ export default function Restaurant() {
         <div>
           <IonList style={{ marginTop: "50px" }}>
             {menus?.map((menu) => (
-              <Link to={`${r_seq}/menu/${menu.seq}`} key={menu.seq}>
+              <Link
+                to={`${r_seq || tmp_r_seq}/menu/${menu.seq}`}
+                key={menu.seq}
+              >
                 <IonItem>
                   <IonAvatar slot="start">
                     <IonImg src={menu.img} />

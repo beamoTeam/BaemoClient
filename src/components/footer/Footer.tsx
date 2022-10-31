@@ -38,6 +38,8 @@ export default function Footer() {
       "/profile": false,
       "/chatting": true,
       "/oauth/kakao": true,
+      "/restaurant": true,
+      "/cart": true,
     };
   }, []);
 
