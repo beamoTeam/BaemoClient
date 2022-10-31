@@ -41,20 +41,21 @@ export default function GlobalHeader() {
       "/chatting": true,
       "/profile": true,
       "/cart": true,
+      "/restaurant": true,
     };
   }, []);
 
-  const setAddressModal = () => {
+  const setAddressModal = useCallback(() => {
     setModal(<AddressModal />);
-  };
+  }, [setModal]);
 
-  const setMapModal = () => {
+  const setMapModal = useCallback(() => {
     if (isHome) {
       setModal(<KakaoMapModal />);
     } else {
       history.goBack();
     }
-  };
+  }, [history, isHome, setModal]);
 
   const kakaoLogin = () => {
     const kakao_redirect_url = window.location.origin.includes("local")
@@ -62,16 +63,6 @@ export default function GlobalHeader() {
       : process.env.REACT_APP_KAKAO_REDIRECT_URI_SERVER;
 
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${kakao_redirect_url}&response_type=code&prompt=login`;
-  };
-
-  const visible = (pathname: string) => {
-    if (pathname.includes("chatting")) {
-      return false;
-    }
-    if (pathname.includes("profile")) {
-      return false;
-    }
-    return true;
   };
 
   const toggleSlideMenu = useCallback(() => {
