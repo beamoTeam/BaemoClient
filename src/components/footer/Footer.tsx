@@ -68,6 +68,8 @@ export default function Footer() {
     history.push(href);
   };
 
+  console.log(location.pathname);
+  console.log(unVisibleURL[location.pathname]);
   if (unVisibleURL[location.pathname]) {
     return null;
   }
