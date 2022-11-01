@@ -14,6 +14,7 @@ import { useHistory } from "react-router";
 import userApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
 import { ChatRoomModel, ChatInfoModel } from "../types/chatRoom";
+import { elapsedText } from "../utils/date";
 
 export default function ChatList() {
   const history = useHistory();
@@ -39,7 +40,7 @@ export default function ChatList() {
   if (chatList.length === 0) return <h4>No Chat List</h4>;
 
   return (
-    <IonPage style={{ marginBottom: "55px" }}>
+    <IonPage style={{ marginBottom: "55px", marginTop: "50px" }}>
       <IonContent fullscreen>
         <IonListHeader>
           <IonLabel>채팅 목록</IonLabel>
@@ -51,8 +52,10 @@ export default function ChatList() {
               <IonImg src={chatInfo.restaurant.img} className={css.img} />
               <IonLabel>
                 <h2>{chatInfo.name}</h2>
-                <h3>{chatInfo.orderTime}</h3>
-                <p className={css.lastUpdate}>{chatInfo.updatedDateTime}</p>
+                <h3>마감: {chatInfo.orderTime}</h3>
+                <p className={css.lastUpdate}>
+                  {elapsedText(chatInfo.updatedDateTime)}
+                </p>
               </IonLabel>
             </IonItem>
           ))}
