@@ -13,9 +13,10 @@ ion-content {
 .textList {
   height: 100vh;
   margin: 0;
+  padding: 0 5px;
   display: flex;
   flex-direction: column;
-  background-color: blue;
+  padding-bottom: 60px;
   overflow: auto;
 }
 
