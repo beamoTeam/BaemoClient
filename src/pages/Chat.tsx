@@ -95,7 +95,7 @@ export default function Chat() {
 
   return (
     <div className={css.chat}>
-      <IonPage style={{ marginTop: "50px" }}>
+      <IonPage style="--offset-bottom:-60px">
         <IonContent>
           {/* <div className={css.Chat}> */}
           <ul className={css.textList}>
