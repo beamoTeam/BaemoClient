@@ -8,20 +8,20 @@ export function elapsedText(date) {
   const today = new Date();
   const elapsedTime = Math.trunc((today.getTime() - date.getTime()) / 1000);
 
-  let elapsedText = "";
-  if (elapsedTime < seconds) {
-    elapsedText = "방금 전";
-  } else if (elapsedTime < hour) {
-    elapsedText = Math.trunc(elapsedTime / minute) + "분 전";
-  } else if (elapsedTime < day) {
-    elapsedText = Math.trunc(elapsedTime / hour) + "시간 전";
-  } else if (elapsedTime < day * 15) {
-    elapsedText = Math.trunc(elapsedTime / day) + "일 전";
-  } else {
-    elapsedText = date.toISOString().split("T")[0];
-  }
+  // let elapsedText = "";
+  // if (elapsedTime < seconds) {
+  //   elapsedText = "방금 전";
+  // } else if (elapsedTime < hour) {
+  //   elapsedText = Math.trunc(elapsedTime / minute) + "분 전";
+  // } else if (elapsedTime < day) {
+  //   elapsedText = Math.trunc(elapsedTime / hour) + "시간 전";
+  // } else if (elapsedTime < day * 15) {
+  //   elapsedText = Math.trunc(elapsedTime / day) + "일 전";
+  // } else {
+  //   elapsedText = date.toISOString().split("T")[0];
+  // }
 
-  return elapsedText;
+  return date.toISOString().split(" ")[0];
 }
 
 function formattedCreatedDate(created_date) {
