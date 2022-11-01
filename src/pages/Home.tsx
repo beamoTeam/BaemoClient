@@ -65,7 +65,7 @@ const Home: React.FC = () => {
   if (groupList.length === 0) return <h4>No group</h4>;
 
   return (
-    <IonPage>
+    <IonPage style={{ marginBottom: "55px" }}>
       <IonContent fullscreen>
         <FoodCategory />
         <SortFilter />

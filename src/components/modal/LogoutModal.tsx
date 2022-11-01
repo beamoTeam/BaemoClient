@@ -11,7 +11,6 @@ import { useChatMenuState } from "../../lib/recoil/chatMenuState";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function LogoutModal() {
-  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useLoginState();
   const [, setAddr] = useAddrState();
   const [, setModal] = useModalState();

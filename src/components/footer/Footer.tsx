@@ -25,6 +25,7 @@ export default function Footer() {
       "/home": false,
       "/chatting": true,
       "/make-group": true,
+      "/chat-list": true,
       "/order-hisotry": true,
       "/profile": true,
     };
@@ -68,8 +69,6 @@ export default function Footer() {
     history.push(href);
   };
 
-  console.log(location.pathname);
-  console.log(unVisibleURL[location.pathname]);
   if (unVisibleURL[location.pathname.split("/")[1]]) {
     return null;
   }
@@ -85,15 +84,15 @@ export default function Footer() {
           <IonLabel data-href="/home">홈</IonLabel>
         </li>
         <li
-          data-href="/chatting"
-          className={currentPath === "/chatting" ? css["current"] : ""}
+          data-href="/chat-list"
+          className={currentPath === "/chat-list" ? css["current"] : ""}
         >
           <IonIcon
             icon={chatboxOutline}
             className={css.icon}
-            data-href="/chatting"
+            data-href="/chat-list"
           />
-          <IonLabel data-href="/chatting">채팅</IonLabel>
+          <IonLabel data-href="/chat-list">채팅</IonLabel>
         </li>
         <li
           data-href="/make-group"

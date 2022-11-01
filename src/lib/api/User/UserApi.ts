@@ -8,6 +8,10 @@ class UserApis extends AxiosClient {
   fetchUserOrderHistory() {
     return AuthClient().get("/api/order");
   }
+
+  fetchUserChatList() {
+    return AuthClient().get("/api/room/user");
+  }
 }
 
 const userApis = new UserApis();
