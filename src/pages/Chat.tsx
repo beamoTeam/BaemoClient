@@ -96,55 +96,55 @@ export default function Chat() {
   return (
     <>
       <IonPage style={{ marginTop: "50px" }}>
-        <IonContent fullscreen>
-          <div className={css.Chat}>
-            <ul className={css.textList}>
-              {!msgList ? (
-                <Spinner />
-              ) : (
-                msgList.map((message: any) => (
-                  <div key={message.id}>
-                    {message.date && (
-                      <div className={css.dateLine}>{message.date}</div>
+        <IonContent style={{ marginBottom: "60px" }}>
+          {/* <div className={css.Chat}> */}
+          <ul className={css.textList}>
+            {!msgList ? (
+              <Spinner />
+            ) : (
+              msgList.map((message: any) => (
+                <div key={message.id}>
+                  {message.date && (
+                    <div className={css.dateLine}>{message.date}</div>
+                  )}
+                  <div className={css.textBox}>
+                    {message.sender === sender && (
+                      <p className={css.msgTimeR}>{message.time}</p>
                     )}
-                    <div className={css.textBox}>
-                      {message.sender === sender && (
-                        <p className={css.msgTimeR}>{message.time}</p>
-                      )}
-                      <p
-                        className={
-                          message.sender === sender
-                            ? css["textBoxR"]
-                            : css["textBoxL"]
-                        }
-                      >
-                        {message.text}
-                      </p>
-                      {message.sender !== sender && (
-                        <p className={css.msgTimeL}>{message.time}</p>
-                      )}
-                    </div>
+                    <p
+                      className={
+                        message.sender === sender
+                          ? css["textBoxR"]
+                          : css["textBoxL"]
+                      }
+                    >
+                      {message.text}
+                    </p>
+                    {message.sender !== sender && (
+                      <p className={css.msgTimeL}>{message.time}</p>
+                    )}
                   </div>
-                ))
-              )}
-              <div ref={scrollRef}></div>
-            </ul>
-            <textarea
-              className={css.textField}
-              placeholder="채팅을 입력하세요"
-              value={msg}
-              onChange={(e) => setMsg(e.target.value!)}
-            ></textarea>
-            <div className={css.send}>
-              {sendLoading ? (
-                <IonButton>
-                  <IonSpinner />
-                </IonButton>
-              ) : (
-                <IonButton onClick={onSubmit}>전송</IonButton>
-              )}
-            </div>
+                </div>
+              ))
+            )}
+            <div ref={scrollRef}></div>
+          </ul>
+          <textarea
+            className={css.textField}
+            placeholder="채팅을 입력하세요"
+            value={msg}
+            onChange={(e) => setMsg(e.target.value!)}
+          ></textarea>
+          <div className={css.send}>
+            {sendLoading ? (
+              <IonButton>
+                <IonSpinner />
+              </IonButton>
+            ) : (
+              <IonButton onClick={onSubmit}>전송</IonButton>
+            )}
           </div>
+          {/* </div> */}
         </IonContent>
       </IonPage>
     </>
