@@ -54,6 +54,7 @@ export default function GlobalHeader() {
       setModal(<KakaoMapModal />);
     } else {
       history.goBack();
+      return;
     }
   }, [history, isHome, setModal]);
 
