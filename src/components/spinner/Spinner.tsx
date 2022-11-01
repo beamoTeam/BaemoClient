@@ -8,6 +8,8 @@ export default function Spinner({ message }: SpinnerProps) {
   return (
     <div
       style={{
+        position: "fixed",
+        top: "55px",
         marginTop: "50px",
         width: "100vw",
         height: "84vh",
