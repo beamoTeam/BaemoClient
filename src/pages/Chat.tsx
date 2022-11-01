@@ -123,9 +123,9 @@ export default function Chat() {
                     </div>
                   </div>
                 ))}
-                <div ref={scrollRef}></div>
               </ul>
             )}
+            <div ref={scrollRef}></div>
             <textarea
               className={css.textField}
               placeholder="채팅을 입력하세요"
