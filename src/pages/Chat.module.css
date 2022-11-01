@@ -11,7 +11,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  /* max-height: calc(100vh - 140px); */
+  height: calc(100vh - 112px);
   background-color: blue;
   overflow-y: scroll;
 }
