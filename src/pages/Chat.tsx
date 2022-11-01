@@ -95,7 +95,7 @@ export default function Chat() {
 
   return (
     <>
-      <IonPage>
+      <IonPage style={{ marginBottom: "55px", marginTop: "50px" }}>
         <IonContent fullscreen>
           <div className={css.Chat}>
             <ul className={css.textList}>
