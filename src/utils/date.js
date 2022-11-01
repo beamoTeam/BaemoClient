@@ -35,6 +35,6 @@ export function closingTimeText(orderTime) {
   const [date, time] = orderTime.split(" ");
   const [, mm, dd] = date.split("-");
   const mmdd = `${mm}-${dd}`;
-  console.log("*** : ", `${mmdd} ${time}`)
-  return `${mmdd} ${time}`;
+
+  return `${mmdd}/${time}`;
 }

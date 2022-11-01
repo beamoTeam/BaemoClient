@@ -51,8 +51,11 @@ export default function ChatList() {
             <IonItem key={seq} className={css.chatItem}>
               <IonImg src={chatInfo.restaurant.img} className={css.img} />
               <IonLabel>
-                <h2>{chatInfo.name}</h2>
-                <h3>마감: {closingTimeText(chatInfo.orderTime)}</h3>
+                <h2>
+                  채팅 {seq}{" "}
+                  <span className={css.restName}>{chatInfo.name}</span>
+                </h2>
+                <h3>모집 마감 {chatInfo.orderTime.split("-").at(-1)}</h3>
                 <p className={css.lastUpdate}>
                   {elapsedText(chatInfo.updatedDateTime)}
                 </p>
