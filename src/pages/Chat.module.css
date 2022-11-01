@@ -10,7 +10,7 @@
 
 .textList {
   margin: 0;
-  padding: 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   /* max-height: calc(100vh - 140px); */
