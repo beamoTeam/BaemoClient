@@ -62,10 +62,8 @@ export default function Chat() {
       setMsgList((prev: any) =>
         prev ? [...prev, chatMsgData] : [chatMsgData]
       );
+      dateHash[create_date] = true;
     }
-    const test = dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`;
-    console.log(test);
-    dateHash[create_date] = true;
   };
 
   // hack
@@ -97,11 +95,11 @@ export default function Chat() {
       <IonPage>
         <IonContent>
           <div className={css.Chat}>
-            <ul className={css.textList}>
-              {!msgList ? (
-                <Spinner />
-              ) : (
-                msgList.map((message: any) => (
+            {!msgList ? (
+              <Spinner />
+            ) : (
+              <ul className={css.textList}>
+                {msgList.map((message: any) => (
                   <div key={message.id}>
                     {message.date && (
                       <div className={css.dateLine}>{message.date}</div>
@@ -124,10 +122,10 @@ export default function Chat() {
                       )}
                     </div>
                   </div>
-                ))
-              )}
-              <div ref={scrollRef}></div>
-            </ul>
+                ))}
+                <div ref={scrollRef}></div>
+              </ul>
+            )}
             <textarea
               className={css.textField}
               placeholder="채팅을 입력하세요"
