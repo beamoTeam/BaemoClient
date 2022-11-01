@@ -32,7 +32,7 @@ export default function GlobalHeader() {
     [location.pathname]
   );
   let isChat = useMemo(
-    () => location.pathname === "/chatting",
+    () => location.pathname.split("/")[1] === "chatting",
     [location.pathname]
   );
 
