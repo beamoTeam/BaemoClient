@@ -95,7 +95,7 @@ export default function Chat() {
 
   return (
     <div className={css.chat}>
-      <IonPage style={{ "--offset-bottom": "-60px" }}>
+      <IonPage style={{ overflow: "hidden" }}>
         <IonContent>
           {/* <div className={css.Chat}> */}
           <ul className={css.textList}>
