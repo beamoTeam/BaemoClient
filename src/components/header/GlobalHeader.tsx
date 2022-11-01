@@ -101,13 +101,14 @@ export default function GlobalHeader() {
         )}
         {isChat && (
           <>
-            <IonIcon
-              icon={menuOutline}
-              className={css.mapButton}
-              onClick={toggleSlideMenu}
-            />
-            {toggleSlide && (
+            {toggleSlide ? (
               <SlideMenu chatMenu={chatMenu} close={toggleSlideMenu} />
+            ) : (
+              <IonIcon
+                icon={menuOutline}
+                className={css.mapButton}
+                onClick={toggleSlideMenu}
+              />
             )}
           </>
         )}

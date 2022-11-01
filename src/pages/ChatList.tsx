@@ -37,7 +37,6 @@ export default function ChatList() {
   }, []);
 
   const enterToChat = (chat_seq: number) => {
-    console.log(chat_seq);
     history.push(`/chatting/${chat_seq}`);
   };
 
