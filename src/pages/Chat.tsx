@@ -54,7 +54,7 @@ export default function Chat() {
           id: serverMsg.id,
           sender: serverMsg.sender,
           text: serverMsg.msg,
-          date: create_date,
+          date: dateHash[create_date] === true ? null : create_date,
           time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
         },
       ]);
