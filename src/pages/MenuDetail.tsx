@@ -145,7 +145,7 @@ export default function MenuDetail() {
             </div>
           </IonItem>
         </IonList>
-        <div className={css.quantity_field}>
+        <div className="quantity_field">
           <div>수량 선택</div>
           <QuantityButton quantity={quantity} setQuantity={setQuantity} />
         </div>
