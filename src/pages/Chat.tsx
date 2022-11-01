@@ -6,22 +6,24 @@ import { MessageModel } from "../types/chatMsg";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
+import { useLocation } from "react-router";
 
 export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
   const history = useHistory();
+  const { pathname } = useLocation();
   const [isLogin] = useLoginState();
   const [sendLoading, setSendLoading] = useState<boolean>(false);
   const [msgList, setMsgList] = useState<any>([]);
   const [msg, setMsg] = useState<string>("");
   const eventSource = useRef<any>(null);
   const scrollRef = useRef<any>(null);
-  const roomNum = window.localStorage.getItem("CHAT_SEQ");
+  const roomNum = Number(pathname.split("/").at(-1));
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const dateHash: any = {};
 
   useEffect(() => {
-    if (!isLogin || !roomNum) {
+    if (!isLogin || !roomNum || isNaN(roomNum)) {
       history.goBack();
     }
   }, [isLogin, roomNum, history]);

@@ -84,7 +84,7 @@ export default function App() {
             />
             <Route
               exact
-              path="/chatting"
+              path="/chatting/:chat_seq"
               render={() => {
                 return Boolean(window.localStorage.getItem("access_token")) ? (
                   <Chat />

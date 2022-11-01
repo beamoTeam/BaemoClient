@@ -36,6 +36,10 @@ export default function ChatList() {
     })();
   }, []);
 
+  const enterToChat = (chat_seq: number) => {
+    history.push(`/chatting/${chat_seq}`);
+  };
+
   if (!chatList) return <Spinner />;
   if (chatList.length === 0) return <h4>No Chat List</h4>;
 
@@ -48,7 +52,11 @@ export default function ChatList() {
 
         <IonList>
           {chatList.map(({ seq, chatInfo }) => (
-            <IonItem key={seq} className={css.chatItem}>
+            <IonItem
+              key={seq}
+              className={css.chatItem}
+              onClick={() => enterToChat(seq)}
+            >
               <IonImg src={chatInfo.restaurant.img} className={css.img} />
               <IonLabel>
                 <h2>
