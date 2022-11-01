@@ -9,11 +9,11 @@
 .textList {
   margin: 5px 0;
   padding: 0;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 112px);
+  height: calc(100vh - 132px);
   background-color: blue;
-  overflow-y: scroll;
 }
 
 .textField {
