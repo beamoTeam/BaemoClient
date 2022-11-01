@@ -51,16 +51,17 @@ export default function Chat() {
         },
       ]);
     } else {
-      setMsgList((prev: any) => [
-        ...prev,
-        {
-          id: serverMsg.id,
-          sender: serverMsg.sender,
-          text: serverMsg.msg,
-          date: dateHash[create_date] === true ? null : create_date,
-          time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
-        },
-      ]);
+      const chatMsgData = {
+        id: serverMsg.id,
+        sender: serverMsg.sender,
+        text: serverMsg.msg,
+        date: dateHash[create_date] === true ? null : create_date,
+        time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
+      };
+
+      setMsgList((prev: any) =>
+        prev ? [...prev, chatMsgData] : [chatMsgData]
+      );
     }
     const test = dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`;
     console.log(test);
