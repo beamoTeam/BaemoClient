@@ -92,6 +92,7 @@ ion-content {
 
 .textBox {
   display: flex;
+  color: black;
 }
 
 .msgTimeL {
