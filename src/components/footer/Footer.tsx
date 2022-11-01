@@ -56,11 +56,12 @@ export default function Footer() {
     }
 
     if (privateURL[href] && !isLogin()) {
+      const kakao_login_link = process.env.REACT_APP_KAKAO_REDIRECT_URI_SERVER!;
       setModal(
         <ConfirmModal
           message={"로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"}
           onCancel={() => setModal(null)}
-          onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+          onConfirm={() => (window.location.href = kakao_login_link)}
         />
       );
       return;

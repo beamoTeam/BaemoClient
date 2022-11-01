@@ -19,7 +19,7 @@ export default function SheetModal({ children, type }: SheetModalProps) {
     <div>
       <IonModal
         isOpen={present}
-        initialBreakpoint={type ? 0.4 : 0.7}
+        initialBreakpoint={type ? 0.3 : 0.7}
         breakpoints={type ? undefined : [0, 0.25, 0.5, 0.75]}
         onDidDismiss={onDidDismiss}
       >
