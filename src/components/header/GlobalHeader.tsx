@@ -83,10 +83,10 @@ export default function GlobalHeader() {
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
             <div onClick={setAddressModal} className={css.headerMain}>
-              <IonTitle className={css.addr}>
+              <div className={css.addr}>
                 {addr || "주소를 선택해주세요"}
                 <IonIcon icon={chevronDownOutline} />
-              </IonTitle>
+              </div>
             </div>
             <div>
               {!isLogin && (
