@@ -96,7 +96,7 @@ export default function Chat() {
   return (
     <>
       <IonPage>
-        <IonContent>
+        <IonContent fullscreen>
           <div className={css.Chat}>
             <ul className={css.textList}>
               {!msgList ? (
