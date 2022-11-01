@@ -1,11 +1,9 @@
 .Chat {
   position: relative;
   width: 100%;
-  /* max-height: calc(100vh - 110px); */
-  /* margin-top: 60px; */
+  height: calc(100vh - 112px);
   padding: 20px 10px 0 10px;
   overflow-y: scroll;
-  background-color: red;
 }
 
 .textList {
