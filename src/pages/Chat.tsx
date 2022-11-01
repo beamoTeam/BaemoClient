@@ -40,7 +40,6 @@ export default function Chat() {
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}-${mm}-${dd}`;
 
-    console.log(serverMsg);
     if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
       setChatMenu((prev: any) => [
         ...prev,
@@ -62,7 +61,7 @@ export default function Chat() {
       ]);
     }
     const test = dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`;
-    console.log(test);
+    // console.log(test);
     dateHash[create_date] = true;
   };
 
@@ -98,9 +97,11 @@ export default function Chat() {
             <ul className={css.textList}>
               {msgList.map((message: any) => (
                 <div key={message.id}>
-                  {message.date && (
-                    <div className={css.dateLine}>{message.date}</div>
-                  )}
+                  {message.date &&
+                    (() => {
+                      console.log("??? : ", message.data);
+                      return <div className={css.dateLine}>{message.date}</div>;
+                    })}
                   <div className={css.textBox}>
                     {message.sender === sender && (
                       <p className={css.msgTimeR}>{message.time}</p>
