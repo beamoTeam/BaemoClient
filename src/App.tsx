@@ -32,6 +32,7 @@ import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import OrderHistory from "./pages/OrderHistory";
+import ChatList from "./pages/ChatList";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import Footer from "./components/footer/Footer";
@@ -66,6 +67,21 @@ export default function App() {
               }}
             />
             <Route exact path="/restaurant/:r_seq" component={Restaurant} />
+            <Route
+              exact
+              path="/chat-list"
+              component={ChatList}
+              // render={() => {
+              //   return Boolean(window.localStorage.getItem("access_token")) ? (
+              //     <ChatList />
+              //   ) : (
+              //     <ConfirmModal
+              //       message="로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"
+              //       onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
+              //     />
+              //   );
+              // }}
+            />
             <Route
               exact
               path="/chatting"
