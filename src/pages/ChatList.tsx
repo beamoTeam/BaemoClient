@@ -20,13 +20,14 @@ export default function ChatList() {
   useEffect(() => {
     console.log(isLogin);
     if (!isLogin) {
-      // history.push("/");
+      history.push("/");
     }
   }, [isLogin, history]);
 
   useEffect(() => {
     (async () => {
       const { data } = await userApis.fetchUserChatList();
+      console.log(data);
       setChatList(data);
     })();
   }, []);
