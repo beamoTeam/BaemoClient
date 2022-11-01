@@ -97,7 +97,7 @@ export default function Chat() {
     <div className={css.chat}>
       <IonPage>
         {/* <div className={css.Chat}> */}
-        <ul className={css.textList}>
+        <ul className={css.textList} ref={scrollRef}>
           {!msgList ? (
             <Spinner />
           ) : (
@@ -126,7 +126,7 @@ export default function Chat() {
               </div>
             ))
           )}
-          <div ref={scrollRef}></div>
+          {/* <div ref={scrollRef}></div> */}
         </ul>
         <textarea
           className={css.textField}
