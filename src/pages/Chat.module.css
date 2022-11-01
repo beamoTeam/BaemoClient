@@ -6,7 +6,7 @@
   overflow-y: scroll;
 } */
 
-.chat ion-content {
+ion-content {
   --offset-bottom: -60px;
 }
 
@@ -15,8 +15,8 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: 60px;
   background-color: blue;
+  overflow: auto;
 }
 
 .textField {
