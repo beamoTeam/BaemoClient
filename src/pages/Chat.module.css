@@ -11,12 +11,11 @@
 }
 
 .textList {
-  height: 100%;
-  margin: 5px 0;
-  padding: 0;
+  height: 100vh;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   background-color: blue;
 }
 
