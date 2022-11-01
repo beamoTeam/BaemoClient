@@ -30,3 +30,11 @@ function formattedCreatedDate(created_date) {
 
   return new Date(`${date} ${time}`);
 }
+
+export function closingTimeText(orderTime) {
+  const [date, time] = orderTime.split(" ");
+  const [, mm, dd] = date.split("-");
+  const mmdd = `${mm}-${dd}`;
+
+  return `${mmdd} ${time}`;
+}

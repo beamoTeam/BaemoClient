@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 import userApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
 import { ChatRoomModel, ChatInfoModel } from "../types/chatRoom";
-import { elapsedText } from "../utils/date";
+import { elapsedText, closingTimeText } from "../utils/date";
 
 export default function ChatList() {
   const history = useHistory();
@@ -52,7 +52,7 @@ export default function ChatList() {
               <IonImg src={chatInfo.restaurant.img} className={css.img} />
               <IonLabel>
                 <h2>{chatInfo.name}</h2>
-                <h3>마감: {chatInfo.orderTime}</h3>
+                <h3>마감: {closingTimeText(chatInfo.orderTime)}</h3>
                 <p className={css.lastUpdate}>
                   {elapsedText(chatInfo.updatedDateTime)}
                 </p>
