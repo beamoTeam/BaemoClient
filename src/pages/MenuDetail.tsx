@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { MenuModel } from "../types/menu";
-import "./MenuDetail.css";
+import css from "./MenuDetail.css";
 import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useCartState } from "../lib/recoil/cartState";
@@ -145,7 +145,7 @@ export default function MenuDetail() {
             </div>
           </IonItem>
         </IonList>
-        <div className="quantity_field">
+        <div className={css.quantity_field}>
           <div>수량 선택</div>
           <QuantityButton quantity={quantity} setQuantity={setQuantity} />
         </div>

@@ -62,6 +62,7 @@ export default function Chat() {
       ]);
     }
     dateHash[create_date] = true;
+    console.log(dateHash);
   };
 
   // hack
