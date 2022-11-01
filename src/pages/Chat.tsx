@@ -1,4 +1,4 @@
-import { IonPage, IonContent, IonButton, IonSpinner } from "@ionic/react";
+import { IonPage, IonButton, IonSpinner } from "@ionic/react";
 import { useState, useRef, useEffect } from "react";
 import css from "./Chat.module.css";
 import chatService from "../lib/api/ChatService";

@@ -40,7 +40,7 @@ export default function Restaurant() {
 
   console.log("이미지 URL : ", menus[0].img);
   return (
-    <IonPage>
+    <IonPage style={{ marginBottom: "55px" }}>
       <IonContent>
         <IonImg style={ImgStyle} alt="메뉴 대표 사진" src={restaurant.img} />
         <IonListHeader>

@@ -47,7 +47,7 @@ export default function OrderHistory() {
   if (!orderHistory) return <Spinner />;
 
   return (
-    <IonPage style={{ marginTop: "50px" }}>
+    <IonPage style={{ marginTop: "50px", marginBottom: "55px" }}>
       <IonContent className="ion-padding">
         <IonListHeader>
           <IonLabel>주문 내역</IonLabel>

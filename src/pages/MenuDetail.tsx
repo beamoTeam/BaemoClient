@@ -77,7 +77,7 @@ export default function MenuDetail() {
   };
 
   return (
-    <IonPage>
+    <IonPage style={{ marginBottom: "55px" }}>
       <IonContent style={marginTop}>
         <IonImg src={menuDetail.img} style={ImgStyle} alt="메뉴 대표 사진" />
         <div className="restuarant_info">

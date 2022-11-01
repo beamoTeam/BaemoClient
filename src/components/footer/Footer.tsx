@@ -39,7 +39,6 @@ export default function Footer() {
       profile: false,
       chatting: true,
       oauth: true,
-      restaurant: true,
       cart: true,
     };
   }, []);
