@@ -8,6 +8,7 @@ import {
   IonList,
   IonSearchbar,
 } from "@ionic/react";
+import Spinner from "../spinner/Spinner";
 import css from "./RestaurantsModal.module.css";
 
 interface RestaurantsModalProps {
@@ -43,11 +44,15 @@ export default function RestaurantsModal({
             onClick={() => modal.current?.setCurrentBreakpoint(0.75)}
             placeholder="Search"
           ></IonSearchbar>
-          <IonList>
-            {restaurants.map((info, idx) => (
-              <Restaurant key={idx} info={info} test={test} />
-            ))}
-          </IonList>
+          {!restaurants ? (
+            <Spinner />
+          ) : (
+            <IonList>
+              {restaurants.map((info, idx) => (
+                <Restaurant key={idx} info={info} test={test} />
+              ))}
+            </IonList>
+          )}
         </IonContent>
       </IonModal>
     </>
