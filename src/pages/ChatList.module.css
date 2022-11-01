@@ -1,0 +1,13 @@
+.chatItem {
+  position: relative;
+}
+
+.lastUpdate {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+
+  font-size: 12px;
+  color: silver;
+}
