@@ -21,7 +21,7 @@ export function elapsedText(date) {
   //   elapsedText = date.toISOString().split("T")[0];
   // }
 
-  return date.toISOString().split(" ")[0];
+  return date.toISOString().split("T")[0];
 }
 
 function formattedCreatedDate(created_date) {
