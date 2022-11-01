@@ -73,6 +73,9 @@ export default function Chat() {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    if (msg.length === 0) {
+      return;
+    }
     setSendLoading(true);
     try {
       // api call (send message)
@@ -95,11 +98,11 @@ export default function Chat() {
       <IonPage>
         <IonContent>
           <div className={css.Chat}>
-            {!msgList ? (
-              <Spinner />
-            ) : (
-              <ul className={css.textList}>
-                {msgList.map((message: any) => (
+            <ul className={css.textList}>
+              {!msgList ? (
+                <Spinner />
+              ) : (
+                msgList.map((message: any) => (
                   <div key={message.id}>
                     {message.date && (
                       <div className={css.dateLine}>{message.date}</div>
@@ -122,9 +125,9 @@ export default function Chat() {
                       )}
                     </div>
                   </div>
-                ))}
-              </ul>
-            )}
+                ))
+              )}
+            </ul>
             <div ref={scrollRef}></div>
             <textarea
               className={css.textField}
