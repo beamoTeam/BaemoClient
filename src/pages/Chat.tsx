@@ -94,9 +94,9 @@ export default function Chat() {
   };
 
   return (
-    <>
+    <div className={css.chat}>
       <IonPage style={{ marginTop: "50px" }}>
-        <IonContent style={{ marginBottom: "60px" }}>
+        <IonContent>
           {/* <div className={css.Chat}> */}
           <ul className={css.textList}>
             {!msgList ? (
@@ -147,6 +147,6 @@ export default function Chat() {
           {/* </div> */}
         </IonContent>
       </IonPage>
-    </>
+    </div>
   );
 }

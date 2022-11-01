@@ -1,9 +1,13 @@
-.Chat {
+/* .Chat {
   position: relative;
   width: 100%;
   height: calc(100vh - 112px);
   padding: 20px 10px 0 10px;
   overflow-y: scroll;
+} */
+
+.chat ion-content {
+  --offset-bottom: -60px;
 }
 
 .textList {
