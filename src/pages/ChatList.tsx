@@ -55,7 +55,9 @@ export default function ChatList() {
                   채팅 {seq}{" "}
                   <span className={css.restName}>{chatInfo.name}</span>
                 </h2>
-                <h3>모집 마감 {chatInfo.orderTime.split("-").at(-1)}</h3>
+                <h3 className={css.closeTime}>
+                  모집 마감 {chatInfo.orderTime.split(" ").at(-1)}
+                </h3>
                 <p className={css.lastUpdate}>
                   {elapsedText(chatInfo.updatedDateTime)}
                 </p>
