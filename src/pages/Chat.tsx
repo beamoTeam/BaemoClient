@@ -61,8 +61,9 @@ export default function Chat() {
         },
       ]);
     }
+    const test = dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`;
+    console.log(test);
     dateHash[create_date] = true;
-    console.log(dateHash);
   };
 
   // hack
