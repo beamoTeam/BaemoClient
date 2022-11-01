@@ -38,7 +38,7 @@ export default function Chat() {
     const serverMsg: MessageModel = JSON.parse(e.data);
     console.log(serverMsg);
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
-    const create_date = `${yyyy}-${mm}-${dd}`;
+    const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
 
     if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
       setChatMenu((prev: any) => [
@@ -55,13 +55,13 @@ export default function Chat() {
           id: serverMsg.id,
           sender: serverMsg.sender,
           text: serverMsg.msg,
-          date: dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`,
+          date: dateHash[create_date] ? null : create_date,
           time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
         },
       ]);
     }
     const test = dateHash[create_date] ? null : `${yyyy}년 ${mm}월 ${dd}일`;
-    // console.log(test);
+    console.log(test);
     dateHash[create_date] = true;
   };
 
