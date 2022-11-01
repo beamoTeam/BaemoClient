@@ -9,10 +9,12 @@ export default function Spinner({ message }: SpinnerProps) {
     <div
       style={{
         position: "fixed",
-        top: "55px",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
         marginTop: "50px",
         width: "100vw",
-        height: "84vh",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
