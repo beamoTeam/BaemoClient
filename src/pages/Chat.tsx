@@ -95,8 +95,8 @@ export default function Chat() {
 
   return (
     <div className={css.chat}>
-      <IonPage style={{ overflow: "hidden" }}>
-        <IonContent>
+      <IonPage>
+        <IonContent style={{ overflow: "hidden" }}>
           {/* <div className={css.Chat}> */}
           <ul className={css.textList}>
             {!msgList ? (
