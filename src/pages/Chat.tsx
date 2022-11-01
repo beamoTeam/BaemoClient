@@ -21,7 +21,7 @@ export default function Chat() {
   const scrollRef = useRef<any>(null);
   const roomNum = Number(pathname.split("/").at(-1));
   const sender = window.localStorage.getItem("CHAT_SENDER");
-  const dateHash: any = {};
+  const dateHash: any = useRef<any>({});
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -55,14 +55,14 @@ export default function Chat() {
         id: serverMsg.id,
         sender: serverMsg.sender,
         text: serverMsg.msg,
-        date: dateHash[create_date] === true ? null : create_date,
+        date: dateHash.current[create_date] === true ? null : create_date,
         time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
       };
 
       setMsgList((prev: any) =>
         prev ? [...prev, chatMsgData] : [chatMsgData]
       );
-      dateHash[create_date] = true;
+      dateHash.current[create_date] = true;
     }
   };
 
