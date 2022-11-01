@@ -7,6 +7,7 @@ import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
 import { useLocation } from "react-router";
+import Spinner from "../components/spinner/Spinner";
 
 export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
@@ -14,7 +15,7 @@ export default function Chat() {
   const { pathname } = useLocation();
   const [isLogin] = useLoginState();
   const [sendLoading, setSendLoading] = useState<boolean>(false);
-  const [msgList, setMsgList] = useState<any>([]);
+  const [msgList, setMsgList] = useState<any | null>(null);
   const [msg, setMsg] = useState<string>("");
   const eventSource = useRef<any>(null);
   const scrollRef = useRef<any>(null);
@@ -96,30 +97,34 @@ export default function Chat() {
         <IonContent>
           <div className={css.Chat}>
             <ul className={css.textList}>
-              {msgList.map((message: any) => (
-                <div key={message.id}>
-                  {message.date && (
-                    <div className={css.dateLine}>{message.date}</div>
-                  )}
-                  <div className={css.textBox}>
-                    {message.sender === sender && (
-                      <p className={css.msgTimeR}>{message.time}</p>
+              {!msgList ? (
+                <Spinner />
+              ) : (
+                msgList.map((message: any) => (
+                  <div key={message.id}>
+                    {message.date && (
+                      <div className={css.dateLine}>{message.date}</div>
                     )}
-                    <p
-                      className={
-                        message.sender === sender
-                          ? css["textBoxR"]
-                          : css["textBoxL"]
-                      }
-                    >
-                      {message.text}
-                    </p>
-                    {message.sender !== sender && (
-                      <p className={css.msgTimeL}>{message.time}</p>
-                    )}
+                    <div className={css.textBox}>
+                      {message.sender === sender && (
+                        <p className={css.msgTimeR}>{message.time}</p>
+                      )}
+                      <p
+                        className={
+                          message.sender === sender
+                            ? css["textBoxR"]
+                            : css["textBoxL"]
+                        }
+                      >
+                        {message.text}
+                      </p>
+                      {message.sender !== sender && (
+                        <p className={css.msgTimeL}>{message.time}</p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
               <div ref={scrollRef}></div>
             </ul>
             <textarea

@@ -1,5 +1,6 @@
 import { IonContent, IonItem, IonLabel, IonImg, IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
+import { anonymousName } from "../../utils/name";
 import css from "./SlideMenu.module.css";
 
 interface SlideMenuProps {
@@ -18,11 +19,11 @@ export default function SlideMenu({ chatMenu, close }: SlideMenuProps) {
           </div>
 
           {chatMenu.length > 0 &&
-            chatMenu.map((menu: { sender: string; data: [] }) => {
+            chatMenu.map((menu: { sender: string; data: [] }, idx: number) => {
               return (
-                <div key={menu.sender}>
+                <div key={idx}>
                   <IonItem slot="header" color="light">
-                    <IonLabel>{menu.sender}</IonLabel>
+                    <IonLabel>{anonymousName(menu.sender)}</IonLabel>
                   </IonItem>
                   {menu.data.map((info: any) => (
                     <div className={css.info} key={info.seq}>
