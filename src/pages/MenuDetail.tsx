@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { MenuModel } from "../types/menu";
+import css from "./MenuDetail.module.css";
 import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useCartState } from "../lib/recoil/cartState";
