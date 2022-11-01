@@ -97,11 +97,9 @@ export default function Chat() {
             <ul className={css.textList}>
               {msgList.map((message: any) => (
                 <div key={message.id}>
-                  {message.date &&
-                    (() => {
-                      console.log("??? : ", message.data);
-                      return <div className={css.dateLine}>{message.date}</div>;
-                    })}
+                  {message.date && (
+                    <div className={css.dateLine}>{message.date}</div>
+                  )}
                   <div className={css.textBox}>
                     {message.sender === sender && (
                       <p className={css.msgTimeR}>{message.time}</p>
