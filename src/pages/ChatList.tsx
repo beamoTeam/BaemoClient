@@ -18,8 +18,9 @@ export default function ChatList() {
   const [chatList, setChatList] = useState<[] | null>(null);
 
   useEffect(() => {
+    console.log(isLogin);
     if (!isLogin) {
-      history.push("/");
+      // history.push("/");
     }
   }, [isLogin, history]);
 

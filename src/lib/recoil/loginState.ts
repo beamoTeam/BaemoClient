@@ -5,7 +5,7 @@ console.log({ IsLOGIN: AccessToken.get() });
 
 const loginState = atom({
   key: "loginState",
-  default: AccessToken.get() ? true : false,
+  default: Boolean(AccessToken.get())
 });
 
 export const useLoginState = () => {
