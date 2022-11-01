@@ -88,7 +88,7 @@ export default function GlobalHeader() {
                 <IonIcon icon={chevronDownOutline} />
               </IonTitle>
             </div>
-            <span>
+            <div>
               {!isLogin && (
                 <IonImg
                   src="assets/images/kakao_login_medium.png"
@@ -97,7 +97,7 @@ export default function GlobalHeader() {
                   onClick={kakaoLogin}
                 />
               )}
-            </span>
+            </div>
           </>
         )}
         {isChat && (
