@@ -1,6 +1,6 @@
 import { IonFab, IonFabButton, IonIcon, IonFabList } from "@ionic/react";
 
-import { chatbubblesOutline, cartOutline } from "ionicons/icons";
+import { addOutline, chatbubblesOutline, cartOutline } from "ionicons/icons";
 import css from "./FloatCartButton.module.css";
 
 export default function FloatChatButton() {
@@ -17,13 +17,18 @@ export default function FloatChatButton() {
   //   </div>
   // );
   return (
-    <IonFab vertical="center" horizontal="center" slot="fixed">
+    <IonFab vertical="bottom" horizontal="start" edge slot="fixed">
       <IonFabButton>
-        <IonIcon icon={chatbubblesOutline} />
+        <IonIcon icon={addOutline} />
       </IonFabButton>
-      <IonFabList side="bottom">
+      <IonFabList side="top">
         <IonFabButton>
           <IonIcon icon={cartOutline} />
+        </IonFabButton>
+      </IonFabList>
+      <IonFabList side="top">
+        <IonFabButton>
+          <IonIcon icon={chatbubblesOutline} />
         </IonFabButton>
       </IonFabList>
     </IonFab>
