@@ -32,7 +32,7 @@ export default function AddressModal() {
     <>
       <IonModal
         ref={modal}
-        trigger="open-restaurant-modal"
+        trigger="open-address-modal"
         initialBreakpoint={0.7}
         breakpoints={[0, 0.25, 0.5, 0.75]}
       >

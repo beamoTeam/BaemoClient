@@ -82,7 +82,11 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div onClick={setAddressModal} className={css.headerMain}>
+            <div
+              onClick={setAddressModal}
+              id="open-address-modal"
+              className={css.headerMain}
+            >
               <div className={css.addr}>
                 {addr || "주소를 선택해주세요"}
                 <IonIcon icon={chevronDownOutline} />
