@@ -6,7 +6,7 @@ import css from "./FloatCartButton.module.css";
 export default function FloatChatButton() {
   return (
     <div className={css.cartPosition}>
-      <IonFab vertical="bottom" horizontal="start" edge slot="fixed">
+      <IonFab vertical="bottom" horizontal="end" slot="fixed">
         <IonFabButton>
           <IonIcon icon={addOutline} />
         </IonFabButton>
