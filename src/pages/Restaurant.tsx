@@ -20,9 +20,10 @@ export default function Restaurant() {
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const r_seq = location.pathname.split("/").at(-1);
-
+  console.log(" OUT :: ", r_seq);
   useEffect(() => {
     (async () => {
+      console.log("in Effect", r_seq);
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);
         console.log(data);
