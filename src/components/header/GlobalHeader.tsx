@@ -114,7 +114,7 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      {addrModalShow && <AddressModal />}
+      <AddressModal />
       <ModalContainer />
     </>
   );
