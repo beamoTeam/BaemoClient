@@ -20,12 +20,11 @@ import SlideMenu from "../modal/SlideMenu";
 export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
-  const addr = window.localStorage.getItem("ADDR");
+  const [addr, setAddr] = useState<any>(window.localStorage.getItem("ADDR"));
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
-  const [addrModalShow, setAddrModalShow] = useState<boolean>(false);
 
   let isHome = useMemo(
     () => location.pathname === "/home",
@@ -44,10 +43,6 @@ export default function GlobalHeader() {
       restaurant: true,
     };
   }, []);
-
-  const setAddressModal = useCallback(() => {
-    setAddrModalShow((prev) => !prev);
-  }, [setModal]);
 
   const setMapModal = useCallback(() => {
     if (isHome) {
@@ -82,7 +77,7 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div onClick={setAddressModal} className={css.headerMain}>
+            <div className={css.headerMain}>
               <div className={css.addr} id="open-address-modal">
                 {addr || "주소를 선택해주세요"}
                 <IonIcon icon={chevronDownOutline} />
@@ -114,7 +109,7 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      <AddressModal />
+      <AddressModal setAddr={setAddr} />
       <ModalContainer />
     </>
   );

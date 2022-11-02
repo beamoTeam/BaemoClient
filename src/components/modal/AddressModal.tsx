@@ -3,7 +3,11 @@ import { IonContent, IonModal } from "@ionic/react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-export default function AddressModal() {
+interface AddressModalProps {
+  setAddr: (newAddr: any) => void;
+}
+
+export default function AddressModal({ setAddr }: AddressModalProps) {
   const modal = useRef<HTMLIonModalElement>(null);
 
   function dismiss() {
@@ -25,6 +29,7 @@ export default function AddressModal() {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     dismiss();
+    setAddr(fullAddress);
     useLocalStorage.set("ADDR", fullAddress);
   };
 
