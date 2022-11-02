@@ -42,6 +42,7 @@ export default function Chat() {
     console.log(serverMsg);
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
+    const currentSender = serverMsg.sender;
 
     if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
       setChatMenu((prev: any) => [
@@ -64,6 +65,9 @@ export default function Chat() {
         prev ? [...prev, chatMsgData] : [chatMsgData]
       );
       dateHash.current[create_date] = true;
+      if (currentSender) {
+        dateHash.current[create_date] = true;
+      }
     }
   };
 
@@ -94,6 +98,7 @@ export default function Chat() {
     }
   };
 
+  console.log(msgList);
   return (
     <div className={css.chat}>
       <IonPage>
