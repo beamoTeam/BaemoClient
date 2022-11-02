@@ -13,7 +13,7 @@ import { useLoginState } from "../lib/recoil/loginState";
 import { useHistory } from "react-router";
 import userApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
-import { ChatRoomModel, ChatInfoModel } from "../types/chatRoom";
+import { ChatRoomModel } from "../types/chatRoom";
 import { elapsedText, closingTimeText } from "../utils/date";
 
 export default function ChatList() {
@@ -22,7 +22,6 @@ export default function ChatList() {
   const [chatList, setChatList] = useState<ChatRoomModel[] | null>(null);
 
   useEffect(() => {
-    console.log(isLogin);
     if (!isLogin) {
       history.push("/");
     }
@@ -50,7 +49,7 @@ export default function ChatList() {
           <IonLabel>채팅 목록</IonLabel>
         </IonListHeader>
 
-        <IonList>
+        {/* <IonList>
           {chatList.map(({ seq, chatInfo }) => (
             <IonItem
               key={seq}
@@ -72,7 +71,7 @@ export default function ChatList() {
               </IonLabel>
             </IonItem>
           ))}
-        </IonList>
+        </IonList> */}
       </IonContent>
     </IonPage>
   );
