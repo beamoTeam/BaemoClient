@@ -176,7 +176,7 @@ export default function App() {
               </IonTabButton>
             </IonTabBar> */}
           {/* </IonTabs> */}
-          <FloatCartButton />
+          {/* <FloatCartButton /> */}
           <Footer />
         </IonReactRouter>
       </IonApp>
