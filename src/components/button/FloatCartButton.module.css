@@ -14,11 +14,5 @@
 .cartPosition {
   position: fixed;
   right: 0;
-  bottom: 50px;
-}
-
-.chaPosition {
-  position: fixed;
-  left: 0;
-  bottom: 50px;
+  bottom: 0;
 }

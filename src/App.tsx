@@ -60,7 +60,7 @@ export default function App() {
               path="/restaurant/:r_seq/menu/:m_seq"
               component={MenuDetail}
             />
-            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/cart/:chat_seq" component={Cart} />
             <Route exact path="/order-hisotry" component={OrderHistory} />
             <Route exact path="/profile" component={Profile} />
 
