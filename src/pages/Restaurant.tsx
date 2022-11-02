@@ -14,16 +14,16 @@ import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
 import { Link, useLocation } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
+import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
   const location = useLocation();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const r_seq = location.pathname.split("/").at(-1);
-  console.log(" OUT :: ", r_seq);
+
   useEffect(() => {
     (async () => {
-      console.log("in Effect", r_seq);
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);
         console.log(data);
@@ -69,6 +69,7 @@ export default function Restaurant() {
             ))}
           </IonList>
         </div>
+        <FloatChatButton />
       </IonContent>
     </IonPage>
   );

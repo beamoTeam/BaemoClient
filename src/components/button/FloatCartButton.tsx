@@ -16,7 +16,6 @@ const unVisibleUrl: any = {
 export default function FloatCartButton() {
   const history = useHistory();
   const location = useLocation();
-  // const [cart] = useCartState();
   const [cart, setCart] = useState<any>(null);
   const [isLogin] = useLoginState();
   const chat_seq = window.localStorage.getItem("CHAT_SEQ");
