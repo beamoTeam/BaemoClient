@@ -33,7 +33,6 @@ export default function OrderHistory() {
       try {
         const { data } = await userApis.fetchUserOrderHistory();
         setOrderHistory(data);
-        console.log(data);
       } catch (err) {
         console.error(err);
       }

@@ -25,6 +25,7 @@ export default function GlobalHeader() {
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
+  const [addrModalShow, setAddrModalShow] = useState<boolean>(false);
 
   let isHome = useMemo(
     () => location.pathname === "/home",
@@ -45,7 +46,7 @@ export default function GlobalHeader() {
   }, []);
 
   const setAddressModal = useCallback(() => {
-    setModal(<AddressModal />);
+    setAddrModalShow((prev) => !prev);
   }, [setModal]);
 
   const setMapModal = useCallback(() => {
@@ -113,6 +114,7 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
+      {addrModalShow && <AddressModal />}
       <ModalContainer />
     </>
   );
