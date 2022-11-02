@@ -12,20 +12,19 @@ import {
 import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
 
 export default function Restaurant() {
-  const { r_seq } = useParams<{ r_seq: any }>();
   const location = useLocation();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
-  const tmp_r_seq = location.pathname.split("/").at(-1);
+  const r_seq = location.pathname.split("/").at(-1);
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await restaurantService.fetchAllMenus(r_seq || tmp_r_seq);
+        const data = await restaurantService.fetchAllMenus(r_seq!);
         console.log(data);
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
@@ -33,12 +32,11 @@ export default function Restaurant() {
         console.error(err);
       }
     })();
-  }, [r_seq, location.pathname]);
+  }, [r_seq, location.pathname, setMenus, setRestaurant]);
 
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
 
-  console.log("이미지 URL : ", menus[0].img);
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent>
@@ -56,10 +54,7 @@ export default function Restaurant() {
         <div>
           <IonList style={{ marginTop: "50px" }}>
             {menus?.map((menu) => (
-              <Link
-                to={`${r_seq || tmp_r_seq}/menu/${menu.seq}`}
-                key={menu.seq}
-              >
+              <Link to={`${r_seq}/menu/${menu.seq}`} key={menu.seq}>
                 <IonItem>
                   <IonAvatar slot="start">
                     <IonImg src={menu.img} />
