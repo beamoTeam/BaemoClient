@@ -22,6 +22,7 @@ export default function Chat() {
   const roomNum = Number(pathname.split("/").at(-1));
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const dateHash: any = useRef<any>({});
+  const userHash: any = useRef<any>({});
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -84,12 +85,12 @@ export default function Chat() {
         roomNum,
         msg,
       });
+      scrollRef.current.scrollIntoView(false);
     } catch (err) {
       console.error(err);
     } finally {
       setMsg("");
       setSendLoading(false);
-      scrollRef.current.scrollIntoView(false);
     }
   };
 

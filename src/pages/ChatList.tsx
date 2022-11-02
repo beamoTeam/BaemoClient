@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 import userApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
 import { ChatRoomModel } from "../types/chatRoom";
-import { elapsedText, closingTimeText } from "../utils/date";
+import { elapsedText } from "../utils/date";
 
 export default function ChatList() {
   const history = useHistory();
@@ -49,7 +49,7 @@ export default function ChatList() {
           <IonLabel>채팅 목록</IonLabel>
         </IonListHeader>
 
-        {/* <IonList>
+        <IonList>
           {chatList.map(({ seq, chatInfo }) => (
             <IonItem
               key={seq}
@@ -71,7 +71,7 @@ export default function ChatList() {
               </IonLabel>
             </IonItem>
           ))}
-        </IonList> */}
+        </IonList>
       </IonContent>
     </IonPage>
   );

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import { IonContent, IonModal } from "@ionic/react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -7,31 +7,34 @@ interface AddressModalProps {
   setAddr: (newAddr: any) => void;
 }
 
-export default function AddressModal({ setAddr }: AddressModalProps) {
+function AddressModal({ setAddr }: AddressModalProps) {
   const modal = useRef<HTMLIonModalElement>(null);
 
-  function dismiss() {
+  const dismiss = useCallback(() => {
     modal.current?.dismiss();
-  }
+  }, []);
 
-  const onComplete = (data: any) => {
-    let fullAddress = data.address;
-    let extraAddress = "";
+  const onComplete = useCallback(
+    (data: any) => {
+      let fullAddress = data.address;
+      let extraAddress = "";
 
-    if (data.addressType === "R") {
-      if (data.bname !== "") {
-        extraAddress += data.bname;
+      if (data.addressType === "R") {
+        if (data.bname !== "") {
+          extraAddress += data.bname;
+        }
+        if (data.buildingName !== "") {
+          extraAddress +=
+            extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+        }
+        fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
       }
-      if (data.buildingName !== "") {
-        extraAddress +=
-          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-    }
-    dismiss();
-    setAddr(fullAddress);
-    useLocalStorage.set("ADDR", fullAddress);
-  };
+      dismiss();
+      setAddr(fullAddress);
+      useLocalStorage.set("ADDR", fullAddress);
+    },
+    [setAddr, dismiss]
+  );
 
   return (
     <>
@@ -48,3 +51,5 @@ export default function AddressModal({ setAddr }: AddressModalProps) {
     </>
   );
 }
+
+export default React.memo(AddressModal);
