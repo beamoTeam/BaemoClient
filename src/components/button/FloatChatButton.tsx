@@ -17,20 +17,22 @@ export default function FloatChatButton() {
   //   </div>
   // );
   return (
-    <IonFab vertical="bottom" horizontal="start" edge slot="fixed">
-      <IonFabButton>
-        <IonIcon icon={addOutline} />
-      </IonFabButton>
-      <IonFabList side="top">
+    <div className={css.chatPosition}>
+      <IonFab vertical="bottom" horizontal="start" edge slot="fixed">
         <IonFabButton>
-          <IonIcon icon={cartOutline} />
+          <IonIcon icon={addOutline} />
         </IonFabButton>
-      </IonFabList>
-      <IonFabList side="top">
-        <IonFabButton>
-          <IonIcon icon={chatbubblesOutline} />
-        </IonFabButton>
-      </IonFabList>
-    </IonFab>
+        <IonFabList side="top">
+          <IonFabButton>
+            <IonIcon icon={cartOutline} />
+          </IonFabButton>
+        </IonFabList>
+        <IonFabList side="top">
+          <IonFabButton>
+            <IonIcon icon={chatbubblesOutline} />
+          </IonFabButton>
+        </IonFabList>
+      </IonFab>
+    </div>
   );
 }
