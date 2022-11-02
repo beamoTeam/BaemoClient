@@ -26,8 +26,6 @@ export default function FloatChatButton() {
           <IonFabButton>
             <IonIcon icon={cartOutline} />
           </IonFabButton>
-        </IonFabList>
-        <IonFabList side="top">
           <IonFabButton>
             <IonIcon icon={chatbubblesOutline} />
           </IonFabButton>
