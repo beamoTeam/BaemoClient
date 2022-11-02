@@ -8,7 +8,6 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import css from "./MakeGroup.module.css";
-import { useAddrState } from "../lib/recoil/addrState";
 import restaurantService from "../lib/api/RestaurantService";
 import { useModalState } from "../lib/recoil/modalState";
 import RestaurantsModal from "../components/modal/RestaurantsModal";
@@ -16,14 +15,12 @@ import TimePicker from "../components/picker/TimePicker";
 import groupOrderService from "../lib/api/GroupOrderService";
 import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
-import { useCartState } from "../lib/recoil/cartState";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import ConfirmModal from "../components/modal/ConfirmModal";
 
 const MakeGroup: React.FC = () => {
   const history = useHistory();
-  const [addr] = useAddrState();
-  const [, setCart] = useCartState();
+  const addr = window.localStorage.getItem("ADDR");
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
@@ -97,7 +94,6 @@ const MakeGroup: React.FC = () => {
       const { data } = await groupOrderService.createGroup(newGroupInfo);
       const c_seq = data.seq;
       const r_seq = data.restaurant.seq;
-      setCart(0);
       setChatMenu([]);
       setModal(null);
       enterToGroup(c_seq, r_seq);

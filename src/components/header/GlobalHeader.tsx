@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import { useAddrState } from "../../lib/recoil/addrState";
-import { IonHeader, IonIcon, IonTitle, IonImg } from "@ionic/react";
+import { IonHeader, IonIcon, IonImg } from "@ionic/react";
 import {
   chevronDownOutline,
   locationOutline,
@@ -21,7 +20,7 @@ import SlideMenu from "../modal/SlideMenu";
 export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
-  const [addr] = useAddrState();
+  const addr = window.localStorage.getItem("ADDR");
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
   const [isLogin] = useLoginState();

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "../hooks/useNavigate";
+import { useHistory } from "react-router";
 import loginService from "../lib/api/LoginService";
 import AccessToken from "../hooks/useToken";
 import { useLoginState } from "../lib/recoil/loginState";
@@ -7,7 +7,7 @@ import useApis from "../lib/api/User/UserApi";
 import Spinner from "../components/spinner/Spinner";
 
 export default function KakaoRedirect() {
-  const navigate = useNavigate();
+  const history = useHistory();
   const [isLogin, setIsLogin] = useLoginState();
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export default function KakaoRedirect() {
         window.localStorage.setItem("CHAT_SENDER", data.name);
       })();
     }
-    navigate("/");
-  }, [isLogin, navigate, setIsLogin]);
+    history.push("/");
+  }, [isLogin, history, setIsLogin]);
 
   return (
     <div style={bgStyle}>

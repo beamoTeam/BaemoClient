@@ -1,12 +1,12 @@
 export function elapsedText(date) {
   date = formattedCreatedDate(date);
-  const seconds = 1;
-  const minute = seconds * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+  // const seconds = 1;
+  // const minute = seconds * 60;
+  // const hour = minute * 60;
+  // const day = hour * 24;
 
-  const today = new Date();
-  const elapsedTime = Math.trunc((today.getTime() - date.getTime()) / 1000);
+  // const today = new Date();
+  // const elapsedTime = Math.trunc((today.getTime() - date.getTime()) / 1000);
 
   // let elapsedText = "";
   // if (elapsedTime < seconds) {

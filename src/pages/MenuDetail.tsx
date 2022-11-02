@@ -78,7 +78,7 @@ export default function MenuDetail() {
         restaurant_seq: menuDetail.restaurant_seq,
         seq: menuDetail.seq,
       };
-      const { data } = await groupOrderService.mutateToCart(chat_seq, cartData);
+      await groupOrderService.mutateToCart(chat_seq, cartData);
       history.goBack();
     } catch (err: any) {
       alert("장바구니 추가에 실패했습니다. 다시 시도해주세요.");

@@ -1,18 +1,16 @@
-import { useAddrState } from "../../lib/recoil/addrState";
-import { modalState } from "../../lib/recoil/modalState";
+import { useRef } from "react";
+import { IonContent, IonModal } from "@ionic/react";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import SheetModal from "./common/SheetModal";
-import { useSetRecoilState } from "recoil";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function AddressModal() {
-  const [, setAddr] = useAddrState();
-  const setModal = useSetRecoilState(modalState);
+  const modal = useRef<HTMLIonModalElement>(null);
+
+  function dismiss() {
+    modal.current?.dismiss();
+  }
 
   const onComplete = (data: any) => {
-    if (true) {
-      setModal(null);
-    }
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -26,13 +24,22 @@ export default function AddressModal() {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    setAddr(fullAddress);
+    dismiss();
     useLocalStorage.set("ADDR", fullAddress);
   };
 
   return (
-    <SheetModal>
-      <DaumPostcodeEmbed onComplete={onComplete} />
-    </SheetModal>
+    <>
+      <IonModal
+        ref={modal}
+        trigger="open-restaurant-modal"
+        initialBreakpoint={0.7}
+        breakpoints={[0, 0.25, 0.5, 0.75]}
+      >
+        <IonContent className="ion-padding">
+          <DaumPostcodeEmbed onComplete={onComplete} />
+        </IonContent>
+      </IonModal>
+    </>
   );
 }

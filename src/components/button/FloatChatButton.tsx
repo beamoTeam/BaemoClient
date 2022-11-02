@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+// import { useCallback } from "react";
 import { IonFab, IonFabButton, IonIcon, IonFabList } from "@ionic/react";
 import { addOutline, chatbubblesOutline, cartOutline } from "ionicons/icons";
 import { useHistory } from "react-router";

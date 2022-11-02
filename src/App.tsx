@@ -36,9 +36,6 @@ import ChatList from "./pages/ChatList";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import Footer from "./components/footer/Footer";
-import FloatCartButton from "./components/button/FloatCartButton";
-import ConfirmModal from "./components/modal/ConfirmModal";
-import { KAKAO_LOGIN_LINK } from "./utils/contants";
 
 setupIonicReact();
 
@@ -67,7 +64,6 @@ export default function App() {
             <Route exact path="/oauth/kakao" component={KakaoRedirect} />
             <Redirect to="/home" />
           </IonRouterOutlet>
-          {/* <FloatCartButton /> */}
           <Footer />
         </IonReactRouter>
       </IonApp>

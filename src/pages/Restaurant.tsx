@@ -27,7 +27,6 @@ export default function Restaurant() {
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);
-        console.log(data);
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
       } catch (err) {

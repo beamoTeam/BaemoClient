@@ -1,20 +1,15 @@
 import { useCallback } from "react";
 import AccessToken from "../../hooks/useToken";
-import { useNavigate } from "../../hooks/useNavigate";
 import CardModal from "./common/CardModal";
 import css from "./LogoutModal.module.css";
 import { useLoginState } from "../../lib/recoil/loginState";
-import { useAddrState } from "../../lib/recoil/addrState";
 import { useModalState } from "../../lib/recoil/modalState";
-import { useCartState } from "../../lib/recoil/cartState";
 import { useChatMenuState } from "../../lib/recoil/chatMenuState";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 export default function LogoutModal() {
   const [isLogin, setIsLogin] = useLoginState();
-  const [, setAddr] = useAddrState();
   const [, setModal] = useModalState();
-  const [, setCart] = useCartState();
   const [, setChatMenu] = useChatMenuState();
 
   const close = useCallback(() => {
@@ -26,16 +21,12 @@ export default function LogoutModal() {
       // reset localStorage
       AccessToken.remove();
       useLocalStorage.remove("ADDR");
-      useLocalStorage.remove("CART");
       useLocalStorage.remove("CHAT_SEQ");
       useLocalStorage.remove("CHAT_SENDER");
 
       // reset global State
-      setAddr(null);
-      setCart(null);
       setIsLogin(false);
       setChatMenu([]);
-
       //
       close();
       // navigate("/home");
