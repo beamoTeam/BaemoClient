@@ -16,7 +16,8 @@ import { MenuModel } from "../types/menu";
 import "./MenuDetail.css";
 import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { useCartState } from "../lib/recoil/cartState";
+import { useLoginState } from "../lib/recoil/loginState";
+import { ButtonSpinner } from "../components/spinner/Spinner";
 import QuantityButton from "../components/button/QuantityButton";
 
 type optionsType = {
@@ -30,8 +31,10 @@ type optionsType = {
 export default function MenuDetail() {
   const history = useHistory();
   const location = useLocation();
+  const [isLogin] = useLoginState();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
-  const [cart, setCart] = useCartState();
+  const chat_seq = useLocalStorage.get("CHAT_SEQ");
   const [quantity, setQuantity] = useState<number>(1);
   const [options] = useState<optionsType>({
     coke: false,
@@ -40,9 +43,16 @@ export default function MenuDetail() {
     source: false,
   });
 
-  const m_seq = location.pathname.split("/").at(-1);
-
+  // private Route
   useEffect(() => {
+    if (!isLogin || !chat_seq) {
+      history.push("/");
+    }
+  }, [isLogin, chat_seq, history]);
+
+  // Initial Data Fetching
+  useEffect(() => {
+    const m_seq = location.pathname.split("/").at(-1);
     (async () => {
       try {
         const data = await restaurantService.fetchDetailMenus(String(m_seq));
@@ -51,29 +61,31 @@ export default function MenuDetail() {
         throw new Error(err);
       }
     })();
-  }, [m_seq]);
+  }, [location.pathname]);
 
   if (!menuDetail) return <h3>로딩중...</h3>;
 
+  // API call
   const addToCart = async () => {
-    // http Body data
-    const cartData: MenuModel = {
-      category: menuDetail.category,
-      count: quantity,
-      img: menuDetail.img,
-      name: menuDetail.name,
-      price: menuDetail.price,
-      restaurant_seq: menuDetail.restaurant_seq,
-      seq: menuDetail.seq,
-    };
-    // api request add To cart
-    const c_seq = useLocalStorage.get("CHAT_SEQ");
-    const { data } = await groupOrderService.mutateToCart(c_seq, cartData);
-
-    // recoil & localStorage update (:number)
-    window.localStorage.setItem("CART", String(cart + data.count));
-    setCart(cart + data.count);
-    history.goBack();
+    setIsLoading(true);
+    try {
+      const cartData: MenuModel = {
+        category: menuDetail.category,
+        count: quantity,
+        img: menuDetail.img,
+        name: menuDetail.name,
+        price: menuDetail.price,
+        restaurant_seq: menuDetail.restaurant_seq,
+        seq: menuDetail.seq,
+      };
+      const { data } = await groupOrderService.mutateToCart(chat_seq, cartData);
+      history.goBack();
+    } catch (err: any) {
+      alert("장바구니 추가에 실패했습니다. 다시 시도해주세요.");
+      console.error(err.response.data);
+    } finally {
+      setIsLoading(true);
+    }
   };
 
   return (
@@ -157,7 +169,9 @@ export default function MenuDetail() {
           </div>
           <div className="min_price">배달 최소 주문금액 16,000원</div>
           <div className="add_to_cart">
-            <IonButton onClick={addToCart}>장바구니에 추가</IonButton>
+            <IonButton onClick={addToCart}>
+              {isLoading ? <ButtonSpinner /> : "장바구니에 추가"}
+            </IonButton>
           </div>
         </div>
       </IonContent>

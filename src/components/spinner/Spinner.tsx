@@ -27,3 +27,7 @@ export default function Spinner({ message }: SpinnerProps) {
     </div>
   );
 }
+
+export function ButtonSpinner() {
+  return <IonSpinner></IonSpinner>;
+}
