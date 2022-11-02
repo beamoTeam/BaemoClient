@@ -11,7 +11,7 @@ import css from "./GroupList.module.css";
 
 interface GroupListProps {
   groupList: GroupModel[];
-  enterToGroup: (c_seq: string, restaurant_seq: string) => void;
+  enterToGroup: (c_seq: number, restaurant_seq: number) => void;
   currentGroup: any;
 }
 
@@ -29,9 +29,7 @@ export default function GroupList({
       {groupList?.map((group) => (
         <IonItem
           key={group.seq}
-          onClick={() =>
-            enterToGroup(String(group.seq), String(group.restaurant.seq))
-          }
+          onClick={() => enterToGroup(group.seq, group.restaurant.seq)}
           detail={group.seq === Number(currentGroup)}
           detailIcon={checkmarkCircleOutline}
         >

@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from 'recoil';
 import AccessToken from "../../hooks/useToken";
 
-console.log({ IsLOGIN: AccessToken.get() });
+console.log({ IsLOGIN: Boolean(AccessToken.get()) });
 
 const loginState = atom({
   key: "loginState",

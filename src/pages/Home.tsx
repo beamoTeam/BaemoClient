@@ -27,29 +27,19 @@ const Home: React.FC = () => {
     })();
   }, []);
 
-  const enterToGroup = async (c_seq: string, restaurant_seq: string) => {
-    const chat_seq = window.localStorage.getItem("CHAT_SEQ");
-    if (chat_seq) {
-      if (String(chat_seq) !== c_seq) {
-        setModal(
-          <AlertModal
-            message="현재 진행중인 주문이 있습니다.
-          취소후 다시 이용해 주세요."
-          />
-        );
-        return;
-      }
-    }
+  const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
       const res = await GroupOrderService.enterGroup(c_seq);
-      if (res.status === 200 || res.status === 201) {
-        useLocalStorage.set("CHAT_SEQ", c_seq);
+      if (res.status <= 201) {
+        useLocalStorage.set("CHAT_SEQ", JSON.stringify(c_seq));
         history.push(`restaurant/${restaurant_seq}`);
       }
     } catch (err: any) {
       if (err.response.status === 400) {
         setModal(<AlertModal message={err.response.data} />);
-      } else if (err.response.status === 401) {
+        return;
+      }
+      if (err.response.status === 401) {
         setModal(
           <ConfirmModal
             message={"로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?"}
@@ -57,6 +47,7 @@ const Home: React.FC = () => {
             onConfirm={() => (window.location.href = KAKAO_LOGIN_LINK)}
           />
         );
+        return;
       }
     }
   };
