@@ -21,6 +21,7 @@ export default function Restaurant() {
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const r_seq = location.pathname.split("/").at(-1);
+  const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
 
   useEffect(() => {
     (async () => {
@@ -69,7 +70,7 @@ export default function Restaurant() {
             ))}
           </IonList>
         </div>
-        <FloatChatButton />
+        <FloatChatButton chat_seq={chat_seq} />
       </IonContent>
     </IonPage>
   );
