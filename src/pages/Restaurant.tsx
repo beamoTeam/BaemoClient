@@ -34,7 +34,7 @@ export default function Restaurant() {
         console.error(err);
       }
     })();
-  }, [r_seq, location.pathname, setMenus, setRestaurant]);
+  }, [r_seq, setMenus, setRestaurant]);
 
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
