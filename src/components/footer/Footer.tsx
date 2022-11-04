@@ -72,6 +72,10 @@ export default function Footer() {
     return null;
   }
 
+  if (location.pathname.includes("store")) {
+    return null;
+  }
+
   return (
     <nav className={css.footer}>
       <ul className={css.list} onClick={goTo}>

@@ -29,3 +29,6 @@ yarn-error.log*
 
 # .env
 modal.md
+
+# admin
+src/admin

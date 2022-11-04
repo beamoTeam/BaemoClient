@@ -65,6 +65,10 @@ export default function GlobalHeader() {
     setToggleSlide((prev) => !prev);
   }, []);
 
+  if (location.pathname.includes("store")) {
+    return null;
+  }
+
   return (
     <>
       <IonHeader className={css.globalHeader}>
