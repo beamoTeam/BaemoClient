@@ -1,0 +1,156 @@
+.OrderCard {
+  width: 100%;
+  min-height: 14rem;
+
+  background-color: white;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.1);
+  font-weight: bold;
+
+  padding: 30px;
+}
+
+.orderCardTop {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 8rem;
+}
+
+.time {
+  min-width: 8rem;
+  flex: 1;
+
+  font-size: 2.2rem;
+  border-radius: 4px;
+}
+
+/* Order INFO */
+.orderInfo {
+  flex: auto;
+  min-height: 100%;
+  width: 70%;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.orderInfo p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Button */
+.btns {
+  flex: 1;
+
+  display: flex;
+  gap: 20px;
+}
+
+.print {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 1px solid grey;
+  width: 8rem;
+  height: 6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.printText {
+  margin-top: 1rem;
+}
+
+.receiveBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 8rem;
+  height: 6rem;
+  border-radius: 4px;
+  background-color: #3880ff;
+  color: white;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.receiveBtn:disabled {
+  opacity: 0.5;
+}
+
+.orderMenus {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Menu Card */
+
+.MenuList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.Fold {
+  margin: 0 auto;
+  width: 10%;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.MenuCard {
+  min-width: 340px;
+  min-height: 200px;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.33);
+}
+
+.MenuCard h4 {
+  text-align: center;
+  color: #8b2cf5;
+}
+
+.more {
+  font-size: 0.8rem;
+  color: silver;
+}
+
+.MenuInfo {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666666;
+}
+
+.menuName {
+  color: black;
+}
+.count {
+  color: black;
+  font-weight: bold;
+}
+
+.foldBtn {
+  color: black;
+  transition: transform 0.1s;
+}
+
+.unFoldBtn {
+  transition: transform 0.1s;
+  transform: rotate(180deg);
+}

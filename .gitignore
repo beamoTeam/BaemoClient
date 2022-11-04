@@ -31,4 +31,5 @@ yarn-error.log*
 modal.md
 
 # admin
-src/admin
+# src/admin
+android

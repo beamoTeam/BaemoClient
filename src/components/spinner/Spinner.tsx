@@ -19,10 +19,11 @@ export default function Spinner({ message }: SpinnerProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "white",
       }}
       className="ion-padding"
     >
-      <IonSpinner></IonSpinner>
+      <IonSpinner style={{ color: "silver" }}></IonSpinner>
       <p>{message}</p>
     </div>
   );
