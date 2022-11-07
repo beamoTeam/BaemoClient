@@ -77,47 +77,49 @@ export default function Cart() {
             <div className={css.title}>BBQ청계 목대점</div>
           </IonItem>
 
-          <IonItem>
-            <div className={css.cartList}>
-              {cartItems.length === 0 ? (
-                <h4>장바구니에 상품이 없습니다.</h4>
-              ) : (
-                [...cartItems].map((x: MenuModel, idx: any) => {
-                  return <CartMenuItem key={idx} cartItem={x} />;
-                })
-              )}
-            </div>
-          </IonItem>
+          {cartItems.length === 0 ? (
+            <h4>장바구니에 상품이 없습니다.</h4>
+          ) : (
+            <>
+              <IonItem>
+                <div className={css.cartList}>
+                  {[...cartItems].map((x: MenuModel, idx: any) => {
+                    return <CartMenuItem key={idx} cartItem={x} />;
+                  })}
+                </div>
+              </IonItem>
 
-          {/* <p className={css.addMore}>
-            <Link to={`/restaurant/${cartItems[0].restaurant_seq}`}>
-              + 더 담으러 가기
-            </Link>
-          </p> */}
+              <p className={css.addMore}>
+                <Link to={`/restaurant/${cartItems[0].restaurant_seq}`}>
+                  + 더 담으러 가기
+                </Link>
+              </p>
 
-          <IonItem>
-            <div className={css.price}>
-              <div>
-                상품금액 <div>{totalPrice.toLocaleString()}원</div>
-              </div>
-              <div>
-                배달 요금 <div>1,500원</div>
-              </div>
-            </div>
-          </IonItem>
+              <IonItem>
+                <div className={css.price}>
+                  <div>
+                    상품금액 <div>{totalPrice.toLocaleString()}원</div>
+                  </div>
+                  <div>
+                    배달 요금 <div>1,500원</div>
+                  </div>
+                </div>
+              </IonItem>
 
-          <IonItem>
-            <div className={css.fee}>
-              <p>총 주문금액</p>
-              <p>{(totalPrice + 1500).toLocaleString()}</p>
-            </div>
-          </IonItem>
+              <IonItem>
+                <div className={css.fee}>
+                  <p>총 주문금액</p>
+                  <p>{(totalPrice + 1500).toLocaleString()}</p>
+                </div>
+              </IonItem>
 
-          <IonItem>
-            <div className={css.orderButton}>
-              <IonButton onClick={handleOrder}>결제하기</IonButton>
-            </div>
-          </IonItem>
+              <IonItem>
+                <div className={css.orderButton}>
+                  <IonButton onClick={handleOrder}>결제하기</IonButton>
+                </div>
+              </IonItem>
+            </>
+          )}
         </IonContent>
       </IonPage>
     </>
