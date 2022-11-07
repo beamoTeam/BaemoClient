@@ -88,6 +88,9 @@ export default function Chat() {
 
     setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
 
+    if (test.sender !== currentSender.current) {
+      currentSender.current = test.sender;
+    }
     dateHash.current[create_date] = true;
   };
 
@@ -119,8 +122,6 @@ export default function Chat() {
     }
   };
 
-  console.log(msgList);
-
   return (
     <div className={css.chat}>
       <IonPage>
@@ -132,9 +133,12 @@ export default function Chat() {
               <div key={message.id}>
                 {message.date && <DateIndicator date={message.date} />}
                 <div className={css.textBox}>
-                  {message.sender !== sender && (
-                    <LeftChatBox message={message} />
-                  )}
+                  {message.sender !== sender &&
+                    (message.sender !== currentSender.current ? (
+                      <LeftChatBox message={message} />
+                    ) : (
+                      <PlaneLeftChatBox message={message} />
+                    ))}
                   {message.sender === sender && (
                     <RightChatBox message={message} />
                   )}
@@ -193,12 +197,12 @@ function RightChatBox({ message }: any) {
   );
 }
 
-function MenuBox({ menu }: any) {
+function PlaneLeftChatBox({ message }: any) {
   return (
-    <div className={css.MenuBox}>
-      <div>여기에 메뉴</div>
-      <div>{menu}</div>
-    </div>
+    <>
+      <p className={css.msgTimeL}>{message.time}</p>
+      <p className={css.textBoxL}>{message.msg}</p>
+    </>
   );
 }
 

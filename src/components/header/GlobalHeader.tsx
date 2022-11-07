@@ -14,7 +14,6 @@ import { useLoginState } from "../../lib/recoil/loginState";
 import ModalContainer from "../modal/common/ModalPortal";
 import { useLocation, useHistory } from "react-router";
 import { useState, useCallback } from "react";
-import { useChatMenuState } from "../../lib/recoil/chatMenuState";
 import SlideMenu from "../modal/SlideMenu";
 
 export default function GlobalHeader() {
@@ -22,8 +21,6 @@ export default function GlobalHeader() {
   const history = useHistory();
   const [addr, setAddr] = useState<any>(window.localStorage.getItem("ADDR"));
   const [, setModal] = useModalState();
-  const [chatMenu] = useChatMenuState();
-  console.log("CHATMENU :: ", chatMenu);
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
