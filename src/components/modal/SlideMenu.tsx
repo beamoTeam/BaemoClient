@@ -18,12 +18,10 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
     if (parsedChatMenu[MENU.sender]) {
-      parsedChatMenu[MENU.sender] = [
-        ...parsedChatMenu[MENU.sender[0]],
-        MENU.menu[0],
-      ];
+      console.log("object인지 array인지 :: ", MENU.menu);
+      parsedChatMenu[MENU.sender] = [...parsedChatMenu[MENU.sender], MENU.menu];
     } else {
-      parsedChatMenu[MENU.sender] = [MENU.menu[0]];
+      parsedChatMenu[MENU.sender] = [MENU.menu];
     }
   });
   console.log("222 :: ", parsedChatMenu);
