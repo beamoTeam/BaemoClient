@@ -20,7 +20,7 @@ export default function SlideMenu({ close }: SlideMenuProps) {
     if (parsedChatMenu[MENU.sender]) {
       parsedChatMenu[MENU.sender] = [...parsedChatMenu[MENU.sender], MENU.menu];
     } else {
-      parsedChatMenu[MENU.sender] = MENU.menu;
+      parsedChatMenu[MENU.sender] = [MENU.menu];
     }
   });
   console.log("222 :: ", parsedChatMenu);
