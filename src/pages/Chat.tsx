@@ -133,7 +133,8 @@ export default function Chat() {
             msgList.map((message: any) => (
               <div key={message.id}>
                 {message.date && <DateIndicator date={message.date} />}
-                {message.menu && <MenuBox menu={message.menu} />}
+                {message.menu && <LeftChatBox menu={message.menu} />}
+                <MenuBox menu={message.menu} />
                 <div className={css.textBox}>
                   {message.sender !== sender && (
                     <LeftChatBox message={message} />
@@ -177,7 +178,7 @@ function LeftChatBox({ message }: any) {
       <div>
         <p className={css.leftSender}>{anonymousName(message.sender)}</p>
         <div className={css.leftMsgTime}>
-          <p className={css.textBoxL}>{message.msg}</p>
+          <p className={css.textBoxL}>{message.menu || message.msg}</p>
           <p className={css.msgTimeR}>{message.time}</p>
         </div>
       </div>
@@ -196,10 +197,10 @@ function RightChatBox({ message }: any) {
 
 function MenuBox({ menu }: any) {
   return (
-    <>
+    <div className={css.MenuBox}>
       <div>여기에 메뉴</div>
       <div>{menu}</div>
-    </>
+    </div>
   );
 }
 
