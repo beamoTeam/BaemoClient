@@ -203,7 +203,7 @@ function RightChatBox({ message }: any) {
 
 function PlaneLeftChatBox({ message }: any) {
   return (
-    <div className={css.leftWrap}>
+    <div className={css.leftWrapPlane}>
       <div className={css.chatAvatarPlane}></div>
       <div>
         <p className={css.leftSenderPlane}></p>

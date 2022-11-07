@@ -115,7 +115,7 @@ ion-content {
 }
 
 .dateLine {
-  margin: 0 auto;
+  margin: 20px auto;
   height: 25px;
   width: 120px;
   border-radius: 24px;
@@ -132,6 +132,11 @@ ion-content {
 .leftWrap {
   display: flex;
   margin: 12px 0;
+}
+
+.leftWrapPlane {
+  display: flex;
+  margin: 0;
 }
 
 .chatAvatar {
@@ -153,6 +158,12 @@ ion-content {
 .leftSender {
   font-size: 13px;
   color: black;
+  padding: 0 3px;
+}
+
+.leftSenderPlane {
+  font-size: 13px;
+  color: white;
   padding: 0 3px;
 }
 
