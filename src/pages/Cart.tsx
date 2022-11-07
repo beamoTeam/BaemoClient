@@ -17,6 +17,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
+import Spinner from "../components/spinner/Spinner";
 
 export default function Cart() {
   const history = useHistory();
@@ -62,8 +63,15 @@ export default function Cart() {
     }
   };
 
-  if (!cartItems) return <h4>Loading..</h4>;
-  if (cartItems.length === 0) return <h4>장바구니에 상품이 없습니다.</h4>;
+  if (!cartItems) return <Spinner />;
+  if (cartItems.length === 0)
+    return (
+      <IonPage style={{ paddingTop: "50px" }}>
+        <IonContent>
+          <h4>장바구니에 상품이 없습니다.</h4>
+        </IonContent>
+      </IonPage>
+    );
   const totalPrice = cartItems.reduce(
     (acc: any, item: any) => (acc += item.price),
     0
