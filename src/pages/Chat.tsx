@@ -35,6 +35,7 @@ export default function Chat() {
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const dateHash: any = useRef<any>({});
   const senderHash: any = useRef<any>({});
+  const currentSender = useRef<any>(null);
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -90,18 +91,6 @@ export default function Chat() {
       setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
     }
     dateHash.current[create_date] = true;
-
-    // if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
-    //   setChatMenu((prev: any) => [
-    //     ...prev,
-    //     {
-    //       sender: serverMsg.sender.split("_")[1],
-    //       data: JSON.parse(serverMsg.msg),
-    //     },
-    //   ]);
-
-    // }
-    console.log(test);
   };
 
   // hack
@@ -124,6 +113,7 @@ export default function Chat() {
       });
       scrollRef.current.scrollIntoView(false);
     } catch (err) {
+      alert("알수없는 오류가 발생했습니다.");
       console.error(err);
     } finally {
       setMsg("");
@@ -131,11 +121,9 @@ export default function Chat() {
     }
   };
 
-  console.log(msgList);
   return (
     <div className={css.chat}>
       <IonPage>
-        {/* <div className={css.Chat}> */}
         <ul className={css.textList}>
           {!msgList ? (
             <Spinner />
@@ -156,7 +144,7 @@ export default function Chat() {
                         : css["textBoxL"]
                     }
                   >
-                    {message.text}
+                    {message.msg}
                   </p>
                   {message.sender !== sender && (
                     <p className={css.msgTimeL}>{message.time}</p>
@@ -182,7 +170,6 @@ export default function Chat() {
             <IonButton onClick={onSubmit}>전송</IonButton>
           )}
         </div>
-        {/* </div> */}
       </IonPage>
     </div>
   );
