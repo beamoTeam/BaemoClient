@@ -17,15 +17,13 @@ export default function SlideMenu({ close }: SlideMenuProps) {
 
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
-    console.log("씨발", MENU);
     if (parsedChatMenu[MENU.sender]) {
-      parsedChatMenu.menu.concat(MENU.menu);
+      parsedChatMenu[MENU.sender].concat(MENU.menu);
     } else {
-      parsedChatMenu["sender"] = MENU.sender;
-      parsedChatMenu["menu"] = MENU.menu;
+      parsedChatMenu[MENU.sender] = MENU.menu;
     }
   });
-  // console.log(" ??? ::", parsedChatMenu);
+  console.log(" ??? ::", parsedChatMenu);
   const parsedMenus = Object.keys(parsedChatMenu).map((key: any) => ({
     sender: key,
     menu: parsedChatMenu[key].menu,
