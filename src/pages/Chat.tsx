@@ -53,32 +53,24 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-    console.log(serverMsg);
+    // console.log(serverMsg);
     const test: ParsedMsg = {
       id: serverMsg.id,
-      msg: serverMsg.msg,
       receiver: serverMsg.receiver,
       roomNum: serverMsg.roomNum,
+      msg: serverMsg.msg,
+      menu: null,
       sender: serverMsg.sender,
       date: "",
       time: "",
-      menu: null,
     };
 
     // 1. menu filtering
-    if (serverMsg.sender.includes("mainMenu")) {
+    if (serverMsg.sender.includes("mainMenu_")) {
+      console.log("true 잔아..");
       test.msg = null;
       test.menu = JSON.parse(serverMsg.msg);
       test.sender = serverMsg.sender.split("_")[1];
-    }
-
-    // 2. time filtering
-    const [yyyy, mm, dd]: any = serverMsg.createdAt;
-    const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
-    test.date = dateHash.current[create_date] === true ? null : create_date;
-    test.time = `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`;
-
-    if (test.menu) {
       setChatMenu((prev: any) => [
         ...prev,
         {
@@ -88,9 +80,16 @@ export default function Chat() {
       ]);
     }
 
+    // 2. time filtering
+    const [yyyy, mm, dd]: any = serverMsg.createdAt;
+    const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
+    test.date = dateHash.current[create_date] === true ? null : create_date;
+    test.time = `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`;
+
     if (test.msg) {
       setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
     }
+    console.log(test);
     dateHash.current[create_date] = true;
   };
 
