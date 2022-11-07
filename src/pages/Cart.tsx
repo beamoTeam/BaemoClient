@@ -64,12 +64,6 @@ export default function Cart() {
   };
 
   if (!cartItems) return <Spinner />;
-  if (cartItems.length === 0)
-    return (
-      <IonContent>
-        <h4>장바구니에 상품이 없습니다.</h4>
-      </IonContent>
-    );
   const totalPrice = cartItems.reduce(
     (acc: any, item: any) => (acc += item.price),
     0
@@ -85,9 +79,13 @@ export default function Cart() {
 
           <IonItem>
             <div className={css.cartList}>
-              {[...cartItems].map((x: MenuModel, idx: any) => {
-                return <CartMenuItem key={idx} cartItem={x} />;
-              })}
+              {cartItems.length === 0 ? (
+                <h4>장바구니에 상품이 없습니다.</h4>
+              ) : (
+                [...cartItems].map((x: MenuModel, idx: any) => {
+                  return <CartMenuItem key={idx} cartItem={x} />;
+                })
+              )}
             </div>
           </IonItem>
 
