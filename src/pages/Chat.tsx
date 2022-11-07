@@ -53,7 +53,7 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-    // console.log(serverMsg);
+
     const test: ParsedMsg = {
       id: serverMsg.id,
       receiver: serverMsg.receiver,
@@ -67,7 +67,6 @@ export default function Chat() {
 
     // 1. menu filtering
     if (serverMsg.sender.includes("mainMenu_")) {
-      console.log("true 잔아..");
       test.msg = null;
       test.menu = JSON.parse(serverMsg.msg);
       test.sender = serverMsg.sender.split("_")[1];
@@ -86,10 +85,8 @@ export default function Chat() {
     test.date = dateHash.current[create_date] === true ? null : create_date;
     test.time = `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`;
 
-    if (test.msg) {
-      setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
-    }
-    console.log(test);
+    setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
+
     dateHash.current[create_date] = true;
   };
 
@@ -121,7 +118,6 @@ export default function Chat() {
     }
   };
 
-  console.log("LIST :: ", msgList);
   return (
     <div className={css.chat}>
       <IonPage>
