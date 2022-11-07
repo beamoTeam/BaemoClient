@@ -132,8 +132,8 @@ export default function Chat() {
           ) : (
             msgList.map((message: any) => (
               <div key={message.id}>
-                {message.menu && <MenuBox menu={message.date} />}
                 {message.date && <DateIndicator date={message.date} />}
+                {message.menu && <MenuBox menu={message.menu} />}
                 <div className={css.textBox}>
                   {message.sender !== sender && (
                     <LeftChatBox message={message} />
