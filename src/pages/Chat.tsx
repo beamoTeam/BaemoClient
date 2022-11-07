@@ -65,10 +65,22 @@ export default function Chat() {
       time: "",
     };
 
+    // const x = {
+    //   category: "메인 메뉴",
+    //   count: 1,
+    //   img: "http://3.94.44.116:2999/img?fileName=goldolive.png",
+    //   menu_seq: 1,
+    //   name: "황금올리브 + 콜라1.25L",
+    //   price: 20000,
+    //   restaurant_seq: 1,
+    //   seq: 140,
+    // };
     // 1. menu filtering
     if (serverMsg.sender.includes("mainMenu_")) {
       test.msg = null;
-      test.menu = JSON.parse(serverMsg.msg);
+      test.menu = JSON.parse(serverMsg.msg)
+        .map((menu: any) => `${menu.name} x ${menu.count}개\n`)
+        .join("");
       test.sender = serverMsg.sender.split("_")[1];
       setChatMenu((prev: any) => [
         ...prev,

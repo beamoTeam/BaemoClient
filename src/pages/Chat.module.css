@@ -32,7 +32,7 @@ ion-content {
   position: relative;
   display: inline-block;
   width: max-content;
-  max-width: calc(100vw - 70px);
+  max-width: calc(100vw - 100px);
   padding: 10px;
   margin-top: 7px;
   font-size: 13px;
@@ -150,4 +150,16 @@ ion-content {
 
 .leftMsgTime {
   display: flex;
+}
+
+.MenuBox {
+  margin: 0 auto;
+  height: 25px;
+  width: 120px;
+  border-radius: 24px;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
