@@ -10,9 +10,9 @@ interface SlideMenuProps {
 }
 
 export default function SlideMenu({ chatMenu, close }: SlideMenuProps) {
-  const test = chatMenu.map((x: any) => x.menu[0]);
-  console.log(parseMenu(test));
-  return null;
+  if (!chatMenu) {
+    return null;
+  }
   return (
     <>
       <IonContent>
