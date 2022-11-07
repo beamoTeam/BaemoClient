@@ -19,7 +19,7 @@ interface ParsedMsg {
   date: string | null;
   time: string;
   menu: object | null;
-  // enter: string | null;
+  isCurrentSender: boolean;
 }
 
 export default function Chat() {
@@ -27,15 +27,15 @@ export default function Chat() {
   const history = useHistory();
   const { pathname } = useLocation();
   const [isLogin] = useLoginState();
-  const [sendLoading, setSendLoading] = useState<boolean>(false);
-  const [msgList, setMsgList] = useState<any | null>(null);
-  const [msg, setMsg] = useState<string>("");
-  const eventSource = useRef<any>(null);
   const scrollRef = useRef<any>(null);
-  const roomNum = Number(pathname.split("/").at(-1));
-  const sender = window.localStorage.getItem("CHAT_SENDER");
+  const eventSource = useRef<any>(null);
   const dateHash: any = useRef<any>({});
   const currentSender = useRef<any>(null);
+  const [msg, setMsg] = useState<string>("");
+  const roomNum = Number(pathname.split("/").at(-1));
+  const [msgList, setMsgList] = useState<any | null>(null);
+  const sender = window.localStorage.getItem("CHAT_SENDER");
+  const [sendLoading, setSendLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -62,6 +62,7 @@ export default function Chat() {
       sender: serverMsg.sender,
       date: "",
       time: "",
+      isCurrentSender: true,
     };
 
     // 1. menu filtering
@@ -86,12 +87,14 @@ export default function Chat() {
     test.date = dateHash.current[create_date] === true ? null : create_date;
     test.time = `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`;
 
-    setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
-
+    // 3. sender
     if (test.sender !== currentSender.current) {
       currentSender.current = test.sender;
+      test.isCurrentSender = false;
     }
-    console.log(currentSender.current);
+
+    setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
+
     dateHash.current[create_date] = true;
   };
 
@@ -135,7 +138,7 @@ export default function Chat() {
                 {message.date && <DateIndicator date={message.date} />}
                 <div className={css.textBox}>
                   {message.sender !== sender &&
-                    (message.sender === currentSender.current ? (
+                    (message.isCurrentSender ? (
                       <PlaneLeftChatBox message={message} />
                     ) : (
                       <LeftChatBox message={message} />

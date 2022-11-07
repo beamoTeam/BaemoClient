@@ -30,7 +30,7 @@ export default function ChatList() {
   useEffect(() => {
     (async () => {
       const { data } = await userApis.fetchUserChatList();
-      console.log(data);
+      // console.log(data);
       setChatList(data);
     })();
   }, []);
