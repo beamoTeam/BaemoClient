@@ -130,24 +130,13 @@ export default function Chat() {
           ) : (
             msgList.map((message: any) => (
               <div key={message.id}>
-                {message.date && (
-                  <div className={css.dateLine}>{message.date}</div>
-                )}
+                {message.date && <DateIndicator date={message.date} />}
                 <div className={css.textBox}>
-                  {message.sender === sender && (
-                    <p className={css.msgTimeR}>{message.time}</p>
-                  )}
-                  <p
-                    className={
-                      message.sender === sender
-                        ? css["textBoxR"]
-                        : css["textBoxL"]
-                    }
-                  >
-                    {message.msg}
-                  </p>
                   {message.sender !== sender && (
-                    <p className={css.msgTimeL}>{message.time}</p>
+                    <LeftChatBox message={message} />
+                  )}
+                  {message.sender === sender && (
+                    <RightChatBox message={message} />
                   )}
                 </div>
               </div>
@@ -173,4 +162,29 @@ export default function Chat() {
       </IonPage>
     </div>
   );
+}
+
+function LeftChatBox({ message }: any) {
+  return (
+    <div className={css.leftWrap}>
+      <div className={css.chatAvatar}></div>
+      <div className={css.leftNameBox}>
+        <p className={css.leftSender}>{message.sender}</p>
+        <p className={css.textBoxL}>{message.msg}</p>
+      </div>
+    </div>
+  );
+}
+
+function RightChatBox({ message }: any) {
+  return (
+    <>
+      <p className={css.msgTimeR}>{message.time}</p>
+      <p className={css.textBoxR}>{message.msg}</p>
+    </>
+  );
+}
+
+function DateIndicator({ date }: any) {
+  return <div className={css.dateLine}>{date}</div>;
 }

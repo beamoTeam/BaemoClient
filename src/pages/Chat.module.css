@@ -127,7 +127,6 @@ ion-content {
   height: 25px;
   width: 120px;
   border-radius: 24px;
-  /* border: 1px solid rgba(0, 0, 0, 0.3); */
   font-size: 14px;
 
   display: flex;
@@ -136,4 +135,24 @@ ion-content {
 
   color: rgba(0, 0, 0, 0.4);
   padding: 2px 4px;
+}
+
+.leftWrap {
+  display: flex;
+}
+
+.chatAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 15px;
+}
+
+.leftNameBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.leftSender {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
 }
