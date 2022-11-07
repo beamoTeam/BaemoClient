@@ -75,7 +75,7 @@ export default function Chat() {
         ...prev,
         {
           sender: test.sender,
-          menu: test.menu,
+          menu: JSON.parse(serverMsg.msg),
         },
       ]);
     }
