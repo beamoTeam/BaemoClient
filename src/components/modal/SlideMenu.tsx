@@ -24,7 +24,7 @@ export default function SlideMenu({ close }: SlideMenuProps) {
       parsedChatMenu["menu"] = MENU.menu;
     }
   });
-
+  console.log(" ??? ::", parsedChatMenu);
   const parsedMenus = Object.keys(parsedChatMenu).map((key: any) => ({
     sender: key,
     menu: parsedChatMenu[key].menu,
