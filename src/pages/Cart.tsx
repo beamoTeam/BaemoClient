@@ -89,11 +89,11 @@ export default function Cart() {
             </div>
           </IonItem>
 
-          <p className={css.addMore}>
+          {/* <p className={css.addMore}>
             <Link to={`/restaurant/${cartItems[0].restaurant_seq}`}>
               + 더 담으러 가기
             </Link>
-          </p>
+          </p> */}
 
           <IonItem>
             <div className={css.price}>
