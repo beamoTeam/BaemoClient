@@ -168,10 +168,14 @@ function LeftChatBox({ message }: any) {
   return (
     <div className={css.leftWrap}>
       <div className={css.chatAvatar}></div>
-      <div className={css.leftNameBox}>
+      <div>
         <p className={css.leftSender}>{message.sender}</p>
-        <p className={css.textBoxL}>{message.msg}</p>
+        <div className={css.leftMsgTime}>
+          <p className={css.textBoxL}>{message.msg}</p>
+          <p className={css.msgTimeR}>{message.time}</p>
+        </div>
       </div>
+      <p className={css.msgTimeL}>{message.time}</p>
     </div>
   );
 }
