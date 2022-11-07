@@ -23,6 +23,7 @@ export default function ChatList() {
 
   useEffect(() => {
     if (!isLogin) {
+      console.log("이거땜에 뒤로 넘어감");
       history.push("/");
     }
   }, [isLogin, history]);
@@ -30,7 +31,6 @@ export default function ChatList() {
   useEffect(() => {
     (async () => {
       const { data } = await userApis.fetchUserChatList();
-      // console.log(data);
       setChatList(data);
     })();
   }, []);

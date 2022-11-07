@@ -116,3 +116,6 @@ export default function GlobalHeader() {
     </>
   );
 }
+
+// 클릭이 두번되거나
+// 채팅 리스트에서 바로 뒤로 넘어가버리거나
