@@ -91,6 +91,7 @@ export default function Chat() {
     if (test.sender !== currentSender.current) {
       currentSender.current = test.sender;
     }
+    console.log(currentSender.current);
     dateHash.current[create_date] = true;
   };
 
@@ -134,10 +135,10 @@ export default function Chat() {
                 {message.date && <DateIndicator date={message.date} />}
                 <div className={css.textBox}>
                   {message.sender !== sender &&
-                    (message.sender !== currentSender.current ? (
-                      <LeftChatBox message={message} />
-                    ) : (
+                    (message.sender === currentSender.current ? (
                       <PlaneLeftChatBox message={message} />
+                    ) : (
+                      <LeftChatBox message={message} />
                     ))}
                   {message.sender === sender && (
                     <RightChatBox message={message} />
