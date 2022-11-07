@@ -57,6 +57,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage style={{ marginBottom: "55px" }}>
+      {/* <div style={{ marginBottom: "55px" }}> */}
       <IonContent fullscreen>
         <FoodCategory />
         <SortFilter />
@@ -66,6 +67,7 @@ const Home: React.FC = () => {
           currentGroup={currentGroup}
         />
       </IonContent>
+      {/* </div> */}
     </IonPage>
   );
 };

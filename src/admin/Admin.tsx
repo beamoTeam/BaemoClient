@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Header from "./Header";
 import SideBar from "./SideBar";
 import Main from "./Main";
@@ -7,6 +7,8 @@ import adminClient from "./api/adminService";
 import { useLocation } from "react-router";
 import ReceiptModal from "./modal/ReceiptModal";
 
+const TIMER = 3000;
+
 export default function Admin() {
   const location = useLocation();
   const [open, setOpen] = useState<boolean>(true);
@@ -14,17 +16,26 @@ export default function Admin() {
   const [currentTab, setCurrentTab] = useState<any>("접수 대기");
   const [openReceipt, setOpenReceipt] = useState<boolean>(false);
   const [receiptSeq, setReceiptSeq] = useState<any>(null);
+  const ordersRef = useRef<any>(null);
 
   useEffect(() => {
-    (async () => {
-      const r_seq = location.pathname.split("/").at(-1);
-      try {
-        const res = await adminClient.fetchOrderData(r_seq);
-        setOrders(res);
-      } catch (err) {
-        setOrders("err");
-      }
-    })();
+    setInterval(() => {
+      (async () => {
+        const r_seq = location.pathname.split("/").at(-1);
+        try {
+          const res = await adminClient.fetchOrderData(r_seq);
+          if (ordersRef.current === JSON.stringify(res)) {
+            return;
+          }
+
+          ordersRef.current = JSON.stringify(res);
+          setOrders(res);
+        } catch (err) {
+          alert("알수없는 오류가 발생했습니다.");
+          console.error(err);
+        }
+      })();
+    }, TIMER);
   }, [location.pathname]);
 
   const toggleSidebar = useCallback(() => {
