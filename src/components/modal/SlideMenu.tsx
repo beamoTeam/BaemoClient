@@ -14,6 +14,9 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   if (!chatMenu) {
     return null;
   }
+  if (chatMenu.length === 0) {
+    return <p>메뉴를 추가 해주세요</p>;
+  }
 
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
@@ -26,13 +29,11 @@ export default function SlideMenu({ close }: SlideMenuProps) {
       parsedChatMenu[MENU.sender] = [MENU.menu[0]];
     }
   });
-  // console.log("222 :: ", parsedChatMenu);
 
   const parsedMenus = Object.keys(parsedChatMenu).map((sender: any) => ({
     sender,
     menu: parseMenu(parsedChatMenu[sender]),
   }));
-  console.log("RESULT :: ", parsedMenus);
 
   return (
     <>
@@ -43,29 +44,28 @@ export default function SlideMenu({ close }: SlideMenuProps) {
             <IonIcon icon={closeOutline} onClick={close} />
           </div>
 
-          {chatMenu.length > 0 &&
-            chatMenu.map((Menu: { sender: string; menu: [] }, idx: number) => {
-              return (
-                <div key={idx}>
-                  <IonItem slot="header" color="light">
-                    <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
-                  </IonItem>
-                  {Menu.menu.map((info: any) => (
-                    <div className={css.info} key={info.seq}>
-                      <IonImg src={info.img} className={css.img} />
-                      <IonLabel>
-                        <h4 className={css.name}>
-                          {info.name} x {info.count}
-                        </h4>
-                        <h4 className={css.price}>
-                          {info.price.toLocaleString()}원
-                        </h4>
-                      </IonLabel>
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
+          {parsedMenus.map((Menu: { sender: any; menu: any }, idx: number) => {
+            return (
+              <div key={idx}>
+                <IonItem slot="header" color="light">
+                  <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
+                </IonItem>
+                {Menu.menu.map((info: any) => (
+                  <div className={css.info} key={info.seq}>
+                    <IonImg src={info.img} className={css.img} />
+                    <IonLabel>
+                      <h4 className={css.name}>
+                        {info.name} x {info.count}
+                      </h4>
+                      <h4 className={css.price}>
+                        {info.price.toLocaleString()}원
+                      </h4>
+                    </IonLabel>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
         </div>
       </IonContent>
     </>
