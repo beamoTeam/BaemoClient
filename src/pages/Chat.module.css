@@ -131,7 +131,7 @@ ion-content {
 
 .leftWrap {
   display: flex;
-  margin: 12px 0;
+  margin-top: 12px;
 }
 
 .leftWrapPlane {
