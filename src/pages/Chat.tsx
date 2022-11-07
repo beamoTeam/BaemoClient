@@ -7,6 +7,7 @@ import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
 import { useLocation } from "react-router";
+import { anonymousName } from "../utils/name";
 import Spinner from "../components/spinner/Spinner";
 
 interface ParsedMsg {
@@ -71,7 +72,7 @@ export default function Chat() {
       test.sender = serverMsg.sender.split("_")[1];
     }
 
-    // 2. teim filtering
+    // 2. time filtering
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
     test.date = dateHash.current[create_date] === true ? null : create_date;
@@ -130,6 +131,7 @@ export default function Chat() {
           ) : (
             msgList.map((message: any) => (
               <div key={message.id}>
+                {message.menu && <MenuBox menu={message.date} />}
                 {message.date && <DateIndicator date={message.date} />}
                 <div className={css.textBox}>
                   {message.sender !== sender && (
@@ -144,21 +146,24 @@ export default function Chat() {
           )}
           <div className={css.scrollRef} ref={scrollRef}></div>
         </ul>
-        <textarea
-          className={css.textField}
-          placeholder="채팅을 입력하세요"
-          value={msg}
-          onChange={(e) => setMsg(e.target.value!)}
-        ></textarea>
-        <div className={css.send}>
-          {sendLoading ? (
-            <IonButton>
-              <IonSpinner />
-            </IonButton>
-          ) : (
-            <IonButton onClick={onSubmit}>전송</IonButton>
-          )}
-        </div>
+        {/* 입력창 */}
+        <>
+          <textarea
+            className={css.textField}
+            placeholder="채팅을 입력하세요"
+            value={msg}
+            onChange={(e) => setMsg(e.target.value!)}
+          ></textarea>
+          <div className={css.send}>
+            {sendLoading ? (
+              <IonButton>
+                <IonSpinner />
+              </IonButton>
+            ) : (
+              <IonButton onClick={onSubmit}>전송</IonButton>
+            )}
+          </div>
+        </>
       </IonPage>
     </div>
   );
@@ -169,13 +174,12 @@ function LeftChatBox({ message }: any) {
     <div className={css.leftWrap}>
       <div className={css.chatAvatar}></div>
       <div>
-        <p className={css.leftSender}>{message.sender}</p>
+        <p className={css.leftSender}>{anonymousName(message.sender)}</p>
         <div className={css.leftMsgTime}>
           <p className={css.textBoxL}>{message.msg}</p>
           <p className={css.msgTimeR}>{message.time}</p>
         </div>
       </div>
-      <p className={css.msgTimeL}>{message.time}</p>
     </div>
   );
 }
@@ -185,6 +189,15 @@ function RightChatBox({ message }: any) {
     <>
       <p className={css.msgTimeR}>{message.time}</p>
       <p className={css.textBoxR}>{message.msg}</p>
+    </>
+  );
+}
+
+function MenuBox({ menu }: any) {
+  return (
+    <>
+      <div>여기에 메뉴</div>
+      <div>{menu}</div>
     </>
   );
 }
