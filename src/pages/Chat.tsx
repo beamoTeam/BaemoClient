@@ -175,7 +175,7 @@ function LeftChatBox({ message }: any) {
       <div>
         <p className={css.leftSender}>{anonymousName(message.sender)}</p>
         <div className={css.leftMsgTime}>
-          <p className={css.textBoxL}>{message.msg || message.menu}</p>
+          <p className={css.textBoxL}>{message.msg}</p>
           <p className={css.msgTimeR}>{message.time}</p>
         </div>
       </div>
