@@ -122,6 +122,7 @@ export default function Chat() {
     }
   };
 
+  console.log("LIST :: ", msgList);
   return (
     <div className={css.chat}>
       <IonPage>
