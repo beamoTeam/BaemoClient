@@ -203,10 +203,18 @@ function RightChatBox({ message }: any) {
 
 function PlaneLeftChatBox({ message }: any) {
   return (
-    <>
-      <p className={css.msgTimeL}>{message.time}</p>
-      <p className={css.textBoxL}>{message.msg}</p>
-    </>
+    <div className={css.leftWrap}>
+      <div className={css.chatAvatarPlane}></div>
+      <div>
+        {/* <p className={css.leftSender}>{anonymousName(message.sender)}</p> */}
+        <div className={css.leftMsgTime}>
+          <p className={css.textBoxL}>
+            {message.msg || JSON.stringify(message.menu)}
+          </p>
+          <p className={css.msgTimeR}>{message.time}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
