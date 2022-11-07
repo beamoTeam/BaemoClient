@@ -18,7 +18,8 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
     if (parsedChatMenu[MENU.sender]) {
-      parsedChatMenu[MENU.sender].concat(MENU.menu);
+      console.log("씨발", MENU);
+      parsedChatMenu[MENU.sender] = [...parsedChatMenu[MENU.sender], MENU.menu];
     } else {
       parsedChatMenu[MENU.sender] = MENU.menu;
     }
