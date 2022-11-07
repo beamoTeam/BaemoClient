@@ -66,11 +66,9 @@ export default function Cart() {
   if (!cartItems) return <Spinner />;
   if (cartItems.length === 0)
     return (
-      <IonPage style={{ paddingTop: "50px" }}>
-        <IonContent>
-          <h4>장바구니에 상품이 없습니다.</h4>
-        </IonContent>
-      </IonPage>
+      <IonContent>
+        <h4>장바구니에 상품이 없습니다.</h4>
+      </IonContent>
     );
   const totalPrice = cartItems.reduce(
     (acc: any, item: any) => (acc += item.price),
