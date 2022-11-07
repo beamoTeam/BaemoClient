@@ -19,7 +19,10 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   chatMenu.forEach((MENU: any) => {
     if (parsedChatMenu[MENU.sender]) {
       console.log("object인지 array인지 :: ", MENU.menu);
-      parsedChatMenu[MENU.sender] = [...parsedChatMenu[MENU.sender], MENU.menu];
+      parsedChatMenu[MENU.sender] = [
+        ...parsedChatMenu[MENU.sender],
+        MENU.menu[0],
+      ];
     } else {
       parsedChatMenu[MENU.sender] = [MENU.menu];
     }
