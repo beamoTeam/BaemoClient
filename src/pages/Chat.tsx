@@ -53,7 +53,7 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-
+    console.log(serverMsg);
     const test: ParsedMsg = {
       id: serverMsg.id,
       msg: serverMsg.msg,
