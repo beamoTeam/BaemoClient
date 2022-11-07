@@ -18,12 +18,12 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
     if (parsedChatMenu[MENU.sender]) {
-      console.log("씨발", MENU);
       parsedChatMenu[MENU.sender] = [...parsedChatMenu[MENU.sender], MENU.menu];
     } else {
       parsedChatMenu[MENU.sender] = MENU.menu;
     }
   });
+  console.log("222 :: ", parsedChatMenu);
 
   const parsedMenus = Object.keys(parsedChatMenu).map((sender: any) => ({
     sender,
