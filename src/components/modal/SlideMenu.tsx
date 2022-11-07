@@ -1,6 +1,7 @@
 import { IonContent, IonItem, IonLabel, IonImg, IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
 import { anonymousName } from "../../utils/name";
+import parseMenu from "../../utils/parseMenu";
 import css from "./SlideMenu.module.css";
 
 interface SlideMenuProps {
@@ -9,6 +10,9 @@ interface SlideMenuProps {
 }
 
 export default function SlideMenu({ chatMenu, close }: SlideMenuProps) {
+  const test = chatMenu.map((x: any) => parseMenu(x.menu));
+  console.log(test);
+  return null;
   return (
     <>
       <IonContent>
