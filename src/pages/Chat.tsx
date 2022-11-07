@@ -15,9 +15,10 @@ interface ParsedMsg {
   receiver: string | null;
   roomNum: number;
   sender: string | null;
-  date: string;
+  date: string | null;
   time: string;
   menu: object | null;
+  // enter: string | null;
 }
 
 export default function Chat() {
@@ -53,7 +54,7 @@ export default function Chat() {
 
     const test: ParsedMsg = {
       id: serverMsg.id,
-      msg: serverMsg.receiver,
+      msg: serverMsg.msg,
       receiver: serverMsg.receiver,
       roomNum: serverMsg.roomNum,
       sender: serverMsg.sender,
@@ -64,43 +65,43 @@ export default function Chat() {
 
     // 1. menu filtering
     if (serverMsg.sender.includes("mainMenu")) {
+      test.msg = null;
       test.menu = JSON.parse(serverMsg.msg);
       test.sender = serverMsg.sender.split("_")[1];
     }
 
+    // 2. teim filtering
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
-    test.date = `${yyyy}년 ${mm}월 ${dd}일`;
-    let currentSender: string | null = serverMsg.sender;
-    if (currentSender.includes("mainMenu")) {
-      currentSender = null;
-    }
+    test.date = dateHash.current[create_date] === true ? null : create_date;
+    test.time = `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`;
 
-    if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
+    if (test.menu) {
       setChatMenu((prev: any) => [
         ...prev,
         {
-          sender: serverMsg.sender.split("_")[1],
-          data: JSON.parse(serverMsg.msg),
+          sender: test.sender,
+          menu: test.menu,
         },
       ]);
-    } else {
-      const chatMsgData = {
-        id: serverMsg.id,
-        sender: serverMsg.sender,
-        text: serverMsg.msg,
-        date: dateHash.current[create_date] === true ? null : create_date,
-        time: `${serverMsg.createdAt[3]}:${serverMsg.createdAt[4]}`,
-      };
-
-      setMsgList((prev: any) =>
-        prev ? [...prev, chatMsgData] : [chatMsgData]
-      );
-      dateHash.current[create_date] = true;
-      if (currentSender) {
-        senderHash.current[currentSender] = true;
-      }
     }
+
+    if (test.msg) {
+      setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
+    }
+    dateHash.current[create_date] = true;
+
+    // if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
+    //   setChatMenu((prev: any) => [
+    //     ...prev,
+    //     {
+    //       sender: serverMsg.sender.split("_")[1],
+    //       data: JSON.parse(serverMsg.msg),
+    //     },
+    //   ]);
+
+    // }
+    console.log(test);
   };
 
   // hack
