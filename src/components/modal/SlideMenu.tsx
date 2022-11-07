@@ -25,13 +25,13 @@ export default function SlideMenu({ close }: SlideMenuProps) {
           </div>
 
           {chatMenu.length > 0 &&
-            chatMenu.map((menu: { sender: string; data: [] }, idx: number) => {
+            chatMenu.map((Menu: { sender: string; menu: [] }, idx: number) => {
               return (
                 <div key={idx}>
                   <IonItem slot="header" color="light">
-                    <IonLabel>{anonymousName(menu.sender)}</IonLabel>
+                    <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
                   </IonItem>
-                  {menu.data.map((info: any) => (
+                  {Menu.menu.map((info: any) => (
                     <div className={css.info} key={info.seq}>
                       <IonImg src={info.img} className={css.img} />
                       <IonLabel>
