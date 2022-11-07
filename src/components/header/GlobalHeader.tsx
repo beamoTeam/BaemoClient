@@ -23,6 +23,7 @@ export default function GlobalHeader() {
   const [addr, setAddr] = useState<any>(window.localStorage.getItem("ADDR"));
   const [, setModal] = useModalState();
   const [chatMenu] = useChatMenuState();
+  console.log("CHATMENU :: ", chatMenu);
   const [isLogin] = useLoginState();
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
