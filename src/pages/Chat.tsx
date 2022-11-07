@@ -206,7 +206,7 @@ function PlaneLeftChatBox({ message }: any) {
     <div className={css.leftWrap}>
       <div className={css.chatAvatarPlane}></div>
       <div>
-        <p className={css.leftSenderPlane}>dfsd</p>
+        <p className={css.leftSenderPlane}></p>
         <div className={css.leftMsgTime}>
           <p className={css.textBoxL}>
             {message.msg || JSON.stringify(message.menu)}
