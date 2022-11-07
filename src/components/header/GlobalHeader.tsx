@@ -103,7 +103,7 @@ export default function GlobalHeader() {
         {isChat && (
           <>
             {toggleSlide ? (
-              <SlideMenu chatMenu={chatMenu} close={toggleSlideMenu} />
+              <SlideMenu close={toggleSlideMenu} />
             ) : (
               <IonIcon
                 icon={menuOutline}
