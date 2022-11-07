@@ -17,6 +17,7 @@ export default function SlideMenu({ close }: SlideMenuProps) {
 
   const parsedChatMenu: any = {};
   chatMenu.forEach((MENU: any) => {
+    console.log("씨발", MENU);
     if (parsedChatMenu[MENU.sender]) {
       parsedChatMenu.menu.concat(MENU.menu);
     } else {
@@ -24,12 +25,12 @@ export default function SlideMenu({ close }: SlideMenuProps) {
       parsedChatMenu["menu"] = MENU.menu;
     }
   });
-  console.log(" ??? ::", parsedChatMenu);
+  // console.log(" ??? ::", parsedChatMenu);
   const parsedMenus = Object.keys(parsedChatMenu).map((key: any) => ({
     sender: key,
     menu: parsedChatMenu[key].menu,
   }));
-  console.log(parsedMenus);
+  // console.log(parsedMenus);
 
   return (
     <>
