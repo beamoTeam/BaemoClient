@@ -4,10 +4,15 @@ import css from "./SideBar.module.css";
 
 export default function SideBar({
   open,
+  orders,
   toggleSidebar,
   currentTab,
   setCurrentTab,
 }: any) {
+  const accepted = orders.filter(
+    (order: any) => order.accepted === "접수 완료"
+  ).length;
+  const waiting = orders.length - accepted;
   return (
     <aside>
       <div className={open ? css["sideBar"] : css["close"]}>
@@ -25,7 +30,8 @@ export default function SideBar({
             }`}
             onClick={() => setCurrentTab("접수 대기")}
           >
-            접수 대기 <IonBadge>11</IonBadge>
+            접수 대기{" "}
+            {waiting > 0 && <IonBadge color="tertiary">{waiting}</IonBadge>}
           </li>
           <li
             className={`${css.SideItem} ${
@@ -33,7 +39,7 @@ export default function SideBar({
             }`}
             onClick={() => setCurrentTab("접수 완료")}
           >
-            접수 완료 <IonBadge>11</IonBadge>
+            접수 완료 <IonBadge color="light">{accepted}</IonBadge>
           </li>
         </ul>
       </div>

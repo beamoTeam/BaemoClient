@@ -93,6 +93,7 @@ export default function Admin() {
       <section style={{ display: "flex", color: "black" }} className="no-print">
         <SideBar
           open={open}
+          orders={orders}
           toggleSidebar={toggleSidebar}
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}

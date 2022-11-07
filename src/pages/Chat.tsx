@@ -9,6 +9,17 @@ import { useLoginState } from "../lib/recoil/loginState";
 import { useLocation } from "react-router";
 import Spinner from "../components/spinner/Spinner";
 
+interface ParsedMsg {
+  id: string;
+  msg: string | null;
+  receiver: string | null;
+  roomNum: number;
+  sender: string | null;
+  date: string;
+  time: string;
+  menu: object | null;
+}
+
 export default function Chat() {
   const [, setChatMenu] = useChatMenuState();
   const history = useHistory();
@@ -22,7 +33,7 @@ export default function Chat() {
   const roomNum = Number(pathname.split("/").at(-1));
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const dateHash: any = useRef<any>({});
-  const userHash: any = useRef<any>({});
+  const senderHash: any = useRef<any>({});
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -39,10 +50,31 @@ export default function Chat() {
 
   eventSource.current.onmessage = (e: any) => {
     const serverMsg: MessageModel = JSON.parse(e.data);
-    console.log(serverMsg);
+
+    const test: ParsedMsg = {
+      id: serverMsg.id,
+      msg: serverMsg.receiver,
+      receiver: serverMsg.receiver,
+      roomNum: serverMsg.roomNum,
+      sender: serverMsg.sender,
+      date: "",
+      time: "",
+      menu: null,
+    };
+
+    // 1. menu filtering
+    if (serverMsg.sender.includes("mainMenu")) {
+      test.menu = JSON.parse(serverMsg.msg);
+      test.sender = serverMsg.sender.split("_")[1];
+    }
+
     const [yyyy, mm, dd]: any = serverMsg.createdAt;
     const create_date = `${yyyy}년 ${mm}월 ${dd}일`;
-    const currentSender = serverMsg.sender;
+    test.date = `${yyyy}년 ${mm}월 ${dd}일`;
+    let currentSender: string | null = serverMsg.sender;
+    if (currentSender.includes("mainMenu")) {
+      currentSender = null;
+    }
 
     if (serverMsg.sender && "mainMenu" === serverMsg.sender.split("_")[0]) {
       setChatMenu((prev: any) => [
@@ -66,7 +98,7 @@ export default function Chat() {
       );
       dateHash.current[create_date] = true;
       if (currentSender) {
-        dateHash.current[create_date] = true;
+        senderHash.current[currentSender] = true;
       }
     }
   };
