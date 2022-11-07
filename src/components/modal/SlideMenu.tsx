@@ -14,7 +14,23 @@ export default function SlideMenu({ close }: SlideMenuProps) {
   if (!chatMenu) {
     return null;
   }
-  console.log("??? :: ", chatMenu);
+
+  const parsedChatMenu: any = {};
+  chatMenu.forEach((MENU: any) => {
+    if (parsedChatMenu[MENU.sender]) {
+      parsedChatMenu.menu.concat(MENU.menu);
+    } else {
+      parsedChatMenu["sender"] = MENU.sender;
+      parsedChatMenu["menu"] = MENU.menu;
+    }
+  });
+
+  const parsedMenus = Object.keys(parsedChatMenu).map((MENU: any) => ({
+    sender: MENU.sender,
+    menu: MENU.menu,
+  }));
+  console.log(parsedMenus);
+
   return (
     <>
       <IonContent>
