@@ -113,8 +113,8 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      <AddressModal setAddr={setAddr} />
       <ModalContainer />
+      <AddressModal setAddr={setAddr} />
     </>
   );
 }
