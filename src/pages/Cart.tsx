@@ -17,12 +17,13 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
-import Spinner from "../components/spinner/Spinner";
+import Spinner, { ButtonSpinner } from "../components/spinner/Spinner";
 
 export default function Cart() {
   const history = useHistory();
   const [cartItems, setCartItems] = useState<any>([]);
   const chat_seq = window.localStorage.getItem("CHAT_SEQ");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isLogin()) {
@@ -42,6 +43,7 @@ export default function Cart() {
   }, [chat_seq, history]);
 
   const handleOrder = async () => {
+    setIsLoading(true);
     try {
       const { data } = await groupOrderService.mutateOrder(chat_seq);
       if (data === "이미 결제되었습니다. 다시 확인하세요.") {
@@ -57,9 +59,12 @@ export default function Cart() {
       });
 
       window.localStorage.setItem("CHAT_SENDER", data.sender);
-      history.push(`/chatting`);
+      history.push(`/chatting/${chat_seq}`);
     } catch (err: any) {
       console.error(err);
+      alert("알수없는 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,7 +122,9 @@ export default function Cart() {
 
               <IonItem>
                 <div className={css.orderButton}>
-                  <IonButton onClick={handleOrder}>결제하기</IonButton>
+                  <IonButton onClick={handleOrder}>
+                    {isLoading ? <ButtonSpinner /> : "결제하기"}
+                  </IonButton>
                 </div>
               </IonItem>
             </>
