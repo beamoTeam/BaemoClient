@@ -1,4 +1,10 @@
-import { IonPage, IonButton, IonSpinner, IonIcon } from "@ionic/react";
+import {
+  IonPage,
+  IonButton,
+  IonSpinner,
+  IonIcon,
+  IonHeader,
+} from "@ionic/react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { menuOutline, chevronBackOutline } from "ionicons/icons";
 import css from "./Chat.module.css";
@@ -241,7 +247,7 @@ function DateIndicator({ date }: any) {
 function ChatHeader({ goBack, toggleSlideMenu }: any) {
   return (
     <>
-      <div className={css.chatHeader}>
+      <IonHeader className={css.chatHeader}>
         <div onClick={goBack}>
           <IonIcon icon={chevronBackOutline} className={css.mapButton} />
         </div>
@@ -252,7 +258,7 @@ function ChatHeader({ goBack, toggleSlideMenu }: any) {
             onClick={toggleSlideMenu}
           />
         </div>
-      </div>
+      </IonHeader>
     </>
   );
 }
