@@ -150,7 +150,7 @@ export default function Chat() {
     if (!msgList) {
       setMsgList([]);
     }
-  }, [msgList]);
+  }, []);
 
   return (
     <div>
