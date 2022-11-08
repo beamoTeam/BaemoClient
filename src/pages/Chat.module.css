@@ -182,3 +182,9 @@ ion-content {
   align-items: center;
   justify-content: center;
 }
+
+.scorllRef {
+  height: 60px;
+  width: 100%;
+  background-color: red;
+}
