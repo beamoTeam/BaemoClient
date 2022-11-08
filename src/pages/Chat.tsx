@@ -104,6 +104,7 @@ export default function Chat() {
 
     setMsgList((prev: any) => (prev ? [...prev, test] : [test]));
 
+    console.log("TEST :: ", test);
     dateHash.current[create_date] = true;
   };
 
