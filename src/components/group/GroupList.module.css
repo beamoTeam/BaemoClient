@@ -19,3 +19,8 @@
 .current {
   background-color: #d7d8da;
 }
+
+.roomSeq {
+  color: silver;
+  font-size: 12px;
+}

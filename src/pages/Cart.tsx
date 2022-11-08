@@ -19,9 +19,6 @@ import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
 import Spinner from "../components/spinner/Spinner";
 
-// 장바구니 슬라이드 메뉴 오류
-// 장바구니 없을떄 ui 이상함.
-
 export default function Cart() {
   const history = useHistory();
   const [cartItems, setCartItems] = useState<any>([]);

@@ -146,6 +146,12 @@ export default function Chat() {
     return;
   }, [history]);
 
+  useEffect(() => {
+    if (!msgList) {
+      setMsgList([]);
+    }
+  }, [msgList]);
+
   return (
     <div>
       <IonPage>

@@ -35,7 +35,9 @@ export default function GroupList({
         >
           <IonImg src={group.restaurant.img} className={css.img} />
           <IonLabel>
-            <h2>{group.name}</h2>
+            <h2>
+              {group.name} <span className={css.roomSeq}>{group.seq}</span>
+            </h2>
             <h3>모집 마감 {group.orderTime.split(" ")[1]}</h3>
           </IonLabel>
         </IonItem>
