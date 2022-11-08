@@ -39,7 +39,7 @@ export default function Footer() {
       profile: false,
       chatting: true,
       oauth: true,
-      cart: true,
+      // cart: true,
     };
   }, []);
 
