@@ -26,6 +26,7 @@ ion-content {
   width: 100%;
   resize: none;
   z-index: 9998;
+  margin: 0;
 }
 
 .textBoxL {
@@ -184,7 +185,4 @@ ion-content {
 }
 
 .scrollRef {
-  height: 60px;
-  width: 100%;
-  background-color: red;
 }
