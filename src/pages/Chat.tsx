@@ -1,5 +1,6 @@
-import { IonPage, IonButton, IonSpinner } from "@ionic/react";
-import { useState, useRef, useEffect } from "react";
+import { IonPage, IonButton, IonSpinner, IonIcon } from "@ionic/react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { menuOutline } from "ionicons/icons";
 import css from "./Chat.module.css";
 import chatService from "../lib/api/ChatService";
 import { MessageModel } from "../types/chatMsg";
@@ -8,6 +9,7 @@ import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
 import { useLocation } from "react-router";
 import { anonymousName } from "../utils/name";
+import SlideMenu from "../components/modal/SlideMenu";
 import Spinner from "../components/spinner/Spinner";
 
 interface ParsedMsg {
@@ -36,6 +38,7 @@ export default function Chat() {
   const [msgList, setMsgList] = useState<any | null>(null);
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const [sendLoading, setSendLoading] = useState<boolean>(false);
+  const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -126,6 +129,10 @@ export default function Chat() {
     }
   };
 
+  const toggleSlideMenu = useCallback(() => {
+    setToggleSlide((prev) => !prev);
+  }, []);
+
   return (
     <div>
       <IonPage>
@@ -171,6 +178,21 @@ export default function Chat() {
           </div>
         </>
       </IonPage>
+      {
+        <>
+          {toggleSlide ? (
+            <SlideMenu close={toggleSlideMenu} />
+          ) : (
+            <div>
+              <IonIcon
+                icon={menuOutline}
+                className={css.mapButton}
+                onClick={toggleSlideMenu}
+              />
+            </div>
+          )}
+        </>
+      }
     </div>
   );
 }

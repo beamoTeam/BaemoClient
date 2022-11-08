@@ -4,7 +4,6 @@ import {
   chevronDownOutline,
   locationOutline,
   chevronBackOutline,
-  menuOutline,
 } from "ionicons/icons";
 import { useModalState } from "../../lib/recoil/modalState";
 import css from "./GlobalHeader.module.css";
@@ -14,7 +13,6 @@ import { useLoginState } from "../../lib/recoil/loginState";
 import ModalContainer from "../modal/common/ModalPortal";
 import { useLocation, useHistory } from "react-router";
 import { useState, useCallback } from "react";
-import SlideMenu from "../modal/SlideMenu";
 
 export default function GlobalHeader() {
   const location = useLocation();
@@ -22,7 +20,6 @@ export default function GlobalHeader() {
   const [addr, setAddr] = useState<any>(window.localStorage.getItem("ADDR"));
   const [, setModal] = useModalState();
   const [isLogin] = useLoginState();
-  const [toggleSlide, setToggleSlide] = useState<boolean>(false);
 
   let isHome = useMemo(
     () => location.pathname === "/home",
@@ -61,11 +58,11 @@ export default function GlobalHeader() {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${kakao_redirect_url}&response_type=code&prompt=login`;
   };
 
-  const toggleSlideMenu = useCallback(() => {
-    setToggleSlide((prev) => !prev);
-  }, []);
-
   if (location.pathname.includes("store")) {
+    return null;
+  }
+
+  if (isChat) {
     return null;
   }
 
@@ -97,19 +94,6 @@ export default function GlobalHeader() {
                 />
               )}
             </div>
-          </>
-        )}
-        {isChat && (
-          <>
-            {toggleSlide ? (
-              <SlideMenu close={toggleSlideMenu} />
-            ) : (
-              <IonIcon
-                icon={menuOutline}
-                className={css.mapButton}
-                onClick={toggleSlideMenu}
-              />
-            )}
           </>
         )}
       </IonHeader>
