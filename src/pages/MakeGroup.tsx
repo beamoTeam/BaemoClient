@@ -158,7 +158,9 @@ const MakeGroup: React.FC = () => {
           </div>
           <IonItem>
             <div className={css.makeBtn}>
-              <IonButton onClick={createGroup}>방만들기</IonButton>
+              <IonButton onClick={createGroup}>
+                {isLoading ? <ButtonSpinner /> : "방만들기"}
+              </IonButton>
             </div>
           </IonItem>
         </IonContent>
