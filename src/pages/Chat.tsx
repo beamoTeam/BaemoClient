@@ -127,7 +127,7 @@ export default function Chat() {
   };
 
   return (
-    <div className={css.chat}>
+    <div>
       <IonPage>
         <ul className={css.textList}>
           {!msgList ? (
