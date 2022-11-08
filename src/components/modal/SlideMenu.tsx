@@ -38,45 +38,43 @@ export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
   }
   return (
     <>
-      <IonContent>
-        <div className={css.SlideMenu}>
-          <div className={css.slideHeader}>
-            <div></div>
-            <IonIcon icon={closeOutline} onClick={toggleSlideMenu} />
-          </div>
-
-          {chatMenu.length === 0 ? (
-            <IonItem slot="header" color="light">
-              <p>장바구니에 상품이 없습니다.</p>
-            </IonItem>
-          ) : (
-            parsedMenus?.map(
-              (Menu: { sender: any; menu: any }, idx: number) => {
-                return (
-                  <div key={idx}>
-                    <IonItem slot="header" color="light">
-                      <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
-                    </IonItem>
-                    {Menu.menu.map((info: any) => (
-                      <div className={css.info} key={info.seq}>
-                        <IonImg src={info.img} className={css.img} />
-                        <IonLabel>
-                          <h4 className={css.name}>
-                            {info.name} x {info.count}
-                          </h4>
-                          <h4 className={css.price}>
-                            {info.price.toLocaleString()}원
-                          </h4>
-                        </IonLabel>
-                      </div>
-                    ))}
-                  </div>
-                );
-              }
-            )
-          )}
+      {/* <IonContent> */}
+      <div className={css.SlideMenu}>
+        <div className={css.slideHeader}>
+          <div></div>
+          <IonIcon icon={closeOutline} onClick={toggleSlideMenu} />
         </div>
-      </IonContent>
+
+        {chatMenu.length === 0 ? (
+          <IonItem slot="header" color="light">
+            <p>장바구니에 상품이 없습니다.</p>
+          </IonItem>
+        ) : (
+          parsedMenus?.map((Menu: { sender: any; menu: any }, idx: number) => {
+            return (
+              <div key={idx}>
+                <IonItem slot="header" color="light">
+                  <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
+                </IonItem>
+                {Menu.menu.map((info: any) => (
+                  <div className={css.info} key={info.seq}>
+                    <IonImg src={info.img} className={css.img} />
+                    <IonLabel>
+                      <h4 className={css.name}>
+                        {info.name} x {info.count}
+                      </h4>
+                      <h4 className={css.price}>
+                        {info.price.toLocaleString()}원
+                      </h4>
+                    </IonLabel>
+                  </div>
+                ))}
+              </div>
+            );
+          })
+        )}
+      </div>
+      {/* </IonContent> */}
     </>
   );
 }
