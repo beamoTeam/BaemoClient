@@ -9,7 +9,7 @@ ion-content {
   padding-top: 50px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 60px;
+  padding-bottom: 90px;
   overflow: auto;
   background-color: white;
 }
