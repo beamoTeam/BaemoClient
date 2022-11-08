@@ -19,6 +19,9 @@ import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
 import Spinner from "../components/spinner/Spinner";
 
+// 장바구니 슬라이드 메뉴 오류
+// 장바구니 없을떄 ui 이상함.
+
 export default function Cart() {
   const history = useHistory();
   const [cartItems, setCartItems] = useState<any>([]);
@@ -78,7 +81,9 @@ export default function Cart() {
           </IonItem>
 
           {cartItems.length === 0 ? (
-            <h4>장바구니에 상품이 없습니다.</h4>
+            <IonItem>
+              <p>장바구니에 상품이 없습니다.</p>
+            </IonItem>
           ) : (
             <>
               <IonItem>
