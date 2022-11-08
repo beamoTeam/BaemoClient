@@ -88,6 +88,8 @@ export default function MenuDetail() {
     }
   };
 
+  console.log(" DETAIL :: ", menuDetail);
+  console.log(" TOTAL PRICE :: ", menuDetail.price);
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent style={marginTop}>
