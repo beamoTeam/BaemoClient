@@ -100,6 +100,7 @@ const MakeGroup: React.FC = () => {
       setModal(null);
       enterToGroup(c_seq, r_seq);
       history.push(`restaurant/${r_seq}`);
+      window.localStorage.setItem("CHAT_SEQ", c_seq);
     } catch (err) {
       alert("알수없는 오류가 발생했습니다.");
       console.error(err);

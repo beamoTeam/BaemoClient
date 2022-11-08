@@ -48,7 +48,7 @@ export default function Cart() {
       const { data } = await groupOrderService.mutateOrder(chat_seq);
       if (data === "이미 결제되었습니다. 다시 확인하세요.") {
         alert(data);
-        history.push(`/chatting`);
+        history.push(`/chatting/${chat_seq}`);
         return;
       }
 
@@ -64,6 +64,7 @@ export default function Cart() {
       console.error(err);
       alert("알수없는 오류가 발생했습니다.");
     } finally {
+      alert("결제가 완료되었습니다.");
       setIsLoading(false);
     }
   };
