@@ -141,9 +141,7 @@ export default function Chat() {
   }, []);
 
   const goBack = useCallback(() => {
-    setTimeout(() => {
-      history.goBack();
-    }, 0);
+    history.goBack();
     return;
   }, [history]);
 

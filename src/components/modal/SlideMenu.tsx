@@ -1,4 +1,4 @@
-import { IonContent, IonItem, IonLabel, IonImg, IonIcon } from "@ionic/react";
+import { IonItem, IonLabel, IonImg, IonIcon } from "@ionic/react";
 import { closeOutline } from "ionicons/icons";
 import { anonymousName } from "../../utils/name";
 import { useChatMenuState } from "../../lib/recoil/chatMenuState";
@@ -38,7 +38,6 @@ export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
   }
   return (
     <>
-      {/* <IonContent> */}
       <div className={css.SlideMenu}>
         <div className={css.slideHeader}>
           <div></div>
@@ -74,7 +73,6 @@ export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
           })
         )}
       </div>
-      {/* </IonContent> */}
     </>
   );
 }
