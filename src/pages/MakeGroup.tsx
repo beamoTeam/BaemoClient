@@ -73,6 +73,7 @@ const MakeGroup: React.FC = () => {
   };
 
   const createGroup = async () => {
+    setIsLoading(true);
     let flag = true;
     Object.values(info).forEach((x) => {
       if (x === null || x === undefined) {
@@ -86,7 +87,6 @@ const MakeGroup: React.FC = () => {
     }
 
     try {
-      setIsLoading((prev) => !prev);
       const newGroupInfo = {
         address: addr,
         detail_address: info.detail_address,
@@ -104,10 +104,10 @@ const MakeGroup: React.FC = () => {
       alert("알수없는 오류가 발생했습니다.");
       console.error(err);
     } finally {
-      setIsLoading((prev) => !prev);
+      setIsLoading(false);
     }
   };
-
+  console.log(isLoading);
   return (
     <>
       <IonPage style={{ paddingTop: "50px" }}>

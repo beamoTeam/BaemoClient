@@ -55,7 +55,7 @@ const Home: React.FC = () => {
 
   if (!groupList) return <Spinner />;
   if (groupList.length === 0) return <h4>No group</h4>;
-
+  console.log(groupList);
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent fullscreen>
