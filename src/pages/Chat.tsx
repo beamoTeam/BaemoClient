@@ -1,6 +1,6 @@
 import { IonPage, IonButton, IonSpinner, IonIcon } from "@ionic/react";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { menuOutline } from "ionicons/icons";
+import { menuOutline, chevronBackOutline } from "ionicons/icons";
 import css from "./Chat.module.css";
 import chatService from "../lib/api/ChatService";
 import { MessageModel } from "../types/chatMsg";
@@ -133,9 +133,17 @@ export default function Chat() {
     setToggleSlide((prev) => !prev);
   }, []);
 
+  const goBack = useCallback(() => {
+    setTimeout(() => {
+      history.goBack();
+    }, 0);
+    return;
+  }, [history]);
+
   return (
     <div>
       <IonPage>
+        <ChatHeader goBack={goBack} toggleSlideMenu={toggleSlideMenu} />
         <ul className={css.textList}>
           {!msgList ? (
             <Spinner />
@@ -178,21 +186,6 @@ export default function Chat() {
           </div>
         </>
       </IonPage>
-      {
-        <>
-          {toggleSlide ? (
-            <SlideMenu close={toggleSlideMenu} />
-          ) : (
-            <div>
-              <IonIcon
-                icon={menuOutline}
-                className={css.mapButton}
-                onClick={toggleSlideMenu}
-              />
-            </div>
-          )}
-        </>
-      }
     </div>
   );
 }
@@ -242,4 +235,35 @@ function PlaneLeftChatBox({ message }: any) {
 
 function DateIndicator({ date }: any) {
   return <div className={css.dateLine}>{date}</div>;
+}
+
+function ChatHeader({ goBack, toggleSlideMenu }: any) {
+  return (
+    <>
+      <div className={css.chatHeader}>
+        <div onClick={goBack}>
+          <IonIcon icon={chevronBackOutline} className={css.mapButton} />
+        </div>
+        <div>
+          <IonIcon
+            icon={menuOutline}
+            className={css.mapButton}
+            onClick={toggleSlideMenu}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
+{
+  /* {
+            <>
+              {toggleSlide ? (
+                <SlideMenu close={toggleSlideMenu} />
+              ) : (
+
+              )}
+            </>
+          } */
 }

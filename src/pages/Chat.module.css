@@ -184,5 +184,13 @@ ion-content {
   justify-content: center;
 }
 
-.scrollRef {
+.chatHeader {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 50px;
+  z-index: 1000;
+  background-color: white;
 }
