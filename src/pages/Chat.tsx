@@ -143,6 +143,7 @@ export default function Chat() {
   return (
     <div>
       <IonPage>
+        {toggleSlide && <SlideMenu toggleSlideMenu={toggleSlideMenu} />}
         <ChatHeader goBack={goBack} toggleSlideMenu={toggleSlideMenu} />
         <ul className={css.textList}>
           {!msgList ? (

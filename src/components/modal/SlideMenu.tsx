@@ -6,10 +6,10 @@ import parseMenu from "../../utils/parseMenu";
 import css from "./SlideMenu.module.css";
 
 interface SlideMenuProps {
-  close: any;
+  toggleSlideMenu: any;
 }
 
-export default function SlideMenu({ close }: SlideMenuProps) {
+export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
   const [chatMenu] = useChatMenuState();
   if (!chatMenu) {
     return null;
@@ -42,7 +42,7 @@ export default function SlideMenu({ close }: SlideMenuProps) {
         <div className={css.SlideMenu}>
           <div className={css.slideHeader}>
             <div></div>
-            <IonIcon icon={closeOutline} onClick={close} />
+            <IonIcon icon={closeOutline} onClick={toggleSlideMenu} />
           </div>
 
           {chatMenu.length === 0 ? (
