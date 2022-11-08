@@ -225,7 +225,9 @@ function RightChatBox({ message }: any) {
   return (
     <>
       <p className={css.msgTimeR}>{message.time}</p>
-      <p className={css.textBoxR}>{message.msg}</p>
+      <p className={css.textBoxR}>
+        {message.msg || JSON.stringify(message.menu)}
+      </p>
     </>
   );
 }
