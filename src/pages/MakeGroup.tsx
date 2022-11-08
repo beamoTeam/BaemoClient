@@ -16,7 +16,7 @@ import groupOrderService from "../lib/api/GroupOrderService";
 import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
-import ConfirmModal from "../components/modal/ConfirmModal";
+import { ButtonSpinner } from "../components/spinner/Spinner";
 
 const MakeGroup: React.FC = () => {
   const history = useHistory();
@@ -24,6 +24,7 @@ const MakeGroup: React.FC = () => {
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [info, setInfo] = useState<any>({
     address: addr,
@@ -85,6 +86,7 @@ const MakeGroup: React.FC = () => {
     }
 
     try {
+      setIsLoading((prev) => !prev);
       const newGroupInfo = {
         address: addr,
         detail_address: info.detail_address,
@@ -99,26 +101,11 @@ const MakeGroup: React.FC = () => {
       enterToGroup(c_seq, r_seq);
       history.push(`restaurant/${r_seq}`);
     } catch (err) {
+      alert("알수없는 오류가 발생했습니다.");
       console.error(err);
+    } finally {
+      setIsLoading((prev) => !prev);
     }
-  };
-
-  const clickCreateButton = () => {
-    // if (chat_seq) {
-    //   setModal(
-    //     <ConfirmModal
-    //       onCancel={() => {
-    //         setTimeout(() => {
-    //           history.goBack();
-    //         }, 0);
-    //       }}
-    //       onConfirm={createGroup}
-    //       message=""
-    //     />
-    //   );
-    // } else {
-    createGroup();
-    // }
   };
 
   return (
@@ -171,7 +158,7 @@ const MakeGroup: React.FC = () => {
           </div>
           <IonItem>
             <div className={css.makeBtn}>
-              <IonButton onClick={clickCreateButton}>방만들기</IonButton>
+              <IonButton onClick={createGroup}>방만들기</IonButton>
             </div>
           </IonItem>
         </IonContent>
