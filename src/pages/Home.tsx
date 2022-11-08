@@ -18,6 +18,7 @@ const Home: React.FC = () => {
   const history = useHistory();
   const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
+  const [currentFilter, setCurrentFilter] = useState<any>(null);
   const currentGroup = window.localStorage.getItem("CHAT_SEQ");
 
   useEffect(() => {
@@ -57,7 +58,6 @@ const Home: React.FC = () => {
 
   return (
     <IonPage style={{ marginBottom: "55px" }}>
-      {/* <div style={{ marginBottom: "55px" }}> */}
       <IonContent fullscreen>
         <FoodCategory />
         <SortFilter />
@@ -67,7 +67,6 @@ const Home: React.FC = () => {
           currentGroup={currentGroup}
         />
       </IonContent>
-      {/* </div> */}
     </IonPage>
   );
 };

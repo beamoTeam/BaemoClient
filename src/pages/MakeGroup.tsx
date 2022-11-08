@@ -104,81 +104,83 @@ const MakeGroup: React.FC = () => {
   };
 
   const clickCreateButton = () => {
-    if (chat_seq) {
-      setModal(
-        <ConfirmModal
-          onCancel={() => {
-            setTimeout(() => {
-              history.goBack();
-            }, 0);
-          }}
-          onConfirm={createGroup}
-          message="새로운 모임을 만들면 현재 모임에서 나가집니다. 새로 만드시겠습니까?"
-        />
-      );
-    } else {
-      createGroup();
-    }
+    // if (chat_seq) {
+    //   setModal(
+    //     <ConfirmModal
+    //       onCancel={() => {
+    //         setTimeout(() => {
+    //           history.goBack();
+    //         }, 0);
+    //       }}
+    //       onConfirm={createGroup}
+    //       message=""
+    //     />
+    //   );
+    // } else {
+    createGroup();
+    // }
   };
 
   return (
-    <IonPage style={{ paddingTop: "50px" }}>
-      <IonContent fullscreen>
-        <RestaurantsModal
-          restaurants={restaurants}
-          selectRestaurant={selectRestaurant}
-        />
-        <div className="make-chat-content">
-          <IonListHeader>
-            <IonLabel>배달 정보</IonLabel>
-          </IonListHeader>
-          <IonItem>
-            <div className={css.addr}>
-              <p>{addr}</p>
-              <div className={css.addrDetailWrap}>
-                <input
-                  name="detail_address"
-                  value={info.detail_address}
-                  onChange={onInput}
-                  placeholder="상세 주소"
-                  className={css.addrDetail}
-                />
+    <>
+      <IonPage style={{ paddingTop: "50px" }}>
+        <IonContent fullscreen>
+          <div className="make-chat-content">
+            <IonListHeader>
+              <IonLabel>배달 정보</IonLabel>
+            </IonListHeader>
+            <IonItem>
+              <div className={css.addr}>
+                <p>{addr}</p>
+                <div className={css.addrDetailWrap}>
+                  <input
+                    name="detail_address"
+                    value={info.detail_address}
+                    onChange={onInput}
+                    placeholder="상세 주소"
+                    className={css.addrDetail}
+                  />
+                </div>
               </div>
-            </div>
-          </IonItem>
+            </IonItem>
 
-          <IonListHeader>
-            <IonLabel>음식점</IonLabel>
-          </IonListHeader>
-          <IonItem>
-            <div className={css.restaurant}>
-              <p>{info.restaurant_name || "음식점을 선택해주세요"}</p>
-              <IonButton
-                id="open-restaurant-modal"
-                onClick={showRestaurantsModal}
-              >
-                음식점 찾기
-              </IonButton>
-            </div>
-          </IonItem>
+            <IonListHeader>
+              <IonLabel>음식점</IonLabel>
+            </IonListHeader>
+            <IonItem>
+              <div className={css.restaurant}>
+                <p>{info.restaurant_name || "음식점을 선택해주세요"}</p>
+                <IonButton
+                  id="open-restaurant-modal"
+                  onClick={showRestaurantsModal}
+                >
+                  음식점 찾기
+                </IonButton>
+              </div>
+            </IonItem>
 
-          <IonListHeader>
-            <IonLabel>모집 마감시간</IonLabel>
-          </IonListHeader>
-          <IonItem>
-            <p className={css.time}>
-              {info.orderTime ? info.orderTime.split(" ")[1] : "00:00"}
-            </p>
-            <TimePicker setTime={setTime} />
-          </IonItem>
-        </div>
-        <IonItem>
-          <div className={css.makeBtn}>
-            <IonButton onClick={clickCreateButton}>방만들기</IonButton>
+            <IonListHeader>
+              <IonLabel>모집 마감시간</IonLabel>
+            </IonListHeader>
+            <IonItem>
+              <p className={css.time}>
+                {info.orderTime ? info.orderTime.split(" ")[1] : "00:00"}
+              </p>
+              <TimePicker setTime={setTime} />
+            </IonItem>
           </div>
-        </IonItem>
-      </IonContent>
-    </IonPage>
+          <IonItem>
+            <div className={css.makeBtn}>
+              <IonButton onClick={clickCreateButton}>방만들기</IonButton>
+            </div>
+          </IonItem>
+        </IonContent>
+      </IonPage>
+      <RestaurantsModal
+        restaurants={restaurants}
+        selectRestaurant={selectRestaurant}
+      />
+    </>
   );
 };
 
