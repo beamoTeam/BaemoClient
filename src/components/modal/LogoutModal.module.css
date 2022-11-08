@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+  margin-top: 60px;
 }
 
 .cardModalBtns button,
