@@ -37,7 +37,6 @@ import ChatList from "./pages/ChatList";
 /* Components */
 import GlobalHeader from "./components/header/GlobalHeader";
 import Footer from "./components/footer/Footer";
-import Toast from "./components/modal/Toast";
 /* Admin */
 const Admin = React.lazy(() => import("./admin/Admin"));
 
@@ -72,7 +71,6 @@ export default function App() {
             </IonRouterOutlet>
             <Footer />
           </IonReactRouter>
-          <Toast />
         </IonApp>
       </RecoilRoot>
     </Suspense>
