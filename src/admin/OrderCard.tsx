@@ -56,7 +56,7 @@ function CardTop({
       setLoading({ ...loading, accept: true });
     }
   };
-
+  console.log({ currentTab })
   return (
     <div className={css.orderCardTop}>
       <div className={css.time}>{time}</div>

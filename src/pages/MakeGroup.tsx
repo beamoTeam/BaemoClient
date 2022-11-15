@@ -33,7 +33,6 @@ const MakeGroup: React.FC = () => {
     restaurant_seq: null,
     restaurant_name: null,
   });
-  const chat_seq = window.localStorage.getItem("CHAT_SEQ");
 
   const onInput = (e: any) => {
     const { name, value } = e.target;
@@ -109,7 +108,7 @@ const MakeGroup: React.FC = () => {
       setIsLoading(false);
     }
   };
-  console.log(isLoading);
+
   return (
     <>
       <IonPage style={{ paddingTop: "50px" }}>
@@ -153,7 +152,7 @@ const MakeGroup: React.FC = () => {
             </IonListHeader>
             <IonItem>
               <p className={css.time}>
-                {info.orderTime ? info.orderTime.split(" ")[1] : "00:00"}
+                {info.orderTime ? info.orderTime.split(" ")[1] : "모집 마감시간을 선택해주세요"}
               </p>
               <TimePicker setTime={setTime} />
             </IonItem>

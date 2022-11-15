@@ -115,6 +115,7 @@ export default function Admin() {
         <Main
           orders={currentOrderList}
           acceptOrder={acceptOrder}
+          currentTab={currentTab}
           openReceiptModal={openReceiptModal}
         />
       </section>

@@ -24,7 +24,7 @@ export default function Restaurant() {
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
   const r_seq = param.r_seq;
   // const rest_seq = location.pathname.split("/").at(-1);
-  // console.log({ r_seq });
+  console.log({ r_seq });
 
   useEffect(() => {
     (async () => {
@@ -33,6 +33,7 @@ export default function Restaurant() {
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
       } catch (err) {
+        alert("메뉴를 불러오는 중 오류가 발생했습니다.");
         console.error(err);
       }
     })();
