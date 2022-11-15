@@ -12,29 +12,30 @@ import {
 import { useEffect, useState } from "react";
 import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
 import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
   const location = useLocation();
+  const { r_seq } = useParams();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
-  const r_seq = location.pathname.split("/").at(-1);
+  const rest_seq = location.pathname.split("/").at(-1);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
 
   useEffect(() => {
     console.log({ r_seq });
     (async () => {
       try {
-        const data = await restaurantService.fetchAllMenus(r_seq!);
+        const data = await restaurantService.fetchAllMenus(rest_seq!);
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [r_seq, setMenus, setRestaurant]);
+  }, [rest_seq, setMenus, setRestaurant]);
 
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
@@ -56,7 +57,7 @@ export default function Restaurant() {
         <div>
           <IonList style={{ marginTop: "50px" }}>
             {menus?.map((menu) => (
-              <Link to={`${r_seq}/menu/${menu.seq}`} key={menu.seq}>
+              <Link to={`${rest_seq}/menu/${menu.seq}`} key={menu.seq}>
                 <IonItem>
                   <IonAvatar slot="start">
                     <IonImg src={menu.img} />
