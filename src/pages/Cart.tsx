@@ -34,7 +34,8 @@ export default function Cart() {
       try {
         const data = await getUserCart(chat_seq);
         console.log("****");
-        console.log(data);
+        console.log(" CART :: ", data);
+        console.log(" PARSED :: ", parseMenu(data.basketMenuList));
         setCartItems(parseMenu(data.basketMenuList));
       } catch (err) {
         console.error(err);
