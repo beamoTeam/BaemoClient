@@ -77,7 +77,7 @@ export default function Cart() {
 
   return (
     <>
-      <IonPage style={{ paddingTop: "50px" }}>
+      <IonPage style={{ padding: "50px 0" }}>
         <IonContent fullscreen>
           <IonItem>
             <div className={css.title}>BBQ청계 목대점</div>
