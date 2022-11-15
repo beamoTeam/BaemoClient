@@ -1,11 +1,7 @@
 import { useToastState } from '../../lib/recoil/toastState';
 import { IonToast } from '@ionic/react';
 
-interface ToastProps {
-  message: string;
-}
-
-export default function Toast({ message }: ToastProps) {
+export default function Toast() {
   const [toast, setToast] = useToastState();
 
   return (
@@ -13,7 +9,7 @@ export default function Toast({ message }: ToastProps) {
       <IonToast
         isOpen={toast}
         onDidDismiss={() => setToast(false)}
-        message={message}
+        message={toast}
         duration={1500}
       />
     </>
