@@ -14,7 +14,7 @@ import restaurantService from "../lib/api/RestaurantService";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { MenuModel } from "../types/menu";
 import "./MenuDetail.css";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useLoginState } from "../lib/recoil/loginState";
 import { ButtonSpinner } from "../components/spinner/Spinner";
@@ -36,6 +36,8 @@ export default function MenuDetail() {
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
   const chat_seq = useLocalStorage.get("CHAT_SEQ");
   const [quantity, setQuantity] = useState<number>(1);
+  const { m_seq }: any = useParams();
+  const menu_seq = location.pathname.split("/").at(-1);
   const [options] = useState<optionsType>({
     coke: false,
     soda: false,
@@ -52,16 +54,15 @@ export default function MenuDetail() {
 
   // Initial Data Fetching
   useEffect(() => {
-    const m_seq = location.pathname.split("/").at(-1);
     (async () => {
       try {
-        const data = await restaurantService.fetchDetailMenus(String(m_seq));
+        const data = await restaurantService.fetchDetailMenus(m_seq || String(menu_seq));
         setMenuDetail(data);
       } catch (err: any) {
         throw new Error(err);
       }
     })();
-  }, [location.pathname]);
+  }, [m_seq]);
 
   if (!menuDetail) return <h3>로딩중...</h3>;
 
