@@ -81,7 +81,7 @@ export default function MenuDetail() {
         seq: menuDetail.seq,
       };
       await groupOrderService.mutateToCart(chat_seq, cartData);
-      setToast("장바구니 추가되었습니다.");
+      setToast("장바구니에 추가되었습니다.");
       history.goBack();
     } catch (err: any) {
       setToast("장바구니 추가에 실패했습니다. 다시 시도해주세요.");

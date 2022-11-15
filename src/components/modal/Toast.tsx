@@ -3,6 +3,7 @@ import { IonToast } from '@ionic/react';
 
 export default function Toast() {
   const [toast, setToast] = useToastState();
+  console.log({ toast });
 
   return (
     <>

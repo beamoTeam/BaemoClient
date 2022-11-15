@@ -7,6 +7,5 @@ export const toastState = atom({
 
 export const useToastState = () => {
   const [toast, setToast] = useRecoilState<any>(toastState);
-  console.log({ toast });
   return [toast, setToast];
 };
