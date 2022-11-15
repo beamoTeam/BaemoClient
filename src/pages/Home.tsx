@@ -32,6 +32,7 @@ const Home: React.FC = () => {
     try {
       const res = await GroupOrderService.enterGroup(c_seq);
       if (res.status <= 201) {
+        console.log(res.data);
         useLocalStorage.set("CHAT_SEQ", JSON.stringify(c_seq));
         history.push(`restaurant/${restaurant_seq}`);
       }
