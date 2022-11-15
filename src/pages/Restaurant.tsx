@@ -18,24 +18,24 @@ import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
   const location = useLocation();
-  const x = useParams();
+  const param:any = useParams();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const rest_seq = location.pathname.split("/").at(-1);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
 
   useEffect(() => {
-    console.log({ x });
+    const r_seq = param.r_seq;
     (async () => {
       try {
-        const data = await restaurantService.fetchAllMenus(rest_seq!);
+        const data = await restaurantService.fetchAllMenus(r_seq!);
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
       } catch (err) {
         console.error(err);
       }
     })();
-  }, [rest_seq, setMenus, setRestaurant]);
+  }, [r_seq, setMenus, setRestaurant]);
 
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
@@ -57,7 +57,7 @@ export default function Restaurant() {
         <div>
           <IonList style={{ marginTop: "50px" }}>
             {menus?.map((menu) => (
-              <Link to={`${rest_seq}/menu/${menu.seq}`} key={menu.seq}>
+              <Link to={`${r_seq}/menu/${menu.seq}`} key={menu.seq}>
                 <IonItem>
                   <IonAvatar slot="start">
                     <IonImg src={menu.img} />
