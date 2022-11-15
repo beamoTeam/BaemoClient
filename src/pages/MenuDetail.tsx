@@ -18,6 +18,7 @@ import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useLoginState } from "../lib/recoil/loginState";
 import { ButtonSpinner } from "../components/spinner/Spinner";
+import { useToastState } from "../lib/recoil/toastState";
 import QuantityButton from "../components/button/QuantityButton";
 
 type optionsType = {
@@ -36,6 +37,7 @@ export default function MenuDetail() {
   const [menuDetail, setMenuDetail] = useState<MenuModel | null>(null);
   const chat_seq = useLocalStorage.get("CHAT_SEQ");
   const [quantity, setQuantity] = useState<number>(1);
+  const [, setToast] = useToastState();
   const [options] = useState<optionsType>({
     coke: false,
     soda: false,
@@ -79,9 +81,10 @@ export default function MenuDetail() {
         seq: menuDetail.seq,
       };
       await groupOrderService.mutateToCart(chat_seq, cartData);
+      setToast("장바구니 추가되었습니다.");
       history.goBack();
     } catch (err: any) {
-      alert("장바구니 추가에 실패했습니다. 다시 시도해주세요.");
+      setToast("장바구니 추가에 실패했습니다. 다시 시도해주세요.");
       console.error(err.response.data);
     } finally {
       setIsLoading(true);
