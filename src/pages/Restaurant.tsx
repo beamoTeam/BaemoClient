@@ -18,14 +18,14 @@ import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
   const location = useLocation();
-  const { r_seq } = useParams();
+  const x = useParams();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const rest_seq = location.pathname.split("/").at(-1);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
 
   useEffect(() => {
-    console.log({ r_seq });
+    console.log({ x });
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(rest_seq!);
