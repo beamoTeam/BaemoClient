@@ -26,6 +26,7 @@ export default function Restaurant() {
 
   useEffect(() => {
     const r_seq = param.r_seq;
+    console.log({ r_seq });
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);
