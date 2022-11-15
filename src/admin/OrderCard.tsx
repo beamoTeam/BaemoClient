@@ -67,14 +67,6 @@ function CardTop({
         <p className={css.orderAddr}>{address}</p>
       </div>
       <div className={css.btns}>
-        <button className={css.print} onClick={() => openReceiptModal(c_seq)}>
-          {loading.print ? (
-            <ButtonSpinner />
-          ) : (
-            <span className={css.printText}>주문표 인쇄</span>
-          )}
-          <IonIcon icon={printOutline} />
-        </button>
         {currentTab === "접수 대기" && (
           <button
             className={css.receiveBtn}
@@ -83,6 +75,14 @@ function CardTop({
             {loading.accept ? <ButtonSpinner /> : <span>주문 접수</span>}
           </button>
         )}
+        <button className={css.print} onClick={() => openReceiptModal(c_seq)}>
+          {loading.print ? (
+            <ButtonSpinner />
+          ) : (
+            <span className={css.printText}>주문표 인쇄</span>
+          )}
+          <IonIcon icon={printOutline} />
+        </button>
       </div>
     </div>
   );

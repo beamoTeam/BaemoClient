@@ -24,6 +24,7 @@ export default function Restaurant() {
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
 
   useEffect(() => {
+    console.log({ restaurant });
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);

@@ -24,6 +24,7 @@ export default function Admin() {
         const r_seq = location.pathname.split("/").at(-1);
         try {
           const res = await adminClient.fetchOrderData(r_seq);
+          console.log("RES :: ", res);
           if (ordersRef.current === JSON.stringify(res)) {
             return;
           }
@@ -54,6 +55,7 @@ export default function Admin() {
             return order;
           })
         );
+        alert("주문이 접수되었습니다.");
       }
       if (res.status >= 400) {
         alert("오류가 발생했습니다. 다시 시도해주세요.");
@@ -82,7 +84,7 @@ export default function Admin() {
   if (orders === "error") {
     return <h4>오류가 발생했습니다. 다시 시도해주세요</h4>;
   }
-
+  console.log(" ORDER :: ", orders);
   let currentOrderList = null;
   if (currentTab === "접수 대기") {
     currentOrderList = orders.filter(
@@ -93,6 +95,7 @@ export default function Admin() {
       (order: any) => order.accepted === "접수 완료"
     );
   }
+  console.log(" CURR :: ", currentOrderList);
 
   const receiptItems = receiptSeq
     ? currentOrderList.find((order: any) => order.c_seq === receiptSeq)

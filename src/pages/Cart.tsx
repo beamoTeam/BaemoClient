@@ -27,7 +27,7 @@ export default function Cart() {
 
   useEffect(() => {
     if (!isLogin()) {
-      history.push("/");
+      history.push("/home");
       return;
     }
     (async () => {
