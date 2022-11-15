@@ -157,7 +157,8 @@ function CartMenuItem({ cartItem }: CartMenuItemProps) {
             <p>- 음료: 콜라</p>
           </div>
           <div className={css.quan}>
-            <QuantityButton quantity={quantity} setQuantity={setQuantity} />
+            {quantity}개
+            {/* <QuantityButton quantity={quantity} setQuantity={setQuantity} /> */}
           </div>
         </div>
       </div>

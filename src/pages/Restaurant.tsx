@@ -43,6 +43,7 @@ export default function Restaurant() {
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;
 
+  console.log({restaurant})
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent>
