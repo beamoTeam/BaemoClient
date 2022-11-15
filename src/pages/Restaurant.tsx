@@ -23,10 +23,10 @@ export default function Restaurant() {
   const [restaurant, setRestaurant] = useState<any>(null);
   const rest_seq = location.pathname.split("/").at(-1);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
+  const r_seq = param.r_seq;
+  console.log({ r_seq });
 
   useEffect(() => {
-    const r_seq = param.r_seq;
-    console.log({ r_seq });
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(r_seq!);
