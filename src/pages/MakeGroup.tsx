@@ -83,6 +83,7 @@ const MakeGroup: React.FC = () => {
 
     if (!flag) {
       alert("옵션을 선택해주세요.");
+      setIsLoading(false);
       return;
     }
 

@@ -17,14 +17,14 @@ import Spinner from "../components/spinner/Spinner";
 import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
-  const location = useLocation();
+  // const location = useLocation();
   const param:any = useParams();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
-  const rest_seq = location.pathname.split("/").at(-1);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
   const r_seq = param.r_seq;
-  console.log({ r_seq });
+  // const rest_seq = location.pathname.split("/").at(-1);
+  // console.log({ r_seq });
 
   useEffect(() => {
     (async () => {
