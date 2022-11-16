@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from "react";
-import { IonContent, IonModal } from "@ionic/react";
+import { IonModal } from "@ionic/react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -44,9 +44,7 @@ function AddressModal({ setAddr }: AddressModalProps) {
         initialBreakpoint={0.7}
         breakpoints={[0, 0.25, 0.5, 0.75]}
       >
-        {/* <IonContent className="ion-padding"> */}
         <DaumPostcodeEmbed onComplete={onComplete} />
-        {/* </IonContent> */}
       </IonModal>
     </>
   );

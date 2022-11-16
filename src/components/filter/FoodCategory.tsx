@@ -10,7 +10,6 @@ export default function FoodCategory() {
     "일식",
     "분식",
     "양식",
-    "괴식",
   ];
 
   return (
