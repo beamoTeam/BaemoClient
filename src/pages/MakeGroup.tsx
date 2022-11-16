@@ -29,7 +29,6 @@ const MakeGroup: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [info, setInfo] = useState<any>({
-    address: addr || window.localStorage.getItem("ADDR"),
     detail_address: "",
     orderTime: null,
     restaurant_seq: null,
@@ -76,13 +75,12 @@ const MakeGroup: React.FC = () => {
   const createGroup = async () => {
     setIsLoading(true);
 
+    if (!addr) {
+      alert("주소를 선택해 주세요");
+      setIsLoading(false);
+      return;
+    }
     for (let key in info) {
-      console.log({ key }, "value:: ", info[key]);
-      if (key === "address" && (window.localStorage.getItem("ADDR") || !info[key])) {
-        alert("주소를 선택해 주세요");
-        setIsLoading(false);
-        return;
-      }
       if (key === "detail_address" && !info[key]) {
         alert("상세 주소를 입력해 주세요");
         setIsLoading(false);
