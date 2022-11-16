@@ -32,6 +32,7 @@ export default function OrderHistory() {
     (async () => {
       try {
         const { data } = await userApis.fetchUserOrderHistory();
+        console.log("주문 내역 :: ", data);
         setOrderHistory(data);
       } catch (err) {
         console.error(err);

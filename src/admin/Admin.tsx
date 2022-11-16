@@ -25,7 +25,6 @@ export default function Admin() {
         const r_seq = location.pathname.split("/").at(-1);
         try {
           const res = await adminClient.fetchOrderData(r_seq);
-          // const sorted = res.sort((a: any, b: any) => b.c_seq - a.c_seq);
 
           if (ordersRef.current === JSON.stringify(res)) {
             return;
