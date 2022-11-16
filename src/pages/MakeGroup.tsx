@@ -154,7 +154,7 @@ const MakeGroup: React.FC = () => {
             </IonListHeader>
             <IonItem>
               <div className={css.restaurant}>
-                <p>{info.restaurant_name || "음식점을 선택해주세요"}</p>
+                <p style={{marginBottom: "10px"}}>{info.restaurant_name || "음식점을 선택해주세요"}</p>
                 <IonButton
                   id="open-restaurant-modal"
                   onClick={showRestaurantsModal}

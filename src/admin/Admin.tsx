@@ -31,7 +31,7 @@ export default function Admin() {
           }
 
           ordersRef.current = JSON.stringify(res);
-          setOrders(res);
+          setOrders(res.sort((a: any, b: any) => b.c_seq - a.c_seq));
         } catch (err) {
           alert("알수없는 오류가 발생했습니다.");
           console.error(err);

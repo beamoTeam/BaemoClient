@@ -57,5 +57,5 @@ export default function TimePicker({ setTime }: any) {
     });
   };
 
-  return <IonButton onClick={openPicker}>선택</IonButton>;
+  return <IonButton style={{padding: "0 5px"}} onClick={openPicker}>선택</IonButton>;
 }
