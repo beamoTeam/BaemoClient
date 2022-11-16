@@ -30,7 +30,7 @@ export default function Spinner({ message }: SpinnerProps) {
           top: "50%",
           left: "50%",
           color: "silver",
-          transform: "translate(-50%, -300%)",
+          transform: "translate(-50%, -350%)",
       }}></IonSpinner>
       <p>{message}</p>
     </div>
