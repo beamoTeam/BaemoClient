@@ -19,13 +19,14 @@ export default function Spinner({ message }: SpinnerProps) {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        opacity: "0.9",
-        zIndex: "9999"
+        opacity: "0.93",
+        zIndex: 10091
       }}
       className="ion-padding"
     >
       <IonSpinner
         style={{
+        color: "silver",
         transform: "translate(-45%, -45%)",
       }}></IonSpinner>
       <p>{message}</p>
