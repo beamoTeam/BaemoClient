@@ -22,13 +22,14 @@ import { ButtonSpinner } from "../components/spinner/Spinner";
 const MakeGroup: React.FC = () => {
   const history = useHistory();
   const [addr,] = useAddrState();
+  console.log({ addr });
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [info, setInfo] = useState<any>({
-    address: addr,
+    address: addr || window.localStorage.getItem("ADDR"),
     detail_address: "",
     orderTime: null,
     restaurant_seq: null,
@@ -89,7 +90,7 @@ const MakeGroup: React.FC = () => {
 
     try {
       const newGroupInfo = {
-        address: addr,
+        address: addr || window.localStorage.getItem("ADDR"),
         detail_address: info.detail_address,
         orderTime: info.orderTime,
         restaurant_seq: info.restaurant_seq,
