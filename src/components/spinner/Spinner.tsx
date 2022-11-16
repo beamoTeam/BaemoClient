@@ -18,7 +18,7 @@ export default function Spinner({ message }: SpinnerProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "red",
+        backgroundColor: "white",
         zIndex: "9999"
       }}
       className="ion-padding"
@@ -27,7 +27,9 @@ export default function Spinner({ message }: SpinnerProps) {
         color: "silver",
         top: "50%",
         left: "50%",
+        backgroundColor: "red",
         transform: "translate(-50%, -50%)",
+        zIndex: "10000"
       }}></IonSpinner>
       <p>{message}</p>
     </div>
