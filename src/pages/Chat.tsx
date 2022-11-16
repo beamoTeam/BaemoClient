@@ -145,11 +145,12 @@ export default function Chat() {
     return;
   }, [history]);
 
+  // 메세지 아무것도 안올때 어케해야될지 모르겠음.
   useEffect(() => {
     if (!msgList) {
       setMsgList([]);
     }
-  }, []);
+  }, [msgList]);
 
   return (
     <div>

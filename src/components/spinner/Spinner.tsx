@@ -19,19 +19,12 @@ export default function Spinner({ message }: SpinnerProps) {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
-        opacity: "0.8",
+        opacity: "0.9",
         zIndex: "9999"
       }}
       className="ion-padding"
     >
-      <IonSpinner style={{
-        color: "silver",
-        top: "50%",
-        left: "50%",
-        backgroundColor: "red",
-        transform: "translate(-50%, -50%)",
-        zIndex: "10000"
-      }}></IonSpinner>
+      <IonSpinner ></IonSpinner>
       <p>{message}</p>
     </div>
   );
@@ -40,3 +33,12 @@ export default function Spinner({ message }: SpinnerProps) {
 export function ButtonSpinner() {
   return <IonSpinner></IonSpinner>;
 }
+
+// style={{
+//         color: "silver",
+//         top: "50%",
+//         left: "50%",
+//         backgroundColor: "red",
+//         transform: "translate(-50%, -50%)",
+//         zIndex: "10000"
+//       }}
