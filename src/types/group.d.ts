@@ -10,7 +10,8 @@ export interface GroupModel {
   restaurant: Restaurant;
   seq: number;
   updatedDateTime?: string;
-} 
+  ableToIn: boolean;
+}
 
 interface RestaurantModel {
   address: string;

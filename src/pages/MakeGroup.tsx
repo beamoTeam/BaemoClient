@@ -16,11 +16,12 @@ import groupOrderService from "../lib/api/GroupOrderService";
 import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
+import { useAddrState } from "../lib/recoil/addrState";
 import { ButtonSpinner } from "../components/spinner/Spinner";
 
 const MakeGroup: React.FC = () => {
   const history = useHistory();
-  const addr = window.localStorage.getItem("ADDR");
+  const [addr,] = useAddrState();
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);

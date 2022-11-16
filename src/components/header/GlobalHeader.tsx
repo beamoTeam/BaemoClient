@@ -12,12 +12,13 @@ import KakaoMapModal from "../modal/KakaoMapModal";
 import { useLoginState } from "../../lib/recoil/loginState";
 import ModalContainer from "../modal/common/ModalPortal";
 import { useLocation, useHistory } from "react-router";
-import { useState, useCallback } from "react";
+import { useAddrState } from "../../lib/recoil/addrState";
+import { useCallback } from "react";
 
 export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
-  const [addr, setAddr] = useState<any>(window.localStorage.getItem("ADDR"));
+  const [addr, setAddr] = useAddrState();
   const [, setModal] = useModalState();
   const [isLogin] = useLoginState();
 
@@ -76,8 +77,8 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div className={css.headerMain}>
-              <div className={css.addr} id="open-address-modal">
+            <div className={css.headerMain} id="open-address-modal">
+              <div className={css.addr}>
                 {addr || "주소를 선택해주세요"}
                 <IonIcon icon={chevronDownOutline} />
               </div>

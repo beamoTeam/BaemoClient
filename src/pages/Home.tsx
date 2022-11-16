@@ -63,7 +63,7 @@ const Home: React.FC = () => {
         <FoodCategory />
         <SortFilter />
         <GroupList
-          groupList={groupList}
+          groupList={groupList.filter(x => x.ableToIn)}
           enterToGroup={enterToGroup}
           currentGroup={currentGroup}
         />
