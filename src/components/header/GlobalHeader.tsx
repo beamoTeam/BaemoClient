@@ -65,11 +65,14 @@ export default function GlobalHeader() {
     return null;
   }
 
+  if (location.pathname.includes("oauth/kakao")) {
+    return null;
+  }
+
   if (isChat) {
     return null;
   }
 
-  console.log(" 헤더에서 로그인 상태 :: ", isLogin);
   return (
     <>
       <IonHeader className={css.globalHeader}>
