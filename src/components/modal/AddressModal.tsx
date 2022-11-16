@@ -40,20 +40,16 @@ function AddressModal() {
 
   return (
     <div>
-      <div>
       <IonModal
         isOpen={present}
         initialBreakpoint={0.6}
         breakpoints={[0, 0.25, 0.5, 0.65]}
         onDidDismiss={onDidDismiss}
       >
-          <div style={{ marginTop: "15px", height: "100%" }}>
-
-        <DaumPostcodeEmbed onComplete={onComplete} />
-          </div>
+        <div style={{ marginTop: "15px", height: "100%" }}>
+          <DaumPostcodeEmbed onComplete={onComplete} />
+        </div>
       </IonModal>
-    </div>
-
     </div>
   );
 }
