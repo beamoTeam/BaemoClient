@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const history = useHistory();
   const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
-  const [currentFilter, setCurrentFilter] = useState<any>(null);
+  const [currentCategory, setCurrentCategory] = useState<any>(null);
   const currentGroup = window.localStorage.getItem("CHAT_SEQ");
 
   useEffect(() => {
@@ -32,7 +32,6 @@ const Home: React.FC = () => {
     try {
       const res = await GroupOrderService.enterGroup(c_seq);
       if (res.status <= 201) {
-        console.log(res.data);
         useLocalStorage.set("CHAT_SEQ", JSON.stringify(c_seq));
         history.push(`restaurant/${restaurant_seq}`);
       }
@@ -57,13 +56,26 @@ const Home: React.FC = () => {
   if (!groupList) return <Spinner />;
   if (groupList.length === 0) return <h4>No group</h4>;
 
+  let test;
+  if (currentCategory) {
+    if (currentCategory === "전체") {
+      test = groupList;
+    }
+    else {
+      test = groupList.filter(x => x.restaurant.category === currentCategory);
+    }
+  }
+  else {
+    test = groupList;
+  }
+
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent fullscreen>
-        <FoodCategory />
+        <FoodCategory currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
         <SortFilter />
         <GroupList
-          groupList={groupList.filter(x => x.ableToIn)}
+          groupList={test}
           enterToGroup={enterToGroup}
           currentGroup={currentGroup}
         />

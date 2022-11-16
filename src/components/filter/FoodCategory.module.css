@@ -18,13 +18,17 @@
 
 .item {
   list-style: none;
-
+  opacity: 0.4;
   min-width: 60px;
-  max-width: 60px;
 
-  padding: 10px;
+  text-align: center;
+  padding: 10px 0px;
 }
 
 .label {
   font-weight: bold;
+}
+
+.currCategory {
+  opacity: 1;
 }

@@ -13,7 +13,7 @@ export default function Admin() {
   const location = useLocation();
   const [open, setOpen] = useState<boolean>(true);
   const [orders, setOrders] = useState<any>(null);
-  console.log(orders)
+
   const [currentTab, setCurrentTab] = useState<any>("접수 대기");
   const [openReceipt, setOpenReceipt] = useState<boolean>(false);
   const [receiptSeq, setReceiptSeq] = useState<any>(null);
@@ -25,13 +25,14 @@ export default function Admin() {
         const r_seq = location.pathname.split("/").at(-1);
         try {
           const res = await adminClient.fetchOrderData(r_seq);
-          console.log("RES :: ", res.sort((a:any,b:any) => b.c_seq - a.c_seq));
+          // const sorted = res.sort((a: any, b: any) => b.c_seq - a.c_seq);
+
           if (ordersRef.current === JSON.stringify(res)) {
             return;
           }
 
           ordersRef.current = JSON.stringify(res);
-          setOrders(res.sort((a:any,b:any) => b.c_seq - a.c_seq));
+          setOrders(res);
         } catch (err) {
           alert("알수없는 오류가 발생했습니다.");
           console.error(err);

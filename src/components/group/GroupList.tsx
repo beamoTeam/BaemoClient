@@ -20,6 +20,9 @@ export default function GroupList({
   enterToGroup,
   currentGroup,
 }: GroupListProps) {
+  if (groupList.length === 0) {
+    return <NoItemUI />
+  }
   return (
     <IonList className={css.list}>
       <IonListHeader>
@@ -44,4 +47,13 @@ export default function GroupList({
       ))}
     </IonList>
   );
+}
+
+function NoItemUI() {
+  return (
+    <div className={css.NoItemUI}>
+      <h4>
+        모임을 만들어 보세요!
+      </h4>
+    </div>)
 }
