@@ -81,7 +81,7 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div className={css.headerMain} id="open-address-modal" onClick={setAddrModal}>
+             <div className={css.headerMain} id="open-address-modal" >  {/*onClick={setAddrModal} */}
               <div className={css.addr} >
                 {addr || "주소를 선택해주세요"}
                 <ModalContainer />
@@ -101,7 +101,7 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      {/* <AddressModal setAddr={setAddr} /> */}
+      <AddressModal/>
     </>
   );
 }
