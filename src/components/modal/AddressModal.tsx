@@ -6,13 +6,12 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { modalState, modalPresentState } from "../../lib/recoil/modalState";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
-
 function AddressModal() {
   const setModal = useSetRecoilState(modalState);
   const present = useRecoilValue(modalPresentState);
   const [, setAddr] = useAddrState();
 
-    const onDidDismiss = () => {
+  const onDidDismiss = () => {
     setModal(null);
   };
 

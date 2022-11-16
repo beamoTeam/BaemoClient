@@ -24,7 +24,10 @@ export default function Spinner({ message }: SpinnerProps) {
       }}
       className="ion-padding"
     >
-      <IonSpinner ></IonSpinner>
+      <IonSpinner
+        style={{
+        transform: "translate(-50%, -50%)",
+      }}></IonSpinner>
       <p>{message}</p>
     </div>
   );
@@ -34,11 +37,3 @@ export function ButtonSpinner() {
   return <IonSpinner></IonSpinner>;
 }
 
-// style={{
-//         color: "silver",
-//         top: "50%",
-//         left: "50%",
-//         backgroundColor: "red",
-//         transform: "translate(-50%, -50%)",
-//         zIndex: "10000"
-//       }}
