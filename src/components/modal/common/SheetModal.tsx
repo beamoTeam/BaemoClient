@@ -19,8 +19,8 @@ export default function SheetModal({ children, type }: SheetModalProps) {
     <div>
       <IonModal
         isOpen={present}
-        initialBreakpoint={type ? 0.3 : 0.7}
-        breakpoints={type ? undefined : [0, 0.25, 0.5, 0.75]}
+        initialBreakpoint={0.6}
+        breakpoints={type ? undefined : [0, 0.25, 0.5, 0.65]}
         onDidDismiss={onDidDismiss}
       >
         <div style={{ marginTop: "15px", height: "100%" }}>{children}</div>
