@@ -19,6 +19,7 @@ export default function Spinner({ message }: SpinnerProps) {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
+        opacity: "0.8",
         zIndex: "9999"
       }}
       className="ion-padding"
