@@ -19,7 +19,7 @@ export default function Spinner({ message }: SpinnerProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "white",
+        backgroundColor: "silver",
       }}
       className="ion-padding"
     >
