@@ -49,10 +49,10 @@ export default function GlobalHeader() {
     }
   }, [history, isHome, setModal]);
 
-  // const setAddrModal = useCallback(() => {
-  //   if (isHome) {
-  //     setModal(<AddressModal />);
-  // }, [history, isHome, setModal]);
+  const setAddrModal = useCallback(() => {
+      setModal(<AddressModal/>);
+    }, [setModal]);
+
   const kakaoLogin = () => {
     const kakao_redirect_url = window.location.origin.includes("local")
       ? process.env.REACT_APP_KAKAO_REDIRECT_URI
@@ -101,7 +101,7 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      <AddressModal setAddr={setAddr} />
+      {/* <AddressModal setAddr={setAddr} /> */}
     </>
   );
 }

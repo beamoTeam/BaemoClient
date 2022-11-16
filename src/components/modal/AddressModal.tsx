@@ -1,18 +1,24 @@
 import React, { useRef, useCallback } from "react";
 import { IonModal } from "@ionic/react";
 import DaumPostcodeEmbed from "react-daum-postcode";
+import { useAddrState } from "../../lib/recoil/addrState";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { modalState, modalPresentState } from "../../lib/recoil/modalState";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
-interface AddressModalProps {
-  setAddr: (newAddr: any) => void;
-}
+function AddressModal() {
+  // const modal = useRef<HTMLIonModalElement>(null);
+  const [, setAddr] = useAddrState();
+    const setModal = useSetRecoilState(modalState);
+  const present = useRecoilValue(modalPresentState);
 
-function AddressModal({ setAddr }: AddressModalProps) {
-  const modal = useRef<HTMLIonModalElement>(null);
+  // const dismiss = useCallback(() => {
+  //   modal.current?.dismiss();
+  // }, []);
 
-  const dismiss = useCallback(() => {
-    modal.current?.dismiss();
-  }, []);
+  const onDidDismiss = useCallback(() => {
+    setModal(null);
+  }, [setModal]);
 
   const onComplete = useCallback(
     (data: any) => {
@@ -29,24 +35,24 @@ function AddressModal({ setAddr }: AddressModalProps) {
         }
         fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
       }
-      dismiss();
+      onDidDismiss();
       setAddr(fullAddress);
       useLocalStorage.set("ADDR", fullAddress);
     },
-    [setAddr, dismiss]
+    [setAddr, onDidDismiss]
   );
 
   return (
-    <>
+    <div>
       <IonModal
-        ref={modal}
-        trigger="open-address-modal"
+        isOpen={present}
         initialBreakpoint={0.7}
         breakpoints={[0, 0.25, 0.5, 0.75]}
+        onDidDismiss={onDidDismiss}
       >
         <DaumPostcodeEmbed onComplete={onComplete} />
       </IonModal>
-    </>
+    </div>
   );
 }
 
