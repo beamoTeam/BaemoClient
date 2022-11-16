@@ -21,7 +21,7 @@ export default function useLogout() {
         setChatMenu([]);
         //
         // navigate("/home");
-        window.location.replace("/home");
+        window.location.replace("/");
       }
   };
 
