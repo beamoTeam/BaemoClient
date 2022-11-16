@@ -26,8 +26,11 @@ export default function Spinner({ message }: SpinnerProps) {
     >
       <IonSpinner
         style={{
-        color: "silver",
-        transform: "translate(-45%, -45%)",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          color: "silver",
+          transform: "translate(-50%, -300%)",
       }}></IonSpinner>
       <p>{message}</p>
     </div>
