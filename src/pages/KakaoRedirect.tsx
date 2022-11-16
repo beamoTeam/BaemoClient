@@ -22,10 +22,10 @@ export default function KakaoRedirect() {
         }
         const { data } = await useApis.fetchUserProfile();
         window.localStorage.setItem("CHAT_SENDER", data.name);
-        history.push("/");
+        history.replace("/");
       })();
     } else {
-      history.push("/");
+      history.replace("/");
     }
     // console.log("로그인 완료 후 :: ", isLogin);
   }, [isLogin, history, setIsLogin]);
