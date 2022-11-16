@@ -15,15 +15,16 @@ export default function KakaoRedirect() {
       const code = new URL(window.location.href).searchParams.get("code");
       (async () => {
         const res = await loginService.getAccessToken(code);
+        console.log(" 로그인 응답 :: ", res);
         if (typeof res === "string") {
           AccessToken.set(res);
           setIsLogin(true);
         }
-
         const { data } = await useApis.fetchUserProfile();
         window.localStorage.setItem("CHAT_SENDER", data.name);
       })();
     }
+    console.log("로그인 완료 후 :: ", isLogin);
     history.push("/");
   }, [isLogin, history, setIsLogin]);
 

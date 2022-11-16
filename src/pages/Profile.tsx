@@ -9,21 +9,16 @@ import {
   IonAvatar,
   IonImg,
 } from "@ionic/react";
-import { useModalState } from "../lib/recoil/modalState";
-import LogoutModal from "../components/modal/LogoutModal";
 import userApis from "../lib/api/User/UserApi";
 import { useEffect, useState } from "react";
 import Spinner from "../components/spinner/Spinner";
 import { useLoginState } from "../lib/recoil/loginState";
 import { useHistory } from "react-router";
-import AccessToken from "../hooks/useToken";
 import useLogout from "../hooks/useLogout";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Profile() {
   const history = useHistory();
   const [isLogin] = useLoginState();
-  const [, setModal] = useModalState();
   const [userInfo, setUserInfo] = useState<any>(null);
   const logout = useLogout();
 

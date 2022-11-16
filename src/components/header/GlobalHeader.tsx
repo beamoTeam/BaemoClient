@@ -49,9 +49,9 @@ export default function GlobalHeader() {
     }
   }, [history, isHome, setModal]);
 
-  const setAddrModal = useCallback(() => {
-      setModal(<AddressModal/>);
-    }, [setModal]);
+  // const setAddrModal = useCallback(() => {
+  //     setModal(<AddressModal/>);
+  //   }, [setModal]);
 
   const kakaoLogin = () => {
     const kakao_redirect_url = window.location.origin.includes("local")
@@ -69,6 +69,7 @@ export default function GlobalHeader() {
     return null;
   }
 
+  console.log(" 헤더에서 로그인 상태 :: ", isLogin);
   return (
     <>
       <IonHeader className={css.globalHeader}>
