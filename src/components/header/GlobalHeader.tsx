@@ -18,7 +18,7 @@ import { useCallback } from "react";
 export default function GlobalHeader() {
   const location = useLocation();
   const history = useHistory();
-  const [addr, setAddr] = useAddrState();
+  const [addr] = useAddrState();
   const [, setModal] = useModalState();
   const [isLogin] = useLoginState();
 
@@ -81,7 +81,7 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div className={css.headerMain} id="open-address-modal" onClick={() => console.log(1)}>
+            <div className={css.headerMain} id="open-address-modal" onClick={setAddrModal}>
               <div className={css.addr} >
                 {addr || "주소를 선택해주세요"}
                 <ModalContainer />
