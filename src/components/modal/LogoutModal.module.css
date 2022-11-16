@@ -1,0 +1,43 @@
+.logoutText {
+  color: black;
+  font-weight: bold;
+}
+
+.alertText {
+  max-width: 200px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cardModalBtns {
+  /* border: 1px solid black; */
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 60px;
+}
+
+.cardModalBtns button,
+.alertModalBtns button {
+  width: 4.5rem;
+  height: 2rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.alertModalBtns {
+  display: flex;
+  justify-content: center;
+}
+
+.no {
+  background-color: grey;
+}
+
+.yes {
+  background-color: #3980fe;
+}
