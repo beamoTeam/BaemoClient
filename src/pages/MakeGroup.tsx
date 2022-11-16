@@ -78,7 +78,7 @@ const MakeGroup: React.FC = () => {
 
     for (let key in info) {
       console.log({ key }, "value:: ", info[key]);
-      if (key === "address" && !info[key]) {
+      if (key === "address" && (window.localStorage.getItem("ADDR") || !info[key])) {
         alert("주소를 선택해 주세요");
         setIsLoading(false);
         return;
