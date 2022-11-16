@@ -75,17 +75,34 @@ const MakeGroup: React.FC = () => {
 
   const createGroup = async () => {
     setIsLoading(true);
-    let flag = true;
-    Object.values(info).forEach((x) => {
-      if (x === null || x === undefined) {
-        flag = false;
-      }
-    });
 
-    if (!flag) {
-      alert("옵션을 선택해주세요.");
-      setIsLoading(false);
-      return;
+    for (let key in info) {
+      console.log({key})
+      if (key === "address" && !info[key]) {
+        alert("주소를 선택해 주세요");
+        setIsLoading(false);
+        return;
+      }
+      if (key === "detail_address" && !info[key]) {
+        alert("상세 주소를 입력해 주세요");
+        setIsLoading(false);
+        return;
+      }
+      if (key === "orderTime" && !info[key]) {
+        alert("주문 시간을 선택해 주세요");
+        setIsLoading(false);
+        return;
+      }
+      if (key === "restaurant_seq" && !info[key]) {
+        alert("음식점을 선택해 주세요");
+        setIsLoading(false);
+        return;
+      }
+      if (key === "restaurant_name" && !info[key]) {
+        alert("음식점을 선택해 주세요");
+        setIsLoading(false);
+        return;
+      }
     }
 
     try {
@@ -103,8 +120,8 @@ const MakeGroup: React.FC = () => {
       enterToGroup(c_seq, r_seq);
       history.push(`restaurant/${r_seq}`);
       window.localStorage.setItem("CHAT_SEQ", c_seq);
-    } catch (err) {
-      alert("알수없는 오류가 발생했습니다.");
+    } catch (err: any) {
+      alert("방을 만드는중 오류가 발생했습니다.");
       console.error(err);
     } finally {
       setIsLoading(false);
