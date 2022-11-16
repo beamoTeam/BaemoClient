@@ -9,9 +9,8 @@ export default function Spinner({ message }: SpinnerProps) {
     <div
       style={{
         position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
+        top: 0,
+        left: 0,
         marginTop: "50px",
         width: "100vw",
         height: "100vh",
@@ -19,11 +18,17 @@ export default function Spinner({ message }: SpinnerProps) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "silver",
+        backgroundColor: "red",
+        zIndex: "9999"
       }}
       className="ion-padding"
     >
-      <IonSpinner style={{ color: "silver" }}></IonSpinner>
+      <IonSpinner style={{
+        color: "silver",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}></IonSpinner>
       <p>{message}</p>
     </div>
   );
