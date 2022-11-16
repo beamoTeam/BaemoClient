@@ -80,6 +80,7 @@ export default function GlobalHeader() {
             <div className={css.headerMain}  onClick={() => console.log(1)}>
               <div className={css.addr} id="open-address-modal">
                 {addr || "주소를 선택해주세요"}
+                <ModalContainer />
                 <IonIcon icon={chevronDownOutline} />
               </div>
             </div>
@@ -96,7 +97,6 @@ export default function GlobalHeader() {
           </>
         )}
       </IonHeader>
-      <ModalContainer />
       <AddressModal setAddr={setAddr} />
     </>
   );
