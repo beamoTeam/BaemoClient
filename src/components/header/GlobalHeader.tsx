@@ -49,6 +49,10 @@ export default function GlobalHeader() {
     }
   }, [history, isHome, setModal]);
 
+  // const setAddrModal = useCallback(() => {
+  //   if (isHome) {
+  //     setModal(<AddressModal />);
+  // }, [history, isHome, setModal]);
   const kakaoLogin = () => {
     const kakao_redirect_url = window.location.origin.includes("local")
       ? process.env.REACT_APP_KAKAO_REDIRECT_URI
@@ -77,8 +81,8 @@ export default function GlobalHeader() {
         </div>
         {!unVisibleURL[location.pathname.split("/")[1]] && (
           <>
-            <div className={css.headerMain}  onClick={() => console.log(1)}>
-              <div className={css.addr} id="open-address-modal">
+            <div className={css.headerMain} id="open-address-modal" onClick={() => console.log(1)}>
+              <div className={css.addr} >
                 {addr || "주소를 선택해주세요"}
                 <ModalContainer />
                 <IonIcon icon={chevronDownOutline} />
