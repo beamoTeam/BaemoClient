@@ -82,7 +82,7 @@ export default function MenuDetail() {
       await groupOrderService.mutateToCart(chat_seq, cartData);
       history.goBack();
     } catch (err: any) {
-      console.error(err.response.data);
+      console.error(err.response);
       if (err.response.statsus === 400) {
         alert("결제 완료된 주문은 메뉴를 추가할 수 없습니다.");
         history.goBack();
