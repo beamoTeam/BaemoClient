@@ -26,8 +26,6 @@ export default function Restaurant() {
 
   useEffect(() => {
     const rest_seq = location.pathname.split("/").at(-1);
-    console.log({ r_seq });
-    console.log({ rest_seq });
     (async () => {
       try {
         const data = await restaurantService.fetchAllMenus(r_seq || rest_seq);

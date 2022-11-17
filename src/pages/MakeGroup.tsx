@@ -22,7 +22,6 @@ import { ButtonSpinner } from "../components/spinner/Spinner";
 const MakeGroup: React.FC = () => {
   const history = useHistory();
   const [addr,] = useAddrState();
-  console.log({ addr });
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
