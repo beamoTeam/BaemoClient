@@ -83,12 +83,12 @@ export default function MenuDetail() {
       history.goBack();
     } catch (err: any) {
       console.error(err.response);
-      if (err.response.statsus === 400) {
+      if (err.response.status === 400) {
         alert("결제 완료된 주문은 메뉴를 추가할 수 없습니다.");
         history.goBack();
       }
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
