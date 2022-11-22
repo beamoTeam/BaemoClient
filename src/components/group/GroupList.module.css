@@ -1,6 +1,7 @@
 .list {
   position: relative;
   overflow-y: scroll;
+  background-color: white;
   -ms-overflow-style: none;
 }
 

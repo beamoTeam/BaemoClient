@@ -54,7 +54,6 @@ const Home: React.FC = () => {
   };
 
   if (!groupList) return <Spinner />;
-  if (groupList.length === 0) return <h4>No group</h4>;
 
   let test;
   if (currentCategory) {
@@ -70,7 +69,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <IonPage style={{ marginBottom: "55px" }}>
+    <IonPage style={{ marginBottom: "55px", background: "white" }}>
       <IonContent fullscreen>
         <FoodCategory currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
         <SortFilter />
