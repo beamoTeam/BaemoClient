@@ -24,6 +24,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     (async () => {
       const data = await groupOrderService.fetchGroupList();
+      console.log(data);
       setGroupList(data);
     })();
   }, []);
@@ -31,6 +32,7 @@ const Home: React.FC = () => {
   const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
       const res = await GroupOrderService.enterGroup(c_seq);
+
       if (res.status <= 201) {
         useLocalStorage.set("CHAT_SEQ", JSON.stringify(c_seq));
         history.push(`restaurant/${restaurant_seq}`);
