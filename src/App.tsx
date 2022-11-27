@@ -52,7 +52,7 @@ export default function App() {
             {/* Router */}
             <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
-              <PrivateRoute>
+              {/* <PrivateRoute> */}
                 <Route exact path="/make-group" component={MakeGroup} />
                 <Route exact path="/restaurant/:r_seq" component={Restaurant} />
                 <Route exact path="/chat-list" component={ChatList} />
@@ -65,7 +65,7 @@ export default function App() {
                 <Route exact path="/cart/:chat_seq" component={Cart} />
                 <Route exact path="/order-hisotry" component={OrderHistory} />
                 <Route exact path="/profile" component={Profile} />
-              </PrivateRoute>
+              {/* </PrivateRoute> */}
               <Route exact path="/oauth/kakao" component={KakaoRedirect} />
               <Route exact path="/store/:r_seq" component={Admin} />
               <Redirect to="/home" />
