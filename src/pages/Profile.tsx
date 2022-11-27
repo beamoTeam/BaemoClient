@@ -24,6 +24,7 @@ export default function Profile() {
     (async () => {
       try {
         const { data } = await userApis.fetchUserProfile();
+        console.log("PROFILE :: ", data);
         setUserInfo(data);
       } catch (err: any) {
         handleUnAuthorized(err);

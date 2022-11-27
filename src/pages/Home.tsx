@@ -23,6 +23,21 @@ const Home: React.FC = () => {
   const currentGroup = window.localStorage.getItem("CHAT_SEQ");
   const groupRef = useRef<any>(null);
 
+  const savedCallback = useRef<any>();
+
+  useEffect(() => {
+    savedCallback.current = intervalTest;
+  });
+
+  useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    }
+
+    const timerId = setInterval(tick, 7500);
+    return () => clearInterval(timerId);
+  }, []);
+
   const intervalTest = async () => {
     try {
       const data = await groupOrderService.fetchGroupList();
@@ -38,8 +53,6 @@ const Home: React.FC = () => {
       alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
     }
   }
-
-  useInterval(intervalTest, 7500);
 
   // useEffect(() => {
   //   const TIMER = setInterval(() => {
