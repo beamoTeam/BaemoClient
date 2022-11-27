@@ -23,11 +23,16 @@ export default function Profile() {
       try {
         const { data } = await userApis.fetchUserProfile();
         setUserInfo(data);
-      } catch (err) {
+      } catch (err: any) {
+        if (err.respnose.status === 401) {
+          alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+          logout();
+        }
+        alert("프로필을 불러오는중 오류가 발생했습니다.")
         console.error(err);
       }
     })();
-  }, []);
+  }, [logout]);
 
   if (!userInfo) return <Spinner />;
 
