@@ -58,16 +58,16 @@ export const ChatClient = () => {
 
 axios.interceptors.response.use(
   (res) => {
+    console.log("성공 :: ", { res });
     if (!(res.status === 200 || res.status === 201 || res.status === 204))
       throw new Error();
 
     if (res.data.errors) throw new Error(res.data.errors);
-
     return res.data.data;
   },
   async (error) => {
     const err = error as AxiosError;
-
+    console.log("실패 :: ", err);
     if (err.response?.status === 401) {
       alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
       window.location.href = '/';
