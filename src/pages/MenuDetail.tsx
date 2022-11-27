@@ -62,7 +62,7 @@ export default function MenuDetail() {
         throw new Error(err);
       }
     })();
-  }, [m_seq]);
+  }, [m_seq, menu_seq]);
 
   if (!menuDetail) return <h3>로딩중...</h3>;
 
@@ -80,6 +80,7 @@ export default function MenuDetail() {
         seq: menuDetail.seq,
       };
       await groupOrderService.mutateToCart(chat_seq, cartData);
+      alert("장바구니에 추가되었습니다.");
       history.goBack();
     } catch (err: any) {
       console.error(err.response);

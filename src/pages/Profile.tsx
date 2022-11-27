@@ -27,6 +27,7 @@ export default function Profile() {
         if (err.response.status === 401) {
           alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
           logout();
+          return;
         }
         alert("프로필을 불러오는중 오류가 발생했습니다.")
         console.error(err);

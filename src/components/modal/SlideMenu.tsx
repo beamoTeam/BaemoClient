@@ -11,6 +11,7 @@ interface SlideMenuProps {
 
 export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
   const [chatMenu] = useChatMenuState();
+  console.log({chatMenu})
   if (!chatMenu) {
     return null;
   }

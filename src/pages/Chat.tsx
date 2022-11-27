@@ -270,15 +270,3 @@ function ChatHeader({ goBack, toggleSlideMenu }: any) {
     </>
   );
 }
-
-{
-  /* {
-            <>
-              {toggleSlide ? (
-                <SlideMenu close={toggleSlideMenu} />
-              ) : (
-
-              )}
-            </>
-          } */
-}
