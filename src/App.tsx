@@ -2,8 +2,8 @@ import React, { Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { IonReactRouter } from "@ionic/react-router";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
-
+import { IonApp, setupIonicReact } from "@ionic/react";
+import PrivateRoute from "./pages/PrivateRoute";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -50,25 +50,24 @@ export default function App() {
           <IonReactRouter>
             <GlobalHeader />
             {/* Router */}
-            <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
-              <Route exact path="/make-group" component={MakeGroup} />
-              <Route exact path="/restaurant/:r_seq" component={Restaurant} />
-              <Route exact path="/chat-list" component={ChatList} />
-              <Route exact path="/chatting/:chat_seq" component={Chat} />
-              <Route
-                exact
-                path="/restaurant/:r_seq/menu/:m_seq"
-                component={MenuDetail}
-              />
-              <Route exact path="/cart/:chat_seq" component={Cart} />
-              <Route exact path="/order-hisotry" component={OrderHistory} />
-              <Route exact path="/profile" component={Profile} />
-
+              <PrivateRoute>
+                <Route exact path="/make-group" component={MakeGroup} />
+                <Route exact path="/restaurant/:r_seq" component={Restaurant} />
+                <Route exact path="/chat-list" component={ChatList} />
+                <Route exact path="/chatting/:chat_seq" component={Chat} />
+                <Route
+                  exact
+                  path="/restaurant/:r_seq/menu/:m_seq"
+                  component={MenuDetail}
+                />
+                <Route exact path="/cart/:chat_seq" component={Cart} />
+                <Route exact path="/order-hisotry" component={OrderHistory} />
+                <Route exact path="/profile" component={Profile} />
+              </PrivateRoute>
               <Route exact path="/oauth/kakao" component={KakaoRedirect} />
               <Route exact path="/store/:r_seq" component={Admin} />
               <Redirect to="/home" />
-            </IonRouterOutlet>
             <Footer />
           </IonReactRouter>
         </IonApp>
