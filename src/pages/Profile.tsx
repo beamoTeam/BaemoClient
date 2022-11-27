@@ -32,7 +32,7 @@ export default function Profile() {
         console.error(err);
       }
     })();
-  }, [logout]);
+  }, []);
 
   if (!userInfo) return <Spinner />;
 
