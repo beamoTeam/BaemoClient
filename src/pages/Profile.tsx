@@ -24,7 +24,7 @@ export default function Profile() {
         const { data } = await userApis.fetchUserProfile();
         setUserInfo(data);
       } catch (err: any) {
-        if (err.respnose.status === 401) {
+        if (err.response.status === 401) {
           alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
           logout();
         }
