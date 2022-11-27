@@ -1,18 +1,30 @@
 import React from 'react';
-import { Redirect } from 'react-router';
-import { IonRouterOutlet } from '@ionic/react';
+import { Route, Redirect } from 'react-router';
 import { useLoginState } from "../lib/recoil/loginState";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
+  props: object;
 }
 
-export default function PrivateRoute({ children }: PrivateRouteProps ) {
+export default function PrivateRoute({ children, props }: PrivateRouteProps ) {
   const [isLogin] = useLoginState();
 
-  if (!isLogin) {
-    return <Redirect to="/home" />;
-  }
-
-  return <IonRouterOutlet />;
+  return (
+      <Route
+        {...props}
+        render={({ location }) =>
+           isLogin ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/home",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
 }

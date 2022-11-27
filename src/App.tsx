@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { IonReactRouter } from "@ionic/react-router";
-import { IonApp, setupIonicReact } from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import PrivateRoute from "./pages/PrivateRoute";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -50,6 +50,7 @@ export default function App() {
           <IonReactRouter>
             <GlobalHeader />
             {/* Router */}
+            <IonRouterOutlet>
               <Route exact path="/home" component={Home} />
               <PrivateRoute>
                 <Route exact path="/make-group" component={MakeGroup} />
@@ -68,6 +69,7 @@ export default function App() {
               <Route exact path="/oauth/kakao" component={KakaoRedirect} />
               <Route exact path="/store/:r_seq" component={Admin} />
               <Redirect to="/home" />
+            </IonRouterOutlet>
             <Footer />
           </IonReactRouter>
         </IonApp>
