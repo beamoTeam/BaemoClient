@@ -5,6 +5,7 @@ import Main from "./Main";
 import Spinner from "../components/spinner/Spinner";
 import adminClient from "./api/adminService";
 import { useLocation } from "react-router";
+import useInterval from "../hooks/useInterval";
 import ReceiptModal from "./modal/ReceiptModal";
 
 const TIMER = 3000;
@@ -38,6 +39,7 @@ export default function Admin() {
         }
       })();
     }, TIMER);
+    return () => clearInterval(TIMER);
   }, [location.pathname]);
 
   const toggleSidebar = useCallback(() => {
