@@ -11,12 +11,14 @@ import {
 } from "@ionic/react";
 import userApis from "../lib/api/User/UserApi";
 import { useEffect, useState } from "react";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import Spinner from "../components/spinner/Spinner";
 import useLogout from "../hooks/useLogout";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState<any>(null);
   const logout = useLogout();
+  const handleUnAuthorized = useUnAuthorized();
 
   useEffect(() => {
     (async () => {
@@ -24,11 +26,7 @@ export default function Profile() {
         const { data } = await userApis.fetchUserProfile();
         setUserInfo(data);
       } catch (err: any) {
-        if (err.response.status === 401) {
-          alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
-          logout();
-          return;
-        }
+        handleUnAuthorized(err);
         alert("프로필을 불러오는중 오류가 발생했습니다.")
         console.error(err);
       }

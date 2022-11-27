@@ -17,17 +17,17 @@ import enterToGroup from "../lib/api/Group/enterToGroup";
 import { useHistory } from "react-router";
 import { useChatMenuState } from "../lib/recoil/chatMenuState";
 import { useAddrState } from "../lib/recoil/addrState";
-import useLogout from "../hooks/useLogout";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import { ButtonSpinner } from "../components/spinner/Spinner";
 
 const MakeGroup: React.FC = () => {
-  const logout = useLogout();
   const history = useHistory();
   const [addr,] = useAddrState();
   const [, setModal] = useModalState();
   const [, setChatMenu] = useChatMenuState();
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const handleUnAuthorized = useUnAuthorized();
 
   const [info, setInfo] = useState<any>({
     detail_address: "",
@@ -49,6 +49,7 @@ const MakeGroup: React.FC = () => {
       const data = await restaurantService.fetchAllRestaurants();
       setRestaurants(data);
     } catch (err) {
+      alert("음식점을 불러오는중 오류가 발생했습니다.");
       console.error(err);
     }
   };
@@ -120,11 +121,7 @@ const MakeGroup: React.FC = () => {
       history.push(`restaurant/${r_seq}`);
       window.localStorage.setItem("CHAT_SEQ", c_seq);
     } catch (err: any) {
-      if (err.response.status === 401 || err.response.status === 403) {
-        alert("로그인이 만료되었습니다. 다시 로그인 해주세요");
-        logout();
-      }
-      alert("방을 만드는중 오류가 발생했습니다.");
+      handleUnAuthorized(err);
       console.error(err);
     } finally {
       setIsLoading(false);

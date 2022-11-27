@@ -11,7 +11,7 @@ interface SlideMenuProps {
 
 export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
   const [chatMenu] = useChatMenuState();
-  console.log({chatMenu})
+
   if (!chatMenu) {
     return null;
   }
@@ -56,16 +56,13 @@ export default function SlideMenu({ toggleSlideMenu }: SlideMenuProps) {
                 <IonItem slot="header" color="light">
                   <IonLabel>{anonymousName(Menu.sender)}</IonLabel>
                 </IonItem>
+
                 {Menu.menu.map((info: any) => (
                   <div className={css.info} key={info.seq}>
                     <IonImg src={info.img} className={css.img} />
                     <IonLabel>
-                      <h4 className={css.name}>
-                        {info.name} x {info.count}
-                      </h4>
-                      <h4 className={css.price}>
-                        {info.price.toLocaleString()}원
-                      </h4>
+                      <h4>{info.name} x {info.count}</h4>
+                      <h4>{info.price.toLocaleString()}원</h4>
                     </IonLabel>
                   </div>
                 ))}

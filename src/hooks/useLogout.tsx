@@ -20,8 +20,9 @@ export default function useLogout() {
         setIsLogin(false);
         setChatMenu([]);
         //
-        // navigate("/home");
         window.location.replace("/");
+        window.location.href = "/home";
+
       }
   };
 

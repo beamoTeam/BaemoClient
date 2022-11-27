@@ -15,6 +15,7 @@ import { useHistory } from "react-router";
 import { useLoginState } from "../lib/recoil/loginState";
 import { useLocation } from "react-router";
 import { anonymousName } from "../utils/name";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import SlideMenu from "../components/modal/SlideMenu";
 import Spinner from "../components/spinner/Spinner";
 
@@ -45,6 +46,7 @@ export default function Chat() {
   const sender = window.localStorage.getItem("CHAT_SENDER");
   const [sendLoading, setSendLoading] = useState<boolean>(false);
   const [toggleSlide, setToggleSlide] = useState<boolean>(false);
+  const handleUnAuthorized = useUnAuthorized();
 
   useEffect(() => {
     if (!isLogin || !roomNum || isNaN(roomNum)) {
@@ -128,6 +130,7 @@ export default function Chat() {
       });
       scrollRef.current.scrollIntoView(false);
     } catch (err) {
+      handleUnAuthorized(err);
       alert("알수없는 오류가 발생했습니다.");
       console.error(err);
     } finally {

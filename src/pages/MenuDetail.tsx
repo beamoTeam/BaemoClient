@@ -18,6 +18,7 @@ import { useHistory, useLocation, useParams } from "react-router";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useLoginState } from "../lib/recoil/loginState";
 import { ButtonSpinner } from "../components/spinner/Spinner";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import QuantityButton from "../components/button/QuantityButton";
 
 type optionsType = {
@@ -37,6 +38,7 @@ export default function MenuDetail() {
   const chat_seq = useLocalStorage.get("CHAT_SEQ");
   const [quantity, setQuantity] = useState<number>(1);
   const { m_seq }: any = useParams();
+  const handleUnAuthorized = useUnAuthorized();
   const menu_seq = location.pathname.split("/").at(-1);
   const [options] = useState<optionsType>({
     coke: false,
@@ -59,10 +61,11 @@ export default function MenuDetail() {
         const data = await restaurantService.fetchDetailMenus(m_seq || String(menu_seq));
         setMenuDetail(data);
       } catch (err: any) {
-        throw new Error(err);
+        handleUnAuthorized(err);
+        alert("메뉴를 불러오는데 실패했습니다.");
       }
     })();
-  }, [m_seq, menu_seq]);
+  }, [m_seq, menu_seq, handleUnAuthorized]);
 
   if (!menuDetail) return <h3>로딩중...</h3>;
 
@@ -83,6 +86,7 @@ export default function MenuDetail() {
       alert("장바구니에 추가되었습니다.");
       history.goBack();
     } catch (err: any) {
+      handleUnAuthorized(err);
       console.error(err.response);
       if (err.response.status === 400) {
         alert("결제 완료된 주문은 메뉴를 추가할 수 없습니다.");
@@ -93,8 +97,6 @@ export default function MenuDetail() {
     }
   };
 
-  console.log(" DETAIL :: ", menuDetail);
-  console.log(" TOTAL PRICE :: ", menuDetail.price);
   return (
     <IonPage style={{ marginBottom: "55px" }}>
       <IonContent style={marginTop}>

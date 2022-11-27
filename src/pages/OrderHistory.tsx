@@ -14,6 +14,7 @@ import { useModalState } from "../lib/recoil/modalState";
 import OrderDetailModal from "../components/modal/OrderDetailModal";
 import css from "./OrderHistory.module.css";
 import { useHistory } from "react-router";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import { useLoginState } from "../lib/recoil/loginState";
 
 export default function OrderHistory() {
@@ -21,6 +22,7 @@ export default function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState<any[] | null>(null);
   const history = useHistory();
   const [isLogin] = useLoginState();
+  const handleUnAuthorized = useUnAuthorized();
 
   useEffect(() => {
     if (!isLogin) {
@@ -35,6 +37,7 @@ export default function OrderHistory() {
         console.log("주문 내역 :: ", data);
         setOrderHistory(data);
       } catch (err) {
+        handleUnAuthorized(err);
         console.error(err);
       }
     })();

@@ -14,11 +14,13 @@ import restaurantService from "../lib/api/RestaurantService";
 import { MenuModel } from "../types/menu";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Spinner from "../components/spinner/Spinner";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 import FloatChatButton from "../components/button/FloatChatButton";
 
 export default function Restaurant() {
   const location = useLocation();
-  const param:any = useParams();
+  const param: any = useParams();
+  const handleUnAuthorized = useUnAuthorized();
   const [menus, setMenus] = useState<MenuModel[] | null>(null);
   const [restaurant, setRestaurant] = useState<any>(null);
   const chat_seq = Number(window.localStorage.getItem("CHAT_SEQ"));
@@ -32,11 +34,12 @@ export default function Restaurant() {
         setMenus(data.menuList);
         setRestaurant(data.restaurant);
       } catch (err) {
+        handleUnAuthorized(err);
         alert("메뉴를 불러오는 중 오류가 발생했습니다.");
         console.error(err);
       }
     })();
-  }, [r_seq, setMenus, setRestaurant]);
+  }, [r_seq, setMenus, setRestaurant, handleUnAuthorized, location.pathname]);
 
   if (!menus) return <Spinner />;
   if (!restaurant) return <Spinner />;

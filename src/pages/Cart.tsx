@@ -15,12 +15,13 @@ import getUserCart from "../lib/api/Cart/getUserCart";
 import { MenuModel } from "../types/menu";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import QuantityButton from "../components/button/QuantityButton";
 import chatService from "../lib/api/ChatService";
 import Spinner, { ButtonSpinner } from "../components/spinner/Spinner";
+import useUnAuthorized from "../hooks/useUnAuthorized";
 
 export default function Cart() {
   const history = useHistory();
+  const handleUnAuthorized = useUnAuthorized();
   const [cartItems, setCartItems] = useState<any>([]);
   const chat_seq = window.localStorage.getItem("CHAT_SEQ");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,10 +39,11 @@ export default function Cart() {
         console.log(" PARSED :: ", parseMenu(data.basketMenuList));
         setCartItems(parseMenu(data.basketMenuList));
       } catch (err) {
+        handleUnAuthorized(err);
         console.error(err);
       }
     })();
-  }, [chat_seq, history]);
+  }, [chat_seq, history, handleUnAuthorized]);
 
   const handleOrder = async () => {
     setIsLoading(true);
@@ -62,6 +64,7 @@ export default function Cart() {
       window.localStorage.setItem("CHAT_SENDER", data.sender);
       history.push(`/chatting/${chat_seq}`);
     } catch (err: any) {
+      handleUnAuthorized(err);
       console.error(err);
       alert("알수없는 오류가 발생했습니다.");
     } finally {
