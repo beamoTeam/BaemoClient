@@ -4,7 +4,7 @@ import { useLoginState } from "../lib/recoil/loginState";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
-  props: any;
+  props?: any;
 }
 
 export default function PrivateRoute({ children, props }: PrivateRouteProps ) {
