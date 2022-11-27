@@ -21,8 +21,25 @@ const Home: React.FC = () => {
   const [currentCategory, setCurrentCategory] = useState<any>(null);
   const currentGroup = window.localStorage.getItem("CHAT_SEQ");
   const groupRef = useRef<any>(null);
-
   const savedCallback = useRef<any>();
+
+  useEffect(() => {
+      (async () => {
+      try {
+        const data = await groupOrderService.fetchGroupList();
+        console.log("** :: ", { data });
+        if (groupRef.current === JSON.stringify(data)) {
+          return;
+        }
+
+        groupRef.current = JSON.stringify(data);
+        setGroupList(data);
+      } catch (err: any) {
+        console.error(err);
+        alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     savedCallback.current = intervalTest;
@@ -52,27 +69,6 @@ const Home: React.FC = () => {
       alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
     }
   }
-
-  // useEffect(() => {
-  //   const TIMER = setInterval(() => {
-  //     (async () => {
-  //     try {
-  //       const data = await groupOrderService.fetchGroupList();
-  //       console.log("** :: ", { data });
-  //       if (groupRef.current === JSON.stringify(data)) {
-  //         return;
-  //       }
-
-  //       groupRef.current = JSON.stringify(data);
-  //       setGroupList(data);
-  //     } catch (err: any) {
-  //       console.error(err);
-  //       alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
-  //     }
-  //   })();
-  //   }, 7500);
-  //   return () => clearInterval(TIMER);
-  // }, []);
 
   const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
