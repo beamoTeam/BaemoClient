@@ -12,7 +12,6 @@ import { useModalState } from "../lib/recoil/modalState";
 import AlertModal from "../components/modal/AlertModal";
 import Spinner from "../components/spinner/Spinner";
 import ConfirmModal from "../components/modal/ConfirmModal";
-import useInterval from "../hooks/useInterval";
 import { KAKAO_LOGIN_LINK } from "../utils/contants";
 
 const Home: React.FC = () => {
@@ -34,7 +33,7 @@ const Home: React.FC = () => {
       savedCallback.current();
     }
 
-    const timerId = setInterval(tick, 7500);
+    const timerId = setInterval(tick, 5000);
     return () => clearInterval(timerId);
   }, []);
 
