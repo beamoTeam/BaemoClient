@@ -24,25 +24,8 @@ const Home: React.FC = () => {
   const savedCallback = useRef<any>();
 
   useEffect(() => {
-      (async () => {
-      try {
-        const data = await groupOrderService.fetchGroupList();
-        console.log("** :: ", { data });
-        if (groupRef.current === JSON.stringify(data)) {
-          return;
-        }
-
-        groupRef.current = JSON.stringify(data);
-        setGroupList(data);
-      } catch (err: any) {
-        console.error(err);
-        alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
     savedCallback.current = intervalTest;
+    intervalTest();
   }, []);
 
   useEffect(() => {
@@ -54,6 +37,7 @@ const Home: React.FC = () => {
     return () => {
       clearInterval(timerId);
       savedCallback.current = null;
+      console.log(savedCallback.current);
     }
   }, []);
 
