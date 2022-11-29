@@ -40,16 +40,16 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    savedCallback.current = intervalTest;
+    // savedCallback.current = intervalTest;
     intervalTest();
   }, [intervalTest]);
 
-  useEffect(() => {
-    const tick = savedCallback.current;
-    const timerId = setInterval(tick, 5000);
+  // useEffect(() => {
+  //   const tick = savedCallback.current;
+  //   const timerId = setInterval(tick, 5000);
 
-    return () => clearInterval(timerId);
-  }, []);
+  //   return () => clearInterval(timerId);
+  // }, []);
 
   const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
