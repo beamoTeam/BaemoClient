@@ -27,7 +27,12 @@ export default function RestaurantsModal({
   }
 
   const test = (restaurant_seq: any, restaurant_name: string) => {
-    selectRestaurant(restaurant_seq, restaurant_name);
+    if (restaurant_seq !== 1) {
+      alert("테스트 기간동안 bbq만 선택 가능합니다.");
+    }
+    // selectRestaurant(restaurant_seq, restaurant_name);
+    selectRestaurant(1, "BBQ 목대점");
+
     dismiss();
   };
 
@@ -50,7 +55,7 @@ export default function RestaurantsModal({
             <Spinner />
           ) : (
             <IonList>
-              {restaurants.filter((rest: any) => rest.seq === 1).map((info, idx) => (
+              {restaurants.map((info, idx) => (
                 <Restaurant key={idx} info={info} test={test} />
               ))}
             </IonList>
