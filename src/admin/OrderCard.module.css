@@ -154,3 +154,10 @@
   transition: transform 0.1s;
   transform: rotate(180deg);
 }
+
+
+@media (max-width: 980px) {
+  .orderCardTop {
+    display: inline;
+  }
+}
