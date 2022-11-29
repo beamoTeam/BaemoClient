@@ -7,7 +7,7 @@ import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
 import GroupOrderService from "../lib/api/GroupOrderService";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { useModalState } from "../lib/recoil/modalState";
 import AlertModal from "../components/modal/AlertModal";
 import Spinner from "../components/spinner/Spinner";
@@ -15,6 +15,7 @@ import ConfirmModal from "../components/modal/ConfirmModal";
 import { KAKAO_LOGIN_LINK } from "../utils/contants";
 
 const Home: React.FC = () => {
+  const location = useLocation();
   const history = useHistory();
   const [, setModal] = useModalState();
   const [groupList, setGroupList] = useState<GroupModel[] | null>(null);
@@ -37,11 +38,13 @@ const Home: React.FC = () => {
     return () => {
       clearInterval(timerId);
       savedCallback.current = null;
-      console.log(savedCallback.current);
     }
   }, []);
 
   const intervalTest = async () => {
+    if (!location.pathname.includes("home")) {
+      return;
+    }
     try {
       const data = await groupOrderService.fetchGroupList();
       console.log("*** :: ", { data });
