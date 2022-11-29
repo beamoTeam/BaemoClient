@@ -51,7 +51,10 @@ const Home: React.FC = () => {
     }
 
     const timerId = setInterval(tick, 5000);
-    return () => clearInterval(timerId);
+    return () => {
+      clearInterval(timerId);
+      savedCallback.current = null;
+    }
   }, []);
 
   const intervalTest = async () => {

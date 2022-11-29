@@ -5,16 +5,11 @@
   font-weight: bold;
 }
 
-.plus, .minus {
+.counter {
   width: 24px;
   height: 24px;
   border-radius: 8px;
   background: #3880ff;
   color: white;
   font-weight: bold;
-}
-
-.quantity_btns ion-button {
-  width: 24px;
-  height: 24px;
 }

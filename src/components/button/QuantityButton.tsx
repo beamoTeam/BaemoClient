@@ -1,4 +1,3 @@
-import { IonButton } from "@ionic/react";
 import { useCallback } from "react";
 import css from "./QuantityButton.module.css";
 
@@ -21,12 +20,9 @@ export default function QuantityButton({
 
   return (
     <div className={css.quantity_btns}>
-      <button onClick={decrement} className={css.minus}>-</button>
+      <div onClick={decrement} className={css.counter}>-</div>
       <div className={css.text}>{quantity}</div>
-      <button onClick={increment} className={css.plus}>+</button>
-      {/* <IonButton onClick={decrement}>-</IonButton> */}
-      {/* <div className={css.text}>{quantity}</div> */}
-      {/* <IonButton onClick={increment}>+</IonButton> */}
+      <div onClick={increment} className={css.counter}>+</div>
     </div>
   );
 }
