@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { IonContent, IonPage } from "@ionic/react";
 import FoodCategory from "../components/filter/FoodCategory";
-// import SortFilter from "../components/filter/SortFilter";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
@@ -24,27 +23,7 @@ const Home: React.FC = () => {
   const groupRef = useRef<any>(null);
   const savedCallback = useRef<any>();
 
-  useEffect(() => {
-    savedCallback.current = intervalTest;
-    intervalTest();
-  }, []);
-
-  useEffect(() => {
-    const tick = () => {
-      savedCallback.current();
-    }
-
-    const timerId = setInterval(tick, 5000);
-    return () => {
-      clearInterval(timerId);
-      savedCallback.current = null;
-    }
-  }, []);
-
-  const intervalTest = async () => {
-    if (!location.pathname.includes("home")) {
-      return;
-    }
+  const intervalTest = useCallback(async () => {
     try {
       const data = await groupOrderService.fetchGroupList();
       console.log("*** :: ", { data });
@@ -58,7 +37,19 @@ const Home: React.FC = () => {
       console.error(err);
       alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    savedCallback.current = intervalTest;
+    intervalTest();
+  }, [intervalTest]);
+
+  useEffect(() => {
+    const tick = savedCallback.current;
+    const timerId = setInterval(tick, 5000);
+
+    return () => clearInterval(timerId);
+  }, []);
 
   const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
