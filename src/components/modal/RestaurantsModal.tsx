@@ -51,7 +51,7 @@ export default function RestaurantsModal({
             onClick={() => modal.current?.setCurrentBreakpoint(0.75)}
             placeholder="Search"
           ></IonSearchbar>
-          {!restaurants ? (
+          {!restaurants || restaurants.length === 0 ? (
             <Spinner />
           ) : (
             <IonList>
