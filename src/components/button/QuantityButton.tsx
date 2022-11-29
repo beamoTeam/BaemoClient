@@ -21,9 +21,12 @@ export default function QuantityButton({
 
   return (
     <div className={css.quantity_btns}>
-      <IonButton onClick={decrement}>-</IonButton>
+      <button onClick={decrement} className={css.minus}>-</button>
       <div className={css.text}>{quantity}</div>
-      <IonButton onClick={increment}>+</IonButton>
+      <button onClick={increment} className={css.plus}>+</button>
+      {/* <IonButton onClick={decrement}>-</IonButton> */}
+      {/* <div className={css.text}>{quantity}</div> */}
+      {/* <IonButton onClick={increment}>+</IonButton> */}
     </div>
   );
 }

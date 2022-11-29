@@ -31,6 +31,8 @@ export default function RestaurantsModal({
     dismiss();
   };
 
+  console.log({restaurants});
+
   return (
     <>
       <IonModal

@@ -35,7 +35,7 @@ function AddressModal() {
       dismiss();
       if (!fullAddress.includes("전남 무안군 청계면 영산로 1666") || !fullAddress.includes("전남 무안군 청계면 도림리 61")) {
         alert("테스트 기간동안 목포대학교만 가능합니다.")
-        fullAddress = "전남 무안군 청꼐면 영산로 1666 (목포대학교)"
+        fullAddress = "전남 무안군 청계면 영산로 1666 (목포대학교)"
       }
       setAddr(fullAddress);
       useLocalStorage.set("ADDR", fullAddress);

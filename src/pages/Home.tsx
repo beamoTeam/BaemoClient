@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IonContent, IonPage } from "@ionic/react";
 import FoodCategory from "../components/filter/FoodCategory";
-import SortFilter from "../components/filter/SortFilter";
+// import SortFilter from "../components/filter/SortFilter";
+import useInterval from "../hooks/useInterval";
 import groupOrderService from "../lib/api/GroupOrderService";
 import { GroupModel } from "../types/group";
 import GroupList from "../components/group/GroupList";
@@ -23,41 +24,10 @@ const Home: React.FC = () => {
   const groupRef = useRef<any>(null);
   const savedCallback = useRef<any>();
 
-  useEffect(() => {
-      (async () => {
-      try {
-        const data = await groupOrderService.fetchGroupList();
-        console.log("** :: ", { data });
-        if (groupRef.current === JSON.stringify(data)) {
-          return;
-        }
-
-        groupRef.current = JSON.stringify(data);
-        setGroupList(data);
-      } catch (err: any) {
-        console.error(err);
-        alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    savedCallback.current = intervalTest;
-  });
-
-  useEffect(() => {
-    const tick = () => {
-      savedCallback.current();
-    }
-
-    const timerId = setInterval(tick, 5000);
-    return () => clearInterval(timerId);
-  }, []);
-
-  const intervalTest = async () => {
+  const intervalFn = async () => {
     try {
       const data = await groupOrderService.fetchGroupList();
-      console.log("** :: ", { data });
+      console.log("*** i :: ", { data });
       if (groupRef.current === JSON.stringify(data)) {
         return;
       }
@@ -69,6 +39,28 @@ const Home: React.FC = () => {
       alert("배달 모임을 불러오는데 실패했습니다. 새로고침 후 다시 시도해주세요.");
     }
   }
+
+  useEffect(() => {
+    intervalFn();
+  }, []);
+
+  const intervalRequest = useInterval(intervalFn,5000);
+
+
+  // useEffect(() => {
+  //   savedCallback.current = intervalFn;
+  // }, []);
+
+  // useEffect(() => {
+  //   const tick = () => {
+  //     savedCallback.current();
+  //   }
+
+  //   const timerId = setInterval(tick, 5000);
+  //   return () => clearInterval(timerId);
+  // }, []);
+
+
 
   const enterToGroup = async (c_seq: number, restaurant_seq: number) => {
     try {
