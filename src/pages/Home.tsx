@@ -115,7 +115,7 @@ const Home: React.FC = () => {
     <IonPage style={{ marginBottom: "55px", background: "white" }}>
       <IonContent fullscreen>
         <FoodCategory currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
-        <SortFilter />
+        {/* <SortFilter /> */}
         <GroupList
           groupList={test}
           enterToGroup={enterToGroup}

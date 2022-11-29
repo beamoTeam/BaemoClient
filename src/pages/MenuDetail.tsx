@@ -114,7 +114,7 @@ export default function MenuDetail() {
         </div>
 
         <IonList>
-          <IonListHeader>
+          {/* <IonListHeader>
             <IonLabel>음료선택</IonLabel>
           </IonListHeader>
           <IonItem>
@@ -149,7 +149,7 @@ export default function MenuDetail() {
               <IonLabel>콜라 1.5L</IonLabel>
               <IonLabel>+3,000원</IonLabel>
             </div>
-          </IonItem>
+          </IonItem> */}
 
           <IonListHeader>
             <IonLabel>추가선택</IonLabel>

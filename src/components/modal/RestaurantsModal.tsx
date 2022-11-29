@@ -48,7 +48,7 @@ export default function RestaurantsModal({
             <Spinner />
           ) : (
             <IonList>
-              {restaurants.map((info, idx) => (
+              {restaurants.filter((rest: any) => rest.seq === 1).map((info, idx) => (
                 <Restaurant key={idx} info={info} test={test} />
               ))}
             </IonList>
