@@ -1,3 +1,4 @@
+import { anonymousName } from "../../utils/name";
 import css from "./ReceiptModal.module.css";
 
 export default function ReceiptModal({
@@ -31,7 +32,7 @@ export default function ReceiptModal({
         <div id="modal-content">
           {testData.map((userOrder: any) => (
             <div key={userOrder.userName}>
-              <div className={css.modalTop}>배 달 주 문[배모]</div>
+              <div className={css.modalTop}>배 달 주 문[배모] ( {anonymousName(userOrder.userName)} )</div>
               <div className={css.modalBody}>
                 <div className={css.addrInfo}>
                   <p>주소 : </p>
